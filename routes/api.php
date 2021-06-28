@@ -34,7 +34,7 @@ Route::group([ 'prefix' => 'auth'], function () {
 
     Route::group([ 'middleware' => 'auth:api'], function() {
         
-        Route::post('user', 'App\Http\Controllers\AuthController@user');
+        Route::post('get_user', 'App\Http\Controllers\AuthController@getUser');
         Route::get('logout', 'App\Http\Controllers\AuthController@logout');
         Route::post('change_social_password', 'App\Http\Controllers\AuthController@changeSocialLoginPassword');
 

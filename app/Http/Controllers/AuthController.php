@@ -424,7 +424,9 @@ class AuthController extends Controller
 
             User::where('id', $user->id)->update(['email_verified_at' => Carbon::now('utc')->format('Y-m-d H:i:s')]);
 
-            return sendSuccess('Verified successfully.', null);
+            $data['user'] = User::where('id', $user->id)->with('address')->first();
+
+            return sendSuccess('Verified successfully.', $data);
         
         }else{
             $res1 = DB::select("select * from signup_verifications where phone = ? and token = ?", [$request->activation_phone_code.$request->activation_phone_number, $request->activation_code]);
@@ -443,7 +445,9 @@ class AuthController extends Controller
 
             User::where('id', $user->id)->update(['phone_verified_at' => Carbon::now('utc')->format('Y-m-d H:i:s')]);
 
-            return sendSuccess('Verified successfully.', null);
+            $data['user'] = User::where('id', $user->id)->with('address')->first();
+
+            return sendSuccess('Verified successfully.', $data);
         }
     }
 
@@ -457,7 +461,7 @@ class AuthController extends Controller
         return sendSuccess('Successfully logged out', null);
     }
 
-    public function user(Request $request){
+    public function getUser(Request $request){
         $data['user'] = ($request->user_id) ? getUser()->where('id', $request->user_id)->first() : getUser()->where('id', $request->user()->id)->first();
         if($data['user']){
             return sendSuccess('success.', $data);
