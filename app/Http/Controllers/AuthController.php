@@ -121,8 +121,8 @@ class AuthController extends Controller
             'social_id' => 'required_if:is_social,1',
             'social_type' => 'required_if:is_social,1',
 
-            'name' => 'required|string',
-            'bussiness_name' => 'required|string',
+            'name' => 'required|string|unique:users,name',
+            'bussiness_name' => 'required|string|unique:users,bussiness_name',
 
             'address' => 'required|string',
             'city' => 'required|string'
