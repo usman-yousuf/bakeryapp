@@ -209,6 +209,12 @@ class AuthController extends Controller
                     
                     if(isset($request->social_email))    
                         $user->social_email = $request->social_email;
+
+                    if(isset($request->name))
+                        $user->name = $request->name;
+
+                    if(isset($request->bussiness_name))
+                        $user->bussiness_name = $request->bussiness_name;
                 }else{
                     if(isset($request->is_social))
                         $user->is_social = $request->is_social;
