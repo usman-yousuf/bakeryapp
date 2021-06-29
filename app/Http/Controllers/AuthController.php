@@ -314,9 +314,9 @@ class AuthController extends Controller
 
     public function socialLogin(Request $request){
         $validator = Validator::make($request->all(), [
-            'email' =>'required_unless:social_type,apple',
-            'social_id' => 'required',
-            'social_type' => 'required'
+            'social_email' =>'required_unless:social_type,apple',
+            'social_type' => 'required',
+            'social_id' => 'required'
         ]);
 
         if($validator->fails()){
@@ -329,10 +329,10 @@ class AuthController extends Controller
         if($request->social_type == 'apple'){
             $user = User::where('social_id', $request->social_id)->first();
         }else{
-            $user = User::where('email',  $request->email)->where('social_id', $request->social_id)->first();
+            $user = User::where('social_email',  $request->social_email)->where('social_id', $request->social_id)->first();
         }
 
-        $check1 = User::where('email',  $request->email)->first();
+        $check1 = User::where('social_email',  $request->social_email)->first();
         if(!$user && $check1){
             return sendError('Email has been registered already with another account.', null);
         }
@@ -358,6 +358,7 @@ class AuthController extends Controller
         $data['token_type'] = 'Bearer';
         $data['expires_at'] = Carbon::parse($tokenResult->token->expires_at)->toDateTimeString();
         $data['user'] = getUser()->where('id', $request->user()->id)->first();
+        DB::commit();
         return sendSuccess('Login successfully.', $data);
     }
 
