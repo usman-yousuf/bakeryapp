@@ -14,8 +14,20 @@ class CreateSubscriptionsTable extends Migration
     public function up()
     {
         Schema::create('subscriptions', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id')->unsigned(false);
+
+            $table->integer('user_id')->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+
+            $table->integer('plan_id')->nullable();
+            $table->foreign('plan_id')->references('id')->on('subscription_plans')->onUpdate('cascade')->onDelete('cascade');
+
+            $table->enum('status', ['active', 'inactive'])->default('active');
+
+            $table->timestamp('trail_ends_at')->nullable();
+
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
