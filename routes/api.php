@@ -33,10 +33,13 @@ Route::group([ 'prefix' => 'auth'], function () {
     Route::post('verify_user', 'App\Http\Controllers\AuthController@verifyUserWithCode');
 
     Route::group([ 'middleware' => 'auth:api'], function() {
-        
+
         Route::post('get_user', 'App\Http\Controllers\AuthController@getUser');
         Route::get('logout', 'App\Http\Controllers\AuthController@logout');
         Route::post('change_social_password', 'App\Http\Controllers\AuthController@changeSocialLoginPassword');
+        Route::post('get_subscription', 'App\Http\Controllers\SubscriptionController@getSubscriptionplan');
+        Route::post('update_subscription', 'App\Http\Controllers\SubscriptionController@updateSubscriptionplan');
+        Route::post('get_subscription_data', 'App\Http\Controllers\SubscriptionController@getSubscriptionDataList');
 
     });
 

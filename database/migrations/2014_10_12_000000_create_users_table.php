@@ -18,8 +18,11 @@ class CreateUsersTable extends Migration
 
             $table->string('name')->unique()->nullable();
             $table->string('bussiness_name')->unique()->nullable();
-            
+
             $table->string('email')->unique()->nullable();
+
+            $table->string('profile_image')->nullable();
+
             $table->string('phone_code')->nullable();
             $table->string('phone_number')->unique()->nullable();
             $table->string('password')->nullable();
@@ -32,9 +35,9 @@ class CreateUsersTable extends Migration
             $table->string('social_email')->nullable();
             $table->enum('social_type', ['facebook', 'google', 'twitter', 'apple'])->nullable();
             $table->boolean('is_social_password_updated')->default(false);
-            
+
             $table->boolean('is_online')->default(false);
-            
+
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

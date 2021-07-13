@@ -9,13 +9,14 @@ use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Carbon\Carbon;
 
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
     protected $table = 'users';
-    
+
     public $timestamps = true;
 
     use SoftDeletes;
@@ -56,6 +57,8 @@ class User extends Authenticatable
         'deleted_at'
     ];
 
+    protected $appends = ['plan_type','active_subscription_date','is_trail_ends'];
+
     /**
      * The attributes that should be cast to native types.
      *
@@ -66,8 +69,42 @@ class User extends Authenticatable
         'phone_verified_at' => 'datetime',
     ];
 
+    // relation with address
+
     function address(){
         return $this->belongsTo(Address::class, 'id', 'user_id');
     }
 
+    // relation with suscription
+
+    function subscription(){
+        return $this->hasOne(Subscription::class, 'user_id', 'id');
+    }
+
+    public function getActiveSubscriptionDateAttribute(){
+        $active = Subscription::where('user_id', $this->id)
+                            ->where('status', 'active')
+                            ->latest()->first();
+
+        if($active != null)
+            return $active->created_at;
+    }
+
+    public function getPlanTypeAttribute (){
+        $subscription = Subscription::where('user_id', $this->id)
+                            ->where('status', 'active')->latest()->first();
+
+        if($subscription != null){
+            return $subscription->plan->name;
+        }
+
+     }
+
+    public function getIsTrailEndsAttribute (){
+        return Subscription::where('user_id', $this->id)
+                        ->where('plan_id', 1)
+                        ->where('ends_at','<=',Carbon::now())
+                        ->latest()->first()?1:0;
+
+    }
 }
