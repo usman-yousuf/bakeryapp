@@ -88,6 +88,8 @@ class SubscriptionController extends Controller
 
     }
 
+    // get subscription plans
+
     public function getSubscriptionPlans(Request $request){
 
         $modals = SubscriptionPlan::all();
