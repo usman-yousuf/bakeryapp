@@ -25,9 +25,6 @@ class CreateSubscriptionPlansTable extends Migration
             $table->boolean('is_sales_enabled')->default(false);
             $table->boolean('is_accounts_enabled')->default(false);
 
-            $table->enum('type', ['trail', 'basic', 'premium'])->default('trail');
-            // $table->int('duratiuon');
-
             $table->enum('status', ['active', 'inactive'])->default('active');
 
             $table->timestamps();
