@@ -91,7 +91,7 @@ class SubscriptionController extends Controller
             ->with(['user', 'plan'])
         ->get();
 
-        return sendSuccess('models fetched successfully', $models);
+        return sendSuccess('Subscription', $models);
 
     }
 }
