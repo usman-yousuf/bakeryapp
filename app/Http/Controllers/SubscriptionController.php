@@ -10,11 +10,9 @@ use Illuminate\Support\Facades\Validator;
 
 class SubscriptionController extends Controller
 {
+    // subscription validation
     public function updateSubscription(Request $request)
     {
-
-        // subscription validation
-
     	$validator = Validator::make($request->all(), [
     		'user_id' => 'required|exists:users,id',
             'plan_id' => 'required|exists:subscription_plans,id'
@@ -50,20 +48,8 @@ class SubscriptionController extends Controller
 
 
 
+    // getting user subscriptions
     public function getSubscription(Request $request){
-
-        $validator = Validator::make($request->all(), [
-    		'subscription_id' => 'exists:subscriptions,id',
-    		'user_id' => 'exists:users,id',
-            'plan_id' => 'exists:subscription_plans,id',
-    		'status' => 'in:active,inactive',
-        ]);
-        if($validator->fails()){
-            $data['validation_error'] = $validator->getMessageBag();
-            return sendError($validator->errors()->all()[0], $data);
-        }
-
-        // getting subscription data
 
         $models = Subscription::orderBy('created_at', 'DESC');
 
@@ -83,16 +69,26 @@ class SubscriptionController extends Controller
             $models->where('status', $request->status);
         }
 
-        if(isset($request->ends_at) && ('' != $request->ends_at)){
-            $models->where('ends_at', '>', $request->ends_at);
+        $models = $models->with(['user', 'plan'])->get();
+
+        if(count($models)){
+            $data['subscription'] = $models;
+            return sendSuccess('Subscriptions Found.', $data);
         }
+        return sendSuccess('No Subscriptions Found.', null);
 
-        $models = $models
-            ->with(['user', 'plan'])
-        ->get();
 
-        return sendSuccess('Subscription', $models);
+    }
 
+    // get subscription plans
+    public function getSubscriptionPlans(Request $request){
+
+        $models = SubscriptionPlan::all();
+        if(count($models)){
+            $data['subscription_plans'] = $models;
+            return sendSuccess('Subscription Plans Found.', $data);
+        }
+        return sendSuccess('No Data Found.', null);
     }
 }
 

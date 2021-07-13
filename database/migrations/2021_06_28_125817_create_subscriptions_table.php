@@ -22,6 +22,8 @@ class CreateSubscriptionsTable extends Migration
             $table->integer('plan_id')->nullable();
             $table->foreign('plan_id')->references('id')->on('subscription_plans')->onUpdate('cascade')->onDelete('cascade');
 
+            $table->enum('status', ['active', 'inactive'])->default('active');
+
             $table->timestamp('ends_at')->nullable();
             
             $table->timestamps();
