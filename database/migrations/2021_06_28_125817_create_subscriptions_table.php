@@ -23,6 +23,7 @@ class CreateSubscriptionsTable extends Migration
             $table->foreign('plan_id')->references('id')->on('subscription_plans')->onUpdate('cascade')->onDelete('cascade');
 
             $table->timestamp('ends_at')->nullable();
+            
             $table->timestamps();
             $table->softDeletes();
         });

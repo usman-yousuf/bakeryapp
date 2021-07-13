@@ -10,15 +10,14 @@ use Illuminate\Support\Facades\Validator;
 
 class SubscriptionController extends Controller
 {
-    public function updateSubscriptionplan(Request $request)
+    public function updateSubscription(Request $request)
     {
 
         // subscription validation
 
     	$validator = Validator::make($request->all(), [
     		'user_id' => 'required|exists:users,id',
-            'plan_id' => 'required|exists:subscription_plans,id',
-    		'status' => 'required|in:active,inactive',
+            'plan_id' => 'required|exists:subscription_plans,id'
         ]);
         if($validator->fails()){
             $data['validation_error'] = $validator->getMessageBag();
@@ -27,23 +26,31 @@ class SubscriptionController extends Controller
 
         // subscription update
 
-        $subscription = Subscription::where('user_id', $request->user_id??$request->user()->id)->latest()->first();
-        if(null != $subscription){
-            $subscription->status = 'inactive';
-            $subscription->save();
-            $subscription->delete();
+        $old_subscription = Subscription::where('user_id', $request->user_id ?? $request->user()->id)->latest()->first();
+        if($old_subscription != null){
+            $old_subscription->status = 'inactive';
+            if($old_subscription->save()){
+                $old_subscription->delete();
+            }
+
         }
-        $subscription =  new Subscription;
-        $subscription->user_id = $request->user_id??$request->user()->id;
-        $subscription->plan_id = $request->plan_id ?? 1;
-        $subscription->status = $request->status;
-        $subscription->save();
-        return sendSuccess("You have Saved Subscription",$subscription);
+
+        $new_subscription =  new Subscription;
+        $new_subscription->user_id = $request->user_id ?? $request->user()->id;
+        $new_subscription->plan_id = $request->plan_id;
+        $new_subscription->ends_at = $request->ends_at;
+        $new_subscription->status = 'active';
+        
+        if($new_subscription->save()){
+            $data['subscription'] = $new_subscription;
+            return sendSuccess("You have Subscribed Successfully.",$data);
+        }
+        return sendError("There is some problem, Please try again.",$data);
     }
 
 
 
-    public function getSubscriptionDataList(Request $request){
+    public function getSubscription(Request $request){
 
         $validator = Validator::make($request->all(), [
     		'subscription_id' => 'exists:subscriptions,id',
