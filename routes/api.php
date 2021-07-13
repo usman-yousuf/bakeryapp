@@ -40,6 +40,7 @@ Route::group([ 'prefix' => 'auth'], function () {
         Route::post('get_subscription', 'App\Http\Controllers\SubscriptionController@getSubscriptionplan');
         Route::post('update_subscription', 'App\Http\Controllers\SubscriptionController@updateSubscriptionplan');
         Route::post('get_subscription_data', 'App\Http\Controllers\SubscriptionController@getSubscriptionDataList');
+        Route::post('get_subscription_plans', 'App\Http\Controllers\SubscriptionController@getSubscriptionPlans');
 
     });
 

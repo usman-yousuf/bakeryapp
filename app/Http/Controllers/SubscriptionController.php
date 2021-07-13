@@ -87,5 +87,12 @@ class SubscriptionController extends Controller
         return sendSuccess('models fetched successfully', $models);
 
     }
+
+    public function getSubscriptionPlans(Request $request){
+
+        $modals = SubscriptionPlan::all();
+
+        return sendSuccess('Subscription Plans', $modals);
+    }
 }
 
