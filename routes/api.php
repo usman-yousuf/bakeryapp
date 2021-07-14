@@ -37,9 +37,16 @@ Route::group([ 'prefix' => 'auth'], function () {
         Route::post('get_user', 'App\Http\Controllers\AuthController@getUser');
         Route::get('logout', 'App\Http\Controllers\AuthController@logout');
         Route::post('change_social_password', 'App\Http\Controllers\AuthController@changeSocialLoginPassword');
+
+        // subscription rooutes
+
         Route::post('get_subscription', 'App\Http\Controllers\SubscriptionController@getSubscription');
         Route::post('update_subscription', 'App\Http\Controllers\SubscriptionController@updateSubscription');
         Route::post('get_subscription_plans', 'App\Http\Controllers\SubscriptionController@getSubscriptionPlans');
+
+        // product routes
+
+        Route::post('add_update_product', 'App\Http\Controllers\ProductController@addUpdateProduct');
 
     });
 

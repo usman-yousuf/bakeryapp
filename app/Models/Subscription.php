@@ -13,6 +13,9 @@ class Subscription extends Model
 
     protected $table = 'subscriptions';
 
+    protected $appends = ['plan_type',];
+
+
     public $timestamps = true;
 
 
@@ -22,5 +25,15 @@ class Subscription extends Model
 
     function plan(){
         return $this->belongsTo(SubscriptionPlan::class, 'plan_id', 'id');
+    }
+
+    function getPlanTypeAttribute(){
+
+        // $subscription = Subscription::where('user_id', $this->id)
+        //                     ->where('status', 'active')->latest()->first();
+
+        // if($subscription != null){
+        //     return $subscription->plan->name;
+        // }
     }
 }

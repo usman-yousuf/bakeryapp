@@ -75,11 +75,18 @@ class User extends Authenticatable
         return $this->belongsTo(Address::class, 'id', 'user_id');
     }
 
-    // relation with suscription
+    // relation with subscription
 
     function subscription(){
         return $this->hasOne(Subscription::class, 'user_id', 'id');
     }
+
+    // relation with product
+
+    function product(){
+        return $this->hasMany(product::class, 'user_id', 'id');
+    }
+
 
     public function getActiveSubscriptionDateAttribute(){
         $active = Subscription::where('user_id', $this->id)
@@ -107,4 +114,5 @@ class User extends Authenticatable
                         ->latest()->first()?1:0;
 
     }
+
 }
