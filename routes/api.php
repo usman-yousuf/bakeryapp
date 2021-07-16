@@ -18,6 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+    Route::post('get_subscription_plans', 'App\Http\Controllers\SubscriptionController@getSubscriptionPlans');
 
 /**
  * Auth Route
@@ -42,7 +43,6 @@ Route::group([ 'prefix' => 'auth'], function () {
 
         Route::post('get_subscription', 'App\Http\Controllers\SubscriptionController@getSubscription');
         Route::post('update_subscription', 'App\Http\Controllers\SubscriptionController@updateSubscription');
-        Route::post('get_subscription_plans', 'App\Http\Controllers\SubscriptionController@getSubscriptionPlans');
 
         // product routes
 

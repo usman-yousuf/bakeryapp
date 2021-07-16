@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Subscription;
 use App\Models\SubscriptionPlan;
 use App\Models\User;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class SubscriptionController extends Controller
@@ -36,9 +37,8 @@ class SubscriptionController extends Controller
         $new_subscription =  new Subscription;
         $new_subscription->user_id = $request->user_id ?? $request->user()->id;
         $new_subscription->plan_id = $request->plan_id;
-        $new_subscription->ends_at = $request->ends_at;
+        $new_subscription->ends_at = $request->plan_id == 1?Carbon::now()->addWeeks(2):$request->ends_at;
         $new_subscription->status = 'active';
-        
         if($new_subscription->save()){
             $data['subscription'] = $new_subscription;
             return sendSuccess("You have Subscribed Successfully.",$data);
@@ -51,10 +51,20 @@ class SubscriptionController extends Controller
     // getting user subscriptions
     public function getSubscription(Request $request){
 
+        $validator = Validator::make($request->all(), [
+            'user_id' => 'exists:users,id',
+            'plan_id' => 'exists:subscription_plans,id',
+            'subscription_id' => 'exists:subscriptions,id',
+            'status' => 'in:active,inactive',
+        ]);
+        if($validator->fails()){
+            $data['validation_error'] = $validator->getMessageBag();
+            return sendError($validator->errors()->all()[0], $data);
+        }
         $models = Subscription::orderBy('created_at', 'DESC');
 
-        if(isset($request->subscription_id) && ('' != $request->subscription_id)){
-            $models->where('subscription_id', $request->subscription_id);
+        if(isset($request->subscription_id) && ('' != $request->subscription_id)){  
+            $models->where('id', $request->subscription_id);
         }
 
         if(isset($request->user_id) && ('' != $request->user_id)){
@@ -69,9 +79,9 @@ class SubscriptionController extends Controller
             $models->where('status', $request->status);
         }
 
-        $models = $models->with(['user', 'plan'])->get();
+        $models = $models->with(['plan','user'])->first();
 
-        if(count($models)){
+        if($models){
             $data['subscription'] = $models;
             return sendSuccess('Subscriptions Found.', $data);
         }

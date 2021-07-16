@@ -47,4 +47,9 @@ class SubscriptionPlan extends Model
          'updated_at',
          'deleted_at'
      ];
+
+    function subscriptions(){
+        return $this->hasMany(Subscription::class ,'plan_id', 'id');
+    }
+
 }

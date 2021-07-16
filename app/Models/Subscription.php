@@ -29,11 +29,7 @@ class Subscription extends Model
 
     function getPlanTypeAttribute(){
 
-        // $subscription = Subscription::where('user_id', $this->id)
-        //                     ->where('status', 'active')->latest()->first();
-
-        // if($subscription != null){
-        //     return $subscription->plan->name;
-        // }
+        $plan_name = $this->plan->slug;
+        return $plan_name;
     }
 }
