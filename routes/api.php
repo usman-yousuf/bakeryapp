@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -45,8 +46,10 @@ Route::group([ 'prefix' => 'auth'], function () {
         Route::post('update_subscription', 'App\Http\Controllers\SubscriptionController@updateSubscription');
 
         // product routes
-
         Route::post('add_update_product', 'App\Http\Controllers\ProductController@addUpdateProduct');
+
+        //adminProducts routes 
+        Route::post('admin_products_Ingredients', [AdminProductController::class, 'getIngredientProducts']);
 
     });
 

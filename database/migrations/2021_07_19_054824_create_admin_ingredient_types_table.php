@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProductTypeTable extends Migration
+class CreateAdminIngredientTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,14 @@ class CreateProductTypeTable extends Migration
      */
     public function up()
     {
-        Schema::create('product_type', function (Blueprint $table) {
-            
+        Schema::create('admin_ingredient_types', function (Blueprint $table) {
             $table->Increments('id')->unsigned(false);
 
+            $table->Integer('admin_ingredient_id');
+            $table->foreign('admin_ingredient_id')->references('id')->on('admin_ingredients')->onDelete('cascade')->onUpdate('cascade');
+
             $table->string('type_name')->nullable();
-            $table->string('type_size')->nullable();
-
-            $table->bigInteger('product_id');
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade')->onUpdate('cascade');
-
+            $table->string('size')->nullable();
 
             $table->timestamps();
             $table->softDeletes();
@@ -36,6 +34,6 @@ class CreateProductTypeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_type');
+        Schema::dropIfExists('admin_ingredient_types');
     }
 }

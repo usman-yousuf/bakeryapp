@@ -13,7 +13,7 @@ class Subscription extends Model
 
     protected $table = 'subscriptions';
 
-    protected $appends = ['plan_type',];
+    protected $appends = ['plan_type'];
 
 
     public $timestamps = true;
@@ -29,7 +29,7 @@ class Subscription extends Model
 
     function getPlanTypeAttribute(){
 
-        $plan_name = $this->plan->slug;
-        return $plan_name;
+        // return $this->plan->slug;
+        return SubscriptionPlan::Where('id',$this->plan_id)->pluck('slug')->first()??NULL;
     }
 }

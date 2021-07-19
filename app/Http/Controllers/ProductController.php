@@ -11,51 +11,36 @@ use Illuminate\Support\Facades\Validator;
 class ProductController extends Controller
 {
 
-    public function addUpdateProduct(Request $request){
+    public function addUpdateProduct(Request $request)
+    {
+        $validator = Validator::make($request->all(),
+            [
+            'user_id' => 'exists:users,id',
+            'product_id' => 'exists:products,id',
+            'price' => 'required_without:product_id|numeric',
+            'name' => 'required_without:product_id|regex:/^[\pL\s\-]+$/u',
+            ]);
 
-    // validation for product
-
-    $validator = Validator::make($request->all(), [
-        'user_id' => 'required|exists:users,id',
-        'product_id' => 'exists:products,id',
-        ]);
         if($validator->fails()){
-            $data['validation_error'] = $validator->getMessageBag();
-            return sendError($validator->errors()->all()[0], $data);
-        }
-        if(isset($request->product_id)){
-            $old_product = Product::where('id', $request->product_id)->first();
-
-            if($old_product != null){
-                $old_product->name = $request->name;
-                $old_product->user_id = $request->user_id;
-                $old_product->description = $request->description;
-                $old_product->price = $request->price;
-                $old_product->save();
-
-                if($old_product->save()){
-                    $data['product'] = $old_product;
-                    return sendSuccess('You have updated successfuly', $data);
-                }
-                return sendError('There is some thing wrong, Please try again', null);
-
+                $data['validation_error'] = $validator->getMessageBag();
+                return sendError($validator->errors()->all()[0], $data);
             }
+
+        $product = Product::where('id', $request->product_id)->first();
+        if($product == null)
+            $product = new Product;
+
+        $product->name = $request->name??$product->name;
+        $product->user_id = $request->user_id??$product->user_id??$request->user()->id;
+        $product->description = $request->description??$product->description;
+        $product->price = $request->price??$product->price;
+        $product->save();
+
+        if($product->save()){
+            $data['product'] = $product;
+            return sendSuccess('Product Saved', $data);
         }
+        return sendError('There is some thing wrong, Please try again', null);   
 
-        $new_product = new Product;
-
-        $new_product->name = $request->name;
-        $new_product->user_id = $request->user_id;
-        $new_product->description = $request->description;
-        $new_product->price = $request->price;
-
-        if($new_product->save()){
-            $data['product'] = $new_product;
-            return sendSuccess('You have saved product successfuly', $data);
-        }
-        return sendError('There is something wrong , Please try again', null);
-
-    }
-
+    }              
 }
-

@@ -15,7 +15,7 @@ class SubscriptionController extends Controller
     public function updateSubscription(Request $request)
     {
     	$validator = Validator::make($request->all(), [
-    		'user_id' => 'required|exists:users,id',
+    		'user_id' => 'exists:users,id',
             'plan_id' => 'required|exists:subscription_plans,id'
         ]);
         if($validator->fails()){
@@ -31,7 +31,6 @@ class SubscriptionController extends Controller
             if($old_subscription->save()){
                 $old_subscription->delete();
             }
-
         }
 
         $new_subscription =  new Subscription;
