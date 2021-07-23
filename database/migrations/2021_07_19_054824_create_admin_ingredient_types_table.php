@@ -21,6 +21,7 @@ class CreateAdminIngredientTypesTable extends Migration
 
             $table->string('type_name')->nullable();
             $table->string('size')->nullable();
+            $table->string('brand_name')->nullable();
 
             $table->timestamps();
             $table->softDeletes();
