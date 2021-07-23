@@ -50,6 +50,7 @@ Route::group([ 'prefix' => 'auth'], function () {
 
         //adminProducts routes 
         Route::post('admin_products_Ingredients', [AdminProductController::class, 'getIngredientProducts']);
+        // Route::post('admin_products_Ingredients', ['App\Http\Controllers\AdminProductController@getIngredientProducts']);
 
     });
 

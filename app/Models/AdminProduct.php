@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class AdminProduct extends Model
 {
     use HasFactory;
+
+    function adminproducttypes(){
+        return $this->hasMany(AdminProductType::class);
+    }
 }
