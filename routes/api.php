@@ -47,10 +47,15 @@ Route::group([ 'prefix' => 'auth'], function () {
 
         // product routes
         Route::post('add_update_product', 'App\Http\Controllers\ProductController@addUpdateProduct');
+        Route::post('get_product', 'App\Http\Controllers\ProductController@getProducts');
 
-        //adminProducts routes 
+        //adminProducts routes
         Route::post('admin_products_Ingredients', [AdminProductController::class, 'getIngredientProducts']);
         // Route::post('admin_products_Ingredients', ['App\Http\Controllers\AdminProductController@getIngredientProducts']);
+
+        // purchase list routes
+
+        Route::post('purchase_list', 'App\Http\Controllers\ProductController@addUpdatePurchaseList');
 
     });
 
