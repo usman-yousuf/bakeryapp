@@ -1,0 +1,294 @@
+.br_20px-s {
+    /* border: 10px solid #f00; */
+    border-radius: 20px !important;
+}
+
+
+/* login page - START */
+
+.custom_body-s {
+    background-image: url('../assets/preview/login_page_border_img1.png'), url('../assets/preview/login_page_border_img2.png'), url('../assets/preview/login_page_border_img3.png');
+    background-position: top left, bottom left, bottom right;
+    background-repeat: no-repeat, no-repeat no-repeat;
+    background-size: 40px 240px, 240px 45px, 40px 240px;
+    padding: inherit;
+}
+
+.padding_inherit-s {
+    padding: inherit;
+}
+
+.image-s {
+    width: 100%;
+}
+
+@media (min-width: 1440px) {
+    .image-s {
+        width: 50%;
+    }
+}
+
+@media (min-width: 1200px) and (max-width: 1440px) {
+    .image-s {
+        width: 75%;
+    }
+}
+
+.w_40-s {
+    width: 40%;
+}
+
+.login_form_icon-s {
+    font-size: 15px;
+    color: gray;
+}
+
+.button_outline-s:focus {
+    outline: none;
+}
+
+.w_68-s {
+    width: 68px;
+}
+
+.br_30px-s {
+    border-radius: 30px;
+}
+
+.no_link-s:hover {
+    text-decoration: none;
+}
+
+
+/* login page - END */
+
+
+/* Dashboard - START */
+
+.bg-primary-s {
+    background-color: #00BFF3;
+}
+
+.sidebar_text-s a {
+    background-color: #00BFF3;
+    color: #fff;
+    text-decoration: none;
+}
+
+.font_size-s {
+    font-size: 14px;
+}
+
+.list-group-flush>.list-group-item {
+    border: 0px !important;
+}
+
+.list-group-item:hover,
+.list-group-item:active {
+    background-color: #fff;
+    color: #00BFF3;
+    border-radius: 5px;
+}
+
+.list-group-flush>.list-group-item>img {
+    filter: invert(0%) sepia(79%) saturate(0%) hue-rotate(112deg) brightness(161%) contrast(100%)
+}
+
+.list-group-flush>.list-group-item:hover img {
+    filter: sepia(79%) saturate(5000%) hue-rotate( 110deg) brightness(117%) contrast(82%);
+}
+
+*/
+/* nav bar - START */
+
+input:focus {
+    outline: none;
+}
+
+.search_icon-s {
+    font-size: 15px;
+    color: gray;
+}
+
+.country_text-s {
+    font-size: 13px;
+}
+
+
+/* nav bar - END */
+
+
+/* dashboard page content - START */
+
+.h_card-s {
+    height: 400px;
+}
+
+.br_15px-s {
+    border-radius: 15px !important;
+}
+
+.view_link-s {
+    color: #D35A8B;
+}
+
+.view_link-s:hover {
+    color: #D35A8B;
+}
+
+.fg_pink-s {
+    color: #D35A8B;
+}
+
+.bg_pink-s {
+    background-color: #D35A8B;
+}
+
+.bg_yellow-s {
+    background-color: #FFC827;
+}
+
+.fg_blue-s {
+    color: #00BFF3;
+}
+
+.bg_blue-s {
+    background-color: #00BFF3;
+}
+
+.table thead tr th {
+    border-top: none;
+}
+
+
+/* ----- scrollbar - start ----- */
+
+.table_scroll-s {
+    overflow: auto;
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+    /* width of the entire scrollbar */
+}
+
+::-webkit-scrollbar-track {
+    background: lightgray;
+    /* color of the tracking area */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #00BFF3;
+    /* color of the scroll thumb */
+    border-radius: 20px;
+    /* roundness of the scroll thumb */
+    border: 1px solid white;
+    /* creates padding around scroll thumb */
+}
+
+
+/* ----- scrollbar - end ----- */
+
+
+/* dashboard page content - END */
+
+
+/* Dashboard - END */
+
+
+/* Product Page - START */
+
+.card_700px_h-s {
+    height: 700px;
+}
+
+.add_product_btn-s {
+    border-radius: 50px;
+    background-color: #D35A8B;
+    font-weight: 500;
+}
+
+
+/* Add Product Modal - START */
+
+.br_50px-s {
+    border-radius: 50px;
+}
+
+.font_20px-s {
+    font-size: 25px;
+    font-family: sans-serif;
+}
+
+.product_size_active-s {
+    background-color: #D35A8B;
+    border-radius: 21px;
+    border: none;
+    width: 30px;
+    height: 28px;
+    text-align: center;
+    color: white;
+}
+
+.product_size-s {
+    background-color: white;
+    border-radius: 21px;
+    border: none;
+    width: 30px;
+    height: 28px;
+    text-align: center;
+    color: black;
+}
+
+
+/* Add Product Modal - END */
+
+
+/* Product Page - END */
+
+
+/* Subscription page - START */
+
+.subscription1_card-s.active,
+.subscription1_card-s:hover {
+    background-color: #D35A8B;
+    color: white;
+}
+
+.subscription2_card-s.active,
+.subscription2_card-s:hover {
+    background-color: #FFC827;
+    color: white;
+}
+
+.subscription3_card-s.active,
+.subscription3_card-s:hover {
+    background-color: #1C56A8;
+    color: white;
+}
+
+.bg_gray-s {
+    background-color: #F5F5F5;
+}
+
+.select2 {
+    width: 100% !important;
+}
+
+.select2-container--default .select2-selection--multiple {
+    background-color: #F5F5F5;
+    border: 0px;
+    border-radius: 4px;
+    cursor: text;
+    padding-bottom: 2px;
+    padding-right: 2px;
+    position: relative;
+}
+
+.select2-container--default .select2-search--inline .select2-search__field {
+    width: 0.75em;
+    height: 45px;
+}
+
+
+/* Subscription page - END */

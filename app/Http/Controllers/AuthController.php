@@ -252,9 +252,9 @@ class AuthController extends Controller
                         return $this->socialLogin($request);
 
                     }else{
-                        // if(!$twilio->sendMessage($request->phone_code.$request->phone_number, 'Enter this code to verify your Grabions account ' . $code)) {
-                        //     return sendError('Phone is invalid', NULL);
-                        // }
+                        if(!$twilio->sendMessage($request->phone_code.$request->phone_number, 'Enter this code to verify your Grabions account ' . $code)) {
+                            return sendError('Phone is invalid', NULL);
+                        }
 
                         Mail::send('email_template.verification_code', ['name' => $user->name, 'code' => $code], function ($m) use ($user) {
 
