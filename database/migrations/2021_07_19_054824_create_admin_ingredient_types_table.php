@@ -20,7 +20,6 @@ class CreateAdminIngredientTypesTable extends Migration
             $table->foreign('admin_ingredient_id')->references('id')->on('admin_ingredients')->onDelete('cascade')->onUpdate('cascade');
 
             $table->string('type_name')->nullable();
-            $table->string('size')->nullable();
             $table->string('brand_name')->nullable();
 
             $table->timestamps();
