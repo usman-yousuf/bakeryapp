@@ -14,11 +14,13 @@ class CreateIngrediantsTable extends Migration
     public function up()
     {
         Schema::create('ingrediants', function (Blueprint $table) {
-           $table->bigIncrements('id')->unsigned(false);
+            $table->bigIncrements('id')->unsigned(false);
 
-            $table->string('item_name')->unique();
-            $table->string('item_type')->nullable();
-            $table->string('item_brand')->nullable();
+            $table->Integer('admin_ingredient_id')->nullable();
+            $table->foreign('admin_ingredient_id')->references('id')->on('admin_ingredients')->onUpdate('cascade')->onDelete('cascade');
+
+            $table->Integer('admin_ingredient_type_id')->nullable();
+            $table->foreign('admin_ingredient_type_id')->references('id')->on('admin_ingredient_types')->onUpdate('cascade')->onDelete('cascade');
 
             $table->timestamps();
             $table->softDeletes();

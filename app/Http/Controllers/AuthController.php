@@ -141,7 +141,7 @@ class AuthController extends Controller
         }
 
         $code = mt_rand(1000, 9999);
-        $check = new User;
+        $check = new User();
 
         if($request->is_social == 0){
             $check = User::where('email', $request->email)->orWhere('phone_number', $request->phone_number)->first();

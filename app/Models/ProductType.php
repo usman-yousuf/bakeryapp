@@ -12,7 +12,7 @@ class ProductType extends Model
 {
     use HasFactory, HasApiTokens;
 
-    protected $table = 'product_type';
+    protected $table = 'product_types';
 
     public $timestamps = true;
 
