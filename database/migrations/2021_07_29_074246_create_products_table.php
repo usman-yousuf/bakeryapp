@@ -14,7 +14,7 @@ class CreateProductsTable extends Migration
     public function up()
     {
         Schema::create('products', function (Blueprint $table) {
-            $table->bigIncrements('id')->unsigned(false);
+            $table->Increments('id')->unsigned(false);
 
             $table->Integer('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
@@ -31,7 +31,6 @@ class CreateProductsTable extends Migration
 
             $table->timestamps();
             $table->softDeletes();
-
         });
     }
 

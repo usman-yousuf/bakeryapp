@@ -9,7 +9,12 @@ class AdminProductType extends Model
 {
     use HasFactory;
 
-    function adminproduct(){
-    	return $this->belongsTo(AdminProduct::class , 'admin_product_id' , 'id');
+
+    function adminProduct(){
+            return $this->belongsTo(AdminProduct::class , 'admin_product_id' , 'id');
+        }
+
+    function product(){
+        return $this->hasMany(Product::class, 'id', 'Admin_product_type_id');
     }
 }

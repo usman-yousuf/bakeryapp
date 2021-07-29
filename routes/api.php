@@ -48,7 +48,7 @@ Route::group([ 'prefix' => 'auth'], function () {
         // product routes
         Route::post('add_update_product', 'App\Http\Controllers\ProductController@addUpdateProduct');
         Route::post('get_product', 'App\Http\Controllers\ProductController@getProducts');
-        Route::post('add_ingredients', 'App\Http\Controllers\ProductController@addUpdateIngredient');
+        // Route::post('add_ingredients', 'App\Http\Controllers\ProductController@addUpdateIngredient');
 
 
         //adminProducts routes
