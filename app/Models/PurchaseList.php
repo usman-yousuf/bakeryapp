@@ -6,24 +6,48 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class purchaseList extends Model
+class PurchaseList extends Model
 {
     use HasFactory;
-    use SoftDeletes;
 
     protected $table = 'purchase_lists';
 
+    use SoftDeletes;
+
     public $timestamps = true;
 
-
-
-    protected $fillables = [
-        'product_name',
+     protected $fillable =[
+        'admin_ingredient_id',
+        'admin_ingredient_type_id',
         'store_name',
-        'brand_name',
-        'quantity',
+        'qunatity',
         'price'
     ];
 
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+        'deleted_at'
+    ];
 
+    protected $with = [
+        'adminIngredient',
+        'adminIngredientType',
+        'productIngredient',
+    ];
+
+
+    public function adminIngredient()
+    {
+        return $this->belongsTo(AdminIngredient::class, 'admin_ingredient_id', 'id');
+    }
+
+    function adminIngredientType()
+    {
+        return $this->belongsTo(AdminIngredientType::class, 'admin_ingredient_type_id', 'id');
+    }
+
+    function productIngredient(){
+        return $this->hasMany(ProductIngredient::class, 'purchase_list_id', 'id');
+    }
 }

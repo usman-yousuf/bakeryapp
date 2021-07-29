@@ -4,59 +4,49 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Passport\HasApiTokens;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
-    use HasFactory, HasApiTokens;
+    use HasFactory;
 
     protected $table = 'products';
 
-    public $timestamps = true;
-
     use SoftDeletes;
 
-    /**
-     *
-     * the attributes mass asignable
-     *
-     * @var array
-     *
-     */
+    public $timestamps = true;
 
-    //  protected $fillables = [
-    //     'user_id',
-    //     'name',
-    //     'description',
-    //     'price'
-    //  ];
-        protected $guarded = [];
+    protected $fillable = [
+        'user_id',
+        'admin_product_id',
+        'admin_product_type_id',
+        'size',
+        'description',
+        'price'
+    ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-
-     protected $hidden = [
-         'created_at',
+    protected $hidden = [
+        'created_at',
          'updated_at',
          'deleted_at'
-     ];
+    ];
+
+    protected $with = [
+        'adminProduct',
+        'adminProductType'
+    ];
 
 
-    // relation with user
-
-    function user(){
-        return $this->belongsTo(User::class, 'user_id', 'id');
+    function adminProduct(){
+        return $this->belongsTo(AdminProduct::class, 'admin_product_id', 'id');
     }
 
-    // relation with ingredients
+    function adminProductType(){
+        return $this->belongsTo(AdminProductType::class, 'admin_product_type_id', 'id');
+    }
 
-    function productIngrediant(){
-        return $this->hasMany(ProductIngrediant::class, 'product_id', 'id');
+    function productIngredient(){
+        return $this->hasMany(ProductIngredient::class, 'product_id', 'id');
     }
 
 }
