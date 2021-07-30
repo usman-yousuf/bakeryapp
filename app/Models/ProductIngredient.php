@@ -19,6 +19,8 @@ class ProductIngredient extends Model
     protected $fillable = [
         'product_id',
         'purchase_list_id',
+        'admin_ingredient_id',
+        'admin_ingredient_type_id',
         'quantity'
     ];
 
@@ -27,6 +29,15 @@ class ProductIngredient extends Model
         'updated_at',
         'deleted_at'
     ];
+
+
+    function adminProduct(){
+        return $this->belongsTo(AdminProduct::class, 'id', 'admin_ingredient_id');
+    }
+
+    function adminProductType(){
+        return $this->belongsTo(AdminProductType::class, 'id', 'admin_ingredient_type_id');
+    }
 
 
     function product(){

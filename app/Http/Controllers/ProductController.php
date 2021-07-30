@@ -30,7 +30,8 @@ class ProductController extends Controller
         'admin_product_id' => 'required_without:product_id|exists:admin_products,id',
         'admin_product_type_id' => 'required_with:admin_product_id|exists:admin_product_types,id',
         'size' => 'required_with:admin_product_id',
-        'purchase_list_id*' => 'required_with:admin_product_id|exists:purchase_lists,id'
+        'purchase_list_id*' => 'required_with:admin_product_id|exists:purchase_lists,id',
+        'admin_ingredient_id*' => 'required|exists:admin_ingredients,id'
         // 'name' => 'required_without:product_id|regex:/^[\pL\s\-]+$/u',
     ]);
 
@@ -45,70 +46,49 @@ class ProductController extends Controller
         $product = new Product;
 
         $admin_product = AdminProduct::where('id',$request->admin_product_id)->first();
-        $admin_product_type = AdminProductType::where('id',$request->admin_product_type_id);
+        $admin_product_type = AdminProductType::where('id',$request->admin_product_type_id)->get();
 
-        $clone_admin_product_type = $admin_product_type;
-    //     $clone_admin_product_type = $clone_admin_product_type->pluck('size')->toArray();
+        $admin_ingredient = AdminIngredient::whereIn('id',$request->admin_ingredient_id)->get();
+        $admin_ingredient_type = AdminIngredientType::whereIn('id',$request->admin_ingredient_type_id)->get();
 
-    //     $dbSizes = explode(',', $clone_admin_product_type[0]);
-    //     $compared_size = in_array($request->size, $dbSizes);
-
-    // if($compared_size == 0)
-    //     return sendError("Wrong size ",[]);
 
         $product->user_id = $request->user_id??$product->user_id??$request->user()->id;
         $product->admin_product_id = $request->admin_product_id??$product->admin_product_id??$request->admin_product()->id;
         $product->admin_product_type_id = $request->admin_product_type_id??$product->admin_product_type_id??$request->admin_product_type()->id;
-
-        $product->size = ($request->size);
-
+        $product->size = $request->size;
         $product->description = $request->description??$product->description;
         $product->price = $request->price??$product->price;
+        $product->save();
+        if(!$product->save())
+            return sendError('There is some thing wrong, Please try again', null);
 
+        $admin_product_type =  $admin_product_type->first();
+        $data['product'] = $product;
+        if(!isset($request->product_id)){
+            $product_type = new ProductType;
+            $product_type->product_id = $product->id;
+            $product_type->type_name = $admin_product_type->type_name;
+            $product_type->type_size = $admin_product_type->size;
+            $product_type->save();
+            if(!$product_type->save())
+            return sendError('There is some thing wrong, Please try again', null);
 
+            $data['product']['product_type'] = $product_type;
+        }
 
-    $product_ingredient->quantity = $request->quantity;
-    // $product_ingredient->product_id = $request->product_id??$request->product()->id;
-    // $product_ingredient->ingredient_id = $request->ingredient_id??$request->ingrediant->id;
+        // return $admin_product_type;
+        foreach($admin_ingredient as $key => $ingredient){
 
+            $product_ingredient = new ProductIngredient;
+            $product_ingredient->purchase_list_id = $ingredient->id??null;
+            $product_ingredient->admin_ingredient_id = $ingredient->id;
+            $product_ingredient->admin_ingredient_type_id = $admin_ingredient_type[$key]->id;
+            $product_ingredient->product_id = $product->id;
+            $product_ingredient->quantity = $request->quantity;
+            $product_ingredient->save();
+            if(!$product_ingredient->save())
+                return sendError('ingredients not save',[]);
 
-    $product->save();
-
-            if(!$product->save())
-                return sendError('There is some thing wrong, Please try again', null);
-
-            $admin_product_type =  $admin_product_type->first();
-
-            $data['product'] = $product;
-            if(!isset($request->product_id)){
-                $product_type = new ProductType;
-                $product_type->product_id = $product->id;
-                $product_type->type_name = $admin_product_type->type_name;
-                $product_type->type_size = $admin_product_type->size;
-                $product_type->save();
-                if(!$product_type->save())
-                    return sendError('There is some thing wrong, Please try again', null);
-
-    // product ingredient
-                // foreach($request->purchase_list_id as $purchase_list){
-                //     $product_ingredient = PurchaseList::where('product_id', $purchase_list);
-                //     if($product_ingredient == null)
-                //         $product_ingredient = new PurchaseList;
-                // }
-
-                foreach($request->purchase_list_id as $ingredient_id){
-
-                    $pro_ingredient = new ProductIngredient;
-                    $pro_ingredient->purchase_list_id = $ingredient_id;
-                    $pro_ingredient->product_id = $product->id;
-                    $pro_ingredient->quantity = $request->quantity;
-                    $pro_ingredient->save();
-                    if(!$pro_ingredient->save())
-                        return sendError('ingredients not save',[]);
-
-                }
-                $data['product']['product_type'] = $product_type;
-                $data['product']['ingredients'] = $pro_ingredient;
         }
 
             return sendSuccess('Product Saved', $data);
@@ -130,7 +110,7 @@ class ProductController extends Controller
             return sendError($validator->errors()->all()[0], $data);
         }
 
-        $ingredient = PurchaseList::where('id', $request->ingredient_id)->first();
+        $ingredient = PurchaseList::where('id', $request->ingredient_id)->get();
         if($ingredient == null)
             $ingredient = new PurchaseList;
 
@@ -214,4 +194,37 @@ class ProductController extends Controller
         }
 
 
-}
+
+        /**
+         *  Extra
+         */
+
+         // product ingredient
+                // foreach($request->purchase_list_id as $purchase_list){
+                //     $product_ingredient = PurchaseList::where('product_id', $purchase_list);
+                //     if($product_ingredient == null)
+                //         $product_ingredient = new PurchaseList;
+                // }
+
+                // foreach($request->purchase_list_id as $ingredient_id){
+
+                //     $pro_ingredient = new ProductIngredient;
+                //     $pro_ingredient->purchase_list_id = $ingredient_id;
+                //     $pro_ingredient->product_id = $product->id;
+                //     $pro_ingredient->quantity = $request->quantity;
+                //     $pro_ingredient->save();
+                //     if(!$pro_ingredient->save())
+                //         return sendError('ingredients not save',[]);
+
+                // }
+
+
+                // $clone_admin_product_type = $clone_admin_product_type->pluck('size')->toArray();
+
+                //     $dbSizes = explode(',', $clone_admin_product_type[0]);
+                //     $compared_size = in_array($request->size, $dbSizes);
+
+                // if($compared_size == 0)
+                //     return sendError("Wrong size ",[]);
+
+    }
