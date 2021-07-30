@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use phpDocumentor\Reflection\Types\Nullable;
 
 class CreateProductIngredientsTable extends Migration
 {
@@ -19,8 +20,14 @@ class CreateProductIngredientsTable extends Migration
             $table->Integer('product_id')->nullable();
             $table->foreign('product_id')->references('id')->on('products')->onUpdate('cascade')->onDelete('cascade');
 
-            $table->Integer('purchase_list_id');
+            $table->Integer('purchase_list_id')->nullable();
             $table->foreign('purchase_list_id')->references('id')->on('purchase_lists')->onDelete('cascade')->onUpdate('cascade');
+
+            $table->Integer('admin_ingredient_id')->nullable();
+            $table->foreign('admin_ingredient_id')->references('id')->on('admin_ingredients')->onDelete('cascade')->onUpdate('cascade');
+
+            $table->Integer('admin_ingredient_type_id')->nullable();
+            $table->foreign('admin_ingredient_type_id')->references('id')->on('admin_ingredient_types')->onDelete('cascade')->onUpdate('cascade');
 
             $table->integer('quantity');
             $table->timestamps();
