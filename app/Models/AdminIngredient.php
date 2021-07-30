@@ -9,12 +9,16 @@ class AdminIngredient extends Model
 {
     use HasFactory;
 
+    protected $with = [
+        'adminIngredientTypes',
+    ];
+
      function adminIngredientTypes(){
-        return $this->hasMany(AdminIngredientType::class);
+        return $this->hasMany(AdminIngredientType::class, 'admin_ingredient_id','id');
     }
 
     function purchaseList(){
-        return $this->hasMany(PurchaseList::class, 'Admin_ingredient_id','id');
+        return $this->hasMany(PurchaseList::class, 'admin_ingredient_id','id');
     }
 
 

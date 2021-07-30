@@ -59,7 +59,9 @@ class ProductController extends Controller
         $product->user_id = $request->user_id??$product->user_id??$request->user()->id;
         $product->admin_product_id = $request->admin_product_id??$product->admin_product_id??$request->admin_product()->id;
         $product->admin_product_type_id = $request->admin_product_type_id??$product->admin_product_type_id??$request->admin_product_type()->id;
-        $product->size = $request->size;
+
+        $product->size = ($request->size);
+
         $product->description = $request->description??$product->description;
         $product->price = $request->price??$product->price;
 
