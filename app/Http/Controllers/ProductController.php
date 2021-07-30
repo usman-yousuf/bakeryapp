@@ -71,7 +71,7 @@ class ProductController extends Controller
             $product_type->type_size = $admin_product_type->size;
             $product_type->save();
             if(!$product_type->save())
-            return sendError('There is some thing wrong, Please try again', null);
+                return sendError('There is some thing wrong, Please try again', null);
 
             $data['product']['product_type'] = $product_type;
         }
@@ -84,7 +84,7 @@ class ProductController extends Controller
             $product_ingredient->admin_ingredient_id = $ingredient->id;
             $product_ingredient->admin_ingredient_type_id = $admin_ingredient_type[$key]->id;
             $product_ingredient->product_id = $product->id;
-            $product_ingredient->quantity = $request->quantity;
+            $product_ingredient->quantity = $request->quantity[$key];
             $product_ingredient->save();
             if(!$product_ingredient->save())
                 return sendError('ingredients not save',[]);
