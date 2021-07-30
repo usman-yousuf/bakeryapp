@@ -63,12 +63,6 @@ class ProductController extends Controller
         $product->description = $request->description??$product->description;
         $product->price = $request->price??$product->price;
 
-    // product ingredient
-    foreach($request->purchase_list_id as $purchase_list){
-        $product_ingredient = PurchaseList::where('product_id', $purchase_list);
-        if($product_ingredient == null)
-            $product_ingredient = new PurchaseList;
-    }
 
 
     $product_ingredient->quantity = $request->quantity;
@@ -81,7 +75,7 @@ class ProductController extends Controller
             if(!$product->save())
                 return sendError('There is some thing wrong, Please try again', null);
 
-                $admin_product_type =  $admin_product_type->first();
+            $admin_product_type =  $admin_product_type->first();
 
             $data['product'] = $product;
             if(!isset($request->product_id)){
@@ -93,6 +87,12 @@ class ProductController extends Controller
                 if(!$product_type->save())
                     return sendError('There is some thing wrong, Please try again', null);
 
+    // product ingredient
+                // foreach($request->purchase_list_id as $purchase_list){
+                //     $product_ingredient = PurchaseList::where('product_id', $purchase_list);
+                //     if($product_ingredient == null)
+                //         $product_ingredient = new PurchaseList;
+                // }
 
                 foreach($request->purchase_list_id as $ingredient_id){
 
