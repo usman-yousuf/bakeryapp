@@ -14,6 +14,6 @@ class AdminIngredientType extends Model
     }
 
     function purchaseList(){
-        return $this->hasMany(PurchaseList::class, 'Admin_ingredient_type_id', 'id');
+        return $this->hasMany(PurchaseList::class, 'admin_ingredient_type_id', 'id');
     }
 }

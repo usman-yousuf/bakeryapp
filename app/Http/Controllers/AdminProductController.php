@@ -28,6 +28,7 @@ class AdminProductController extends Controller
         $data = [];
 
         if(isset($request->products)){
+
             $products = AdminProduct::get();
             $data['products'] = $products;
         }
@@ -47,7 +48,6 @@ class AdminProductController extends Controller
             $product_type_size = AdminProductType::where('id', $request->product_type_id)->pluck('size');
             $data['ingredient_type_size'] = $product_type_size;
         }
-
         if(NULL == $data)
             return sendError('No Data Found',[]);
 
