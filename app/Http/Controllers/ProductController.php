@@ -29,7 +29,7 @@ class ProductController extends Controller
         'price' => 'required_without:product_id|numeric',
         'admin_product_id' => 'required_without:product_id|exists:admin_products,id',
         'admin_product_type_id' => 'required_with:admin_product_id|exists:admin_product_types,id',
-        'size' => 'required_with:admin_product_id|in:S,M,L',
+        'size' => 'required_with:admin_product_id',
         'purchase_list_id*' => 'required_with:admin_product_id|exists:purchase_lists,id'
         // 'name' => 'required_without:product_id|regex:/^[\pL\s\-]+$/u',
     ]);
