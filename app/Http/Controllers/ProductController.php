@@ -59,15 +59,17 @@ class ProductController extends Controller
         $product->user_id = $request->user_id??$product->user_id??$request->user()->id;
         $product->admin_product_id = $request->admin_product_id??$product->admin_product_id??$request->admin_product()->id;
         $product->admin_product_type_id = $request->admin_product_type_id??$product->admin_product_type_id??$request->admin_product_type()->id;
-        $product->size = json_encode($request->size);
+        $product->size = $request->size;
         $product->description = $request->description??$product->description;
         $product->price = $request->price??$product->price;
 
     // product ingredient
-    $product_ingredient = PurchaseList::where('product_id', $request->product_id);
+    foreach($request->purchase_list_id as $purchase_list){
+        $product_ingredient = PurchaseList::where('product_id', $purchase_list);
+        if($product_ingredient == null)
+            $product_ingredient = new PurchaseList;
+    }
 
-    if($product_ingredient == null)
-        $product_ingredient = new PurchaseList;
 
     $product_ingredient->quantity = $request->quantity;
     // $product_ingredient->product_id = $request->product_id??$request->product()->id;
