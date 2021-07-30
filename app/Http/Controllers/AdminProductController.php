@@ -45,7 +45,11 @@ class AdminProductController extends Controller
         }
         if(isset($request->product_type_id)){
             $product_type_size = AdminProductType::where('id', $request->product_type_id)->pluck('size');
-            $data['ingredient_type_size'] = $product_type_size;
+            $data['product_type_size'] = $product_type_size;
+        }
+        if(isset($request->ingredient_type_id)){
+            $ingredient_type_size = AdminIngredientType::where('id', $request->ingredient_type_id)->pluck('size');
+            $data['ingredient_type_size'] = $ingredient_type_size;
         }
 
         if(NULL == $data)

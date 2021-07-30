@@ -48,13 +48,13 @@ class ProductController extends Controller
         $admin_product_type = AdminProductType::where('id',$request->admin_product_type_id);
 
         $clone_admin_product_type = $admin_product_type;
-        $clone_admin_product_type = $clone_admin_product_type->pluck('size')->toArray();
+    //     $clone_admin_product_type = $clone_admin_product_type->pluck('size')->toArray();
 
-        $dbSizes = explode(',', $clone_admin_product_type[0]);
-        $compared_size = in_array($request->size, $dbSizes);
+    //     $dbSizes = explode(',', $clone_admin_product_type[0]);
+    //     $compared_size = in_array($request->size, $dbSizes);
 
-    if($compared_size == 0)
-        return sendError("Wrong size ",[]);
+    // if($compared_size == 0)
+    //     return sendError("Wrong size ",[]);
 
         $product->user_id = $request->user_id??$product->user_id??$request->user()->id;
         $product->admin_product_id = $request->admin_product_id??$product->admin_product_id??$request->admin_product()->id;
