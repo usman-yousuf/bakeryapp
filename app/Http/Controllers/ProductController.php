@@ -81,7 +81,7 @@ class ProductController extends Controller
         foreach($admin_ingredient as $key => $ingredient){
 
             $product_ingredient = new ProductIngredient;
-            $product_ingredient->purchase_list_id = $ingredient->id??null;
+            $product_ingredient->purchase_list_id = null;
             $product_ingredient->admin_ingredient_id = $ingredient->id;
             $product_ingredient->admin_ingredient_type_id = $admin_ingredient_type[$key]->id;
             $product_ingredient->product_id = $product->id;
