@@ -72,10 +72,10 @@ class AuthController extends Controller
 
             Log::info($code);
 
-            $twilio = new TwilioController;
-            if(!$twilio->sendMessage($check->phone_code.$check->phone_number, 'Enter this code to verify your Grabions account ' . $code)) {
-                return sendError('Phone is invalid', NULL);
-            }
+            // $twilio = new TwilioController;
+            // if(!$twilio->sendMessage($check->phone_code.$check->phone_number, 'Enter this code to verify your Grabions account ' . $code)) {
+            //     return sendError('Phone is invalid', NULL);
+            // }
 
             // SAVE VERIFICATION TOKEN
             $signupVerification = new SignupVerification;
@@ -133,12 +133,12 @@ class AuthController extends Controller
             return sendError($validator->errors()->all()[0], $data);
         }
 
-        $twilio = new TwilioController;
-        $twilioResponse = $twilio->isValidNumber($request->phone_code, $request->phone_number);
+        // $twilio = new TwilioController;
+        // $twilioResponse = $twilio->isValidNumber($request->phone_code, $request->phone_number);
 
-        if(!$twilioResponse){
-            return sendError('Phone number is invalid', null);
-        }
+        // if(!$twilioResponse){
+        //     return sendError('Phone number is invalid', null);
+        // }
 
         $code = mt_rand(1000, 9999);
         $check = new User();
@@ -252,9 +252,9 @@ class AuthController extends Controller
                         return $this->socialLogin($request);
 
                     }else{
-                        if(!$twilio->sendMessage($request->phone_code.$request->phone_number, 'Enter this code to verify your Grabions account ' . $code)) {
-                            // return sendError('Phone is invalid', NULL);
-                        }
+                        // if(!$twilio->sendMessage($request->phone_code.$request->phone_number, 'Enter this code to verify your Grabions account ' . $code)) {
+                        //     // return sendError('Phone is invalid', NULL);
+                        // }
 
                         Mail::send('email_template.verification_code', ['name' => $user->name, 'code' => $code], function ($m) use ($user) {
 
