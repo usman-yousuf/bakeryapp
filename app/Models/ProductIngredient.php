@@ -30,18 +30,23 @@ class ProductIngredient extends Model
         'deleted_at'
     ];
 
+    protected $with = [
+        'adminIngredient',
+        'adminIngredientType'
+    ];
 
-    function adminProduct(){
-        return $this->belongsTo(AdminProduct::class, 'id', 'admin_ingredient_id');
+
+    function adminIngredient(){
+        return $this->belongsTo(AdminIngredient::class, 'admin_ingredient_id', 'id');
     }
 
-    function adminProductType(){
-        return $this->belongsTo(AdminProductType::class, 'id', 'admin_ingredient_type_id');
+    function adminIngredientType(){
+        return $this->belongsTo(AdminIngredientType::class, 'admin_ingredient_type_id', 'id');
     }
 
 
     function product(){
-        return $this->belongsTo(Product::class, 'id', 'product_id');
+        return $this->belongsTo(Product::class, 'product_id', 'id');
     }
 
     function purchaseList(){
