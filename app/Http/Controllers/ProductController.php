@@ -50,12 +50,8 @@ class ProductController extends Controller
 
         $admin_product = AdminProduct::where('id',$request->admin_product_id)->first();
         $admin_product_type = AdminProductType::where('id',$request->admin_product_type_id)->get();
-        $admin_ingredient = AdminIngredient::whereIn('id',$request->admin_ingredient_id)->get();
-        $admin_ingredient_type = AdminIngredientType::whereIn('id',$request->admin_ingredient_type_id)->get();
-        if(!isset($request->purchase_list_id))
-            $request->purchase_list_id = [];
-        $purchase_list = Purchaselist::whereIn('id', $request->purchase_list_id)->get();
 
+        //Product_list 
         $product->user_id = $request->user_id??$product->user_id??$request->user()->id;
         $product->admin_product_id = $request->admin_product_id??$product->admin_product_id??$request->admin_product()->id;
         $product->admin_product_type_id = $request->admin_product_type_id??$product->admin_product_type_id??$request->admin_product_type()->id;
@@ -66,20 +62,24 @@ class ProductController extends Controller
         if(!$product->save())
             return sendError('There is some thing wrong, Please try again', null);
 
-        $admin_product_type =  $admin_product_type->first();
 
-        if(!isset($request->product_id)){
-            $product_type = new ProductType;
-            $product_type->product_id = $product->id;
-            $product_type->type_name = $admin_product_type->type_name;
-            $product_type->type_size = $admin_product_type->size;
-            $product_type->save();
-            if(!$product_type->save())
-                return sendError('There is some thing wrong, Please try again', null);
+        // if(!isset($request->product_id)){
+        //     $product_type = new ProductType;
+        //     $product_type->product_id = $product->id;
+        //     $product_type->type_name = $admin_product_type->type_name;
+        //     $product_type->type_size = $admin_product_type->size;
+        //     $product_type->save();
+        //     if(!$product_type->save())
+        //         return sendError('There is some thing wrong, Please try again', null);
 
-        }
+        // }
 
-        // return $admin_product_type;
+        if(!isset($request->purchase_list_id))
+            $request->purchase_list_id = [];
+        $purchase_list = Purchaselist::whereIn('id', $request->purchase_list_id)->get();
+        $admin_ingredient = AdminIngredient::whereIn('id',$request->admin_ingredient_id)->get();
+        $admin_ingredient_type = AdminIngredientType::whereIn('id',$request->admin_ingredient_type_id)->get();
+
         foreach($admin_ingredient as $key => $ingredient){
 
             $product_ingredient = new ProductIngredient;
