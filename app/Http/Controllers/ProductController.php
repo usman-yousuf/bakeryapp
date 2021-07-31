@@ -34,6 +34,7 @@ class ProductController extends Controller
         'admin_ingredient_id' => 'required|exists:admin_ingredients,id|array',
         'admin_ingredient_type_id' => 'required|exists:admin_ingredient_types,id|array',
         'quantity' => 'required|array',
+        'purchase_list_id' => 'exists:purchase_lists,id|array'
         // 'name' => 'required_without:product_id|regex:/^[\pL\s\-]+$/u',
     ]);
 
@@ -49,10 +50,11 @@ class ProductController extends Controller
 
         $admin_product = AdminProduct::where('id',$request->admin_product_id)->first();
         $admin_product_type = AdminProductType::where('id',$request->admin_product_type_id)->get();
-
         $admin_ingredient = AdminIngredient::whereIn('id',$request->admin_ingredient_id)->get();
         $admin_ingredient_type = AdminIngredientType::whereIn('id',$request->admin_ingredient_type_id)->get();
-
+        if(!isset($request->purchase_list_id))
+            $request->purchase_list_id = [];
+        $purchase_list = Purchaselist::whereIn('id', $request->purchase_list_id)->get();
 
         $product->user_id = $request->user_id??$product->user_id??$request->user()->id;
         $product->admin_product_id = $request->admin_product_id??$product->admin_product_id??$request->admin_product()->id;
@@ -81,9 +83,9 @@ class ProductController extends Controller
         foreach($admin_ingredient as $key => $ingredient){
 
             $product_ingredient = new ProductIngredient;
-            $product_ingredient->purchase_list_id = null;
-            $product_ingredient->admin_ingredient_id = $ingredient->id;
-            $product_ingredient->admin_ingredient_type_id = $admin_ingredient_type[$key]->id;
+            $product_ingredient->purchase_list_id = $purchase_list[$key]->id??null;
+            $product_ingredient->admin_ingredient_id = $purchase_list[$key]->admin_ingredient_id??$admin_ingredient[$key]->id;
+            $product_ingredient->admin_ingredient_type_id = $purchase_list[$key]->admin_ingredient_type_id??$admin_ingredient_type[$key]->id;
             $product_ingredient->product_id = $product->id;
             $product_ingredient->quantity = $request->quantity[$key];
             $product_ingredient->save();
