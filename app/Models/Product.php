@@ -32,8 +32,10 @@ class Product extends Model
     ];
 
     protected $with = [
+        'productType',
         'adminProduct',
-        'adminProductType'
+        'adminProductType',
+        'productIngredient',
     ];
 
 
@@ -47,6 +49,10 @@ class Product extends Model
 
     function productIngredient(){
         return $this->hasMany(ProductIngredient::class, 'product_id', 'id');
+    }
+
+    function productType(){
+        return $this->hasMany(ProductType::class, 'product_id', 'id');
     }
 
 }

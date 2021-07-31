@@ -27,11 +27,13 @@ class ProductController extends Controller
         'user_id' => 'exists:users,id',
         'product_id' => 'exists:products,id',
         'price' => 'required_without:product_id|numeric',
-        'admin_product_id' => 'required_without:product_id|exists:admin_products,id',
+        'admin_product_id' => 'required|exists:admin_products,id',
+        'description' => 'required|string',
         'admin_product_type_id' => 'required_with:admin_product_id|exists:admin_product_types,id',
         'size' => 'required_with:admin_product_id',
-        'purchase_list_id*' => 'required_with:admin_product_id|exists:purchase_lists,id',
-        'admin_ingredient_id*' => 'required|exists:admin_ingredients,id'
+        'admin_ingredient_id' => 'required|exists:admin_ingredients,id|array',
+        'admin_ingredient_type_id' => 'required|exists:admin_ingredient_types,id|array',
+        'quantity' => 'required|array',
         // 'name' => 'required_without:product_id|regex:/^[\pL\s\-]+$/u',
     ]);
 
@@ -63,7 +65,7 @@ class ProductController extends Controller
             return sendError('There is some thing wrong, Please try again', null);
 
         $admin_product_type =  $admin_product_type->first();
-        $data['product'] = $product;
+
         if(!isset($request->product_id)){
             $product_type = new ProductType;
             $product_type->product_id = $product->id;
@@ -73,7 +75,6 @@ class ProductController extends Controller
             if(!$product_type->save())
             return sendError('There is some thing wrong, Please try again', null);
 
-            $data['product']['product_type'] = $product_type;
         }
 
         // return $admin_product_type;
@@ -84,13 +85,13 @@ class ProductController extends Controller
             $product_ingredient->admin_ingredient_id = $ingredient->id;
             $product_ingredient->admin_ingredient_type_id = $admin_ingredient_type[$key]->id;
             $product_ingredient->product_id = $product->id;
-            $product_ingredient->quantity = $request->quantity;
+            $product_ingredient->quantity = $request->quantity[$key];
             $product_ingredient->save();
             if(!$product_ingredient->save())
                 return sendError('ingredients not save',[]);
 
         }
-
+            $data['product'] = Product::where('id',$product->id)->first();
             return sendSuccess('Product Saved', $data);
     }
 
