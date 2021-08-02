@@ -29,8 +29,10 @@ class CreateOrdersTable extends Migration
             $table->string('phone_code')->nullable();
             $table->string('phone_number')->nullable();
             $table->string('delivery_address')->nullable();
-            $table->enum('order_status', ['new-order','in-baking','ready-to-deliver,sold,other']);
+            $table->enum('order_status', ['new-order','in-baking','ready-to-deliver','sold','other']);
             $table->decimal('advance_payment')->nullable();
+            $table->decimal('quantity')->nullable();
+            $table->decimal('total_price')->nullable();
 
             $table->softDeletes();
             $table->timestamps();

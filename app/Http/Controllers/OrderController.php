@@ -29,6 +29,7 @@ class OrderController extends Controller
             'order_status' => 'required_with:order_id,product_id|in:new-order,in-baking,ready-to-deliver,sold,other',
             'advance_payment' => 'required_without:order_id|integer',
             'order_id' => 'numeric|exists:orders,id',
+            'quantity' => 'required_without:order_id|numeric',
 
         ]);
 
@@ -62,6 +63,8 @@ class OrderController extends Controller
         $order->delivery_address = $request->delivery_address ?? $order->delivery_address;
         $order->order_status = $request->order_status;
         $order->advance_payment = $request->advance_payment ?? $order->advance_payment;
+        $order->quantity = $request->quantity ?? $order->quantity;
+        $order->total_price = $request->quantity * $product->price ?? $order->total_price;
         $order->save();
         if(!$order->save())
             return sendError('Order not saved',[]);
@@ -115,6 +118,7 @@ class OrderController extends Controller
         $validator = Validator::make($request->all(),[
 
             'month' => 'required',
+            'year' => 'required',
             'user_id' => 'required|exists:users,id',
         ]);
 
@@ -123,11 +127,11 @@ class OrderController extends Controller
                 return sendError($validator->errors()->all()[0], $data);
         }
 
-        $purchase = PurchaseList::where('user_id',$request->user_id);
-        $sale = order::where('user_id',$request->user_id);
+        $purchase = PurchaseList::where('user_id',$request->user_id)->whereMonth('created_at', $request->month)->whereYear('created_at', $request->year);
+        $sale = order::where('order_status','sold')->where('user_id',$request->user_id)->whereMonth('created_at', $request->month)->whereYear('created_at', $request->year);
 
-        $data['purchase'] =  $purchase->pluck('price')->sum();
-        $data['sale'] =  $sale->pluck('advance_payment')->sum();
+        $data['purchase_sum'] =  $purchase->pluck('price')->sum();
+        $data['sale_sum'] =  $sale->pluck('advance_payment')->sum();
 
         return $data;
 
