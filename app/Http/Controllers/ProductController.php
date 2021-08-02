@@ -36,65 +36,66 @@ class ProductController extends Controller
         'quantity' => 'required|array',
         'purchase_list_id' => 'exists:purchase_lists,id|array'
         // 'name' => 'required_without:product_id|regex:/^[\pL\s\-]+$/u',
-    ]);
 
-    if($validator->fails()){
-        $data['validation_error'] = $validator->getMessageBag();
-            return sendError($validator->errors()->all()[0], $data);
-    }
+        ]);
 
-    if(
-        count($request->admin_ingredient_id) != count($request->admin_ingredient_type_id) ||
-        count($request->quantity) != count($request->admin_ingredient_id) ||
-        count($request->quantity) != count($request->admin_ingredient_type_id)
-        )
-        return sendError('Unequal amount of data provided',[]);
-
-    $product = Product::where('id', $request->product_id)->first();
-
-    if($product == null)
-        $product = new Product;
-
-        $admin_product = AdminProduct::where('id',$request->admin_product_id)->first();
-        $admin_product_type = AdminProductType::where('id',$request->admin_product_type_id)->get();
-
-        //Product_list 
-        $product->user_id = $request->user_id??$product->user_id??$request->user()->id;
-        $product->admin_product_id = $request->admin_product_id??$product->admin_product_id??$request->admin_product()->id;
-        $product->admin_product_type_id = $request->admin_product_type_id??$product->admin_product_type_id??$request->admin_product_type()->id;
-        $product->size = $request->size;
-        $product->description = $request->description??$product->description;
-        $product->price = $request->price??$product->price;
-        $product->save();
-        if(!$product->save())
-            return sendError('There is some thing wrong, Please try again', null);
-
-
-        foreach($request->admin_ingredient_id as $key => $ingredient){
-
-            $admin_ingredient = AdminIngredient::where('id',$ingredient)->first();
-            if(NULL == $admin_ingredient)
-                return sendError('Admin Ingredient does not exist',[]);
-
-            $admin_ingredient_type = AdminIngredientType::where('id',$request->admin_ingredient_type_id[$key])->where('admin_ingredient_id',$admin_ingredient->id)->first();
-            if(NULL == $admin_ingredient_type)
-                return sendError('Admin Ingredient type does not exist or dont belongs to the save Admin Ingredient',[]);
-
-            $purchase_list = Purchaselist::where('id', $request->purchase_list_id[$key] ?? NULL)->first();
-
-            $product_ingredient = new ProductIngredient;
-            $product_ingredient->product_id = $product->id;
-            $product_ingredient->purchase_list_id = $purchase_list->id ?? NULL;
-            $product_ingredient->admin_ingredient_id = $purchase_list->admin_ingredient_id ?? $admin_ingredient->id;
-            $product_ingredient->admin_ingredient_type_id = $purchase_list->admin_ingredient_type_id ?? $admin_ingredient_type->id;
-            $product_ingredient->quantity = $request->quantity[$key];
-            $product_ingredient->save();
-            if(!$product_ingredient->save())
-                return sendError('ingredients not save',[]);
-
+        if($validator->fails()){
+            $data['validation_error'] = $validator->getMessageBag();
+                return sendError($validator->errors()->all()[0], $data);
         }
-            $data['product'] = Product::where('id',$product->id)->first();
-            return sendSuccess('Product Saved', $data);
+
+        if(
+            count($request->admin_ingredient_id) != count($request->admin_ingredient_type_id) ||
+            count($request->quantity) != count($request->admin_ingredient_id) ||
+            count($request->quantity) != count($request->admin_ingredient_type_id)
+            )
+            return sendError('Unequal amount of data provided',[]);
+
+        $product = Product::where('id', $request->product_id)->first();
+
+        if($product == null)
+            $product = new Product;
+
+            $admin_product = AdminProduct::where('id',$request->admin_product_id)->first();
+            $admin_product_type = AdminProductType::where('id',$request->admin_product_type_id)->get();
+
+            //Product_list
+            $product->user_id = $request->user_id??$product->user_id??$request->user()->id;
+            $product->admin_product_id = $request->admin_product_id??$product->admin_product_id??$request->admin_product()->id;
+            $product->admin_product_type_id = $request->admin_product_type_id??$product->admin_product_type_id??$request->admin_product_type()->id;
+            $product->size = $request->size;
+            $product->description = $request->description??$product->description;
+            $product->price = $request->price??$product->price;
+            $product->save();
+            if(!$product->save())
+                return sendError('There is some thing wrong, Please try again', null);
+
+
+            foreach($request->admin_ingredient_id as $key => $ingredient){
+
+                $admin_ingredient = AdminIngredient::where('id',$ingredient)->first();
+                if(NULL == $admin_ingredient)
+                    return sendError('Admin Ingredient does not exist',[]);
+
+                $admin_ingredient_type = AdminIngredientType::where('id',$request->admin_ingredient_type_id[$key])->where('admin_ingredient_id',$admin_ingredient->id)->first();
+                if(NULL == $admin_ingredient_type)
+                    return sendError('Admin Ingredient type does not exist or dont belongs to the save Admin Ingredient',[]);
+
+                $purchase_list = Purchaselist::where('id', $request->purchase_list_id[$key] ?? NULL)->first();
+
+                $product_ingredient = new ProductIngredient;
+                $product_ingredient->product_id = $product->id;
+                $product_ingredient->purchase_list_id = $purchase_list->id ?? NULL;
+                $product_ingredient->admin_ingredient_id = $purchase_list->admin_ingredient_id ?? $admin_ingredient->id;
+                $product_ingredient->admin_ingredient_type_id = $purchase_list->admin_ingredient_type_id ?? $admin_ingredient_type->id;
+                $product_ingredient->quantity = $request->quantity[$key];
+                $product_ingredient->save();
+                if(!$product_ingredient->save())
+                    return sendError('ingredients not save',[]);
+
+            }
+                $data['product'] = Product::where('id',$product->id)->first();
+                return sendSuccess('Product Saved', $data);
     }
 
     // Purchase List add and update ingredients
@@ -118,7 +119,7 @@ class ProductController extends Controller
             return sendError($validator->errors()->all()[0], $data);
         }
 
-        $check = 
+        $check =
 
         $ingredient = PurchaseList::where('id', $request->purchase_list_id)->first();
         if($ingredient == null)
@@ -137,8 +138,68 @@ class ProductController extends Controller
 
         $data['ingredient'] = PurchaseList::where('id',$ingredient->id)->first();
         return sendSuccess('Ingredient Saved', $data);
-        
+
     }
+
+    // search Purchase List
+
+    public function searchPurchaseList(Request $request){
+
+
+         $validator = Validator::make($request->all(),[
+
+            'purchase_list_id' => 'exists:purchase_lists,id',
+            'user_id' => 'exists:users,id',
+            'store_name' => 'string',
+            'brand_name' => 'string',
+            'price' => 'integer',
+            'date'=> 'date'
+        ]);
+
+        if($validator->fails()){
+            $data['validation_error'] = $validator->getMessageBag();
+            return sendError($validator->errors()->all()[0], $data);
+        }
+
+
+        $purchase_list = PurchaseList::where('user_id', $request->user_id ?? $request->user()->id);
+
+            if(isset($request->product_name)){
+                $product_name = $request->product_name;
+                $purchase_list = $purchase_list->whereHas( 'adminIngredient' , function($q) use ($product_name) {
+                    $q->where('name','like',"%{$product_name}%");
+                });
+            }
+
+            if(isset($request->brand_name)){
+                $brand_name = $request->brand_name;
+                // return gettype($brand_name);
+                $purchase_list = $purchase_list->whereHas('adminIngredientType' , function($q) use($brand_name) {
+                    $q->where('brand_name','like',"%{$brand_name}%");
+                });
+            }
+
+            // search by store name
+            if(isset($request->store_name)){
+                $purchase_list = $purchase_list->where('store_name','like',"%{$request->store_name}%");
+            }
+
+            // search by price
+            if(isset($request->price)){
+                $purchase_list = $purchase_list->where('price','>=',$request->price);
+            }
+
+            // search by date
+            if(isset($request->date)){
+                $purchase_list = $purchase_list->where('created_at','like',"%{$request->date}%");
+            }
+
+            $data['purchase_list'] = $purchase_list->get();
+
+            return sendSuccess("purchase_list",$data);
+
+
+}
 
     // get products
 
@@ -202,7 +263,7 @@ class ProductController extends Controller
         }
 
 
-
+    }
         /**
          *  Extra
          */
@@ -235,4 +296,4 @@ class ProductController extends Controller
                 // if($compared_size == 0)
                 //     return sendError("Wrong size ",[]);
 
-    }
+
