@@ -106,6 +106,10 @@ class ProductController extends Controller
             'purchase_list_id' => 'exists:purchase_lists,id',
             'admin_ingredient_id' => 'required|exists:admin_ingredients,id',
             'admin_ingredient_type_id' => 'required|exists:admin_ingredient_types,id',
+            'admin_ingredient_type_id' => 'required|exists:admin_ingredient_types,id',
+            'price' => 'required|integer',
+            'quantity' => 'required|integer',
+            'store_name' => 'required|string',
         ]);
 
         if($validator->fails()){
@@ -113,26 +117,25 @@ class ProductController extends Controller
             return sendError($validator->errors()->all()[0], $data);
         }
 
-        $ingredient = PurchaseList::where('id', $request->ingredient_id)->get();
+        $check = 
+
+        $ingredient = PurchaseList::where('id', $request->purchase_list_id)->first();
         if($ingredient == null)
             $ingredient = new PurchaseList;
 
-            $ingredient->id = $request->ingredient_id;
-            $ingredient->admin_ingredient_id = $request->admin_ingredient_id??$ingredient->admin_ingredient_id??$request->admin_ingredient()->id;
-            $ingredient->admin_ingredient_type_id = $request->admin_ingredient_type_id??$ingredient->admin_ingredient_type_id??$request->admin_ingredient_type()->id;
-            $ingredient->store_name = $request->store_name;
-            $ingredient->quantity = $request->quantity;
-            $ingredient->price = $request->price;
+            $ingredient->admin_ingredient_id = $request->admin_ingredient_id ?? $ingredient->admin_ingredient_id;
+            $ingredient->admin_ingredient_type_id = $request->admin_ingredient_type_id ?? $ingredient->admin_ingredient_type_id;
+            $ingredient->store_name = $request->store_name ?? $ingredient->store_name;
+            $ingredient->quantity = $request->quantity ?? $ingredient->quantity;
+            $ingredient->price = $request->price ?? $ingredient->price;
             $ingredient->save();
 
-        if($ingredient->save()){
-            $data['Ingredient'] = $ingredient;
-            $data['Ingredient']['adminIngredient'] = $ingredient->adminIngredient;
-            $data['Ingredient']['adminIngredientType'] = $ingredient->adminIngredientType;
+        if(!$ingredient->save())
+            return sendError('There is some thing wrong, Please try again',[]);
 
-            return sendSuccess('Ingredient Saved', $data);
-        }
-        return sendError('There is some thing wrong, Please try again', null);
+        $data['ingredient'] = PurchaseList::where('id',$ingredient->id)->first();
+        return sendSuccess('Ingredient Saved', $data);
+        
     }
 
     // get products
