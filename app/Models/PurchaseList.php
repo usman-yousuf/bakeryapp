@@ -33,7 +33,6 @@ class PurchaseList extends Model
     protected $with = [
         'adminIngredient',
         'adminIngredientType',
-        'productIngredient',
     ];
 
 
@@ -45,9 +44,5 @@ class PurchaseList extends Model
     function adminIngredientType()
     {
         return $this->belongsTo(AdminIngredientType::class, 'admin_ingredient_type_id', 'id');
-    }
-
-    function productIngredient(){
-        return $this->hasMany(ProductIngredient::class, 'purchase_list_id', 'id');
     }
 }
