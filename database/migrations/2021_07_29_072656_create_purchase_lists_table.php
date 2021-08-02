@@ -16,6 +16,9 @@ class CreatePurchaseListsTable extends Migration
         Schema::create('purchase_lists', function (Blueprint $table) {
             $table->Increments('id')->unsigned(false);
 
+            $table->Integer('user_id')->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+
             $table->Integer('admin_ingredient_id');
             $table->foreign('admin_ingredient_id')->references('id')->on('admin_ingredients')->onDelete('cascade')->onUpdate('cascade');
 
