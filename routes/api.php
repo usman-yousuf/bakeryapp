@@ -37,6 +37,7 @@ Route::group([ 'prefix' => 'auth'], function () {
 
     Route::post('update_order', [OrderController::class,'updateOrder']);
     Route::post('get_order', [OrderController::class,'getOrder']);
+    Route::post('get_analytics', [OrderController::class,'analytics']);
     Route::post('search_purchase_list', 'App\Http\Controllers\ProductController@searchPurchaseList');
     
     Route::group([ 'middleware' => 'auth:api'], function() {

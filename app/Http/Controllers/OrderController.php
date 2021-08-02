@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\AdminProductType;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\PurchaseList;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -45,11 +46,11 @@ class OrderController extends Controller
 
         $admin_product_type = AdminProductType::where('id',$request->admin_product_type_id)->first();
         if(NULL == $admin_product_type)
-            return sendSuccess('Admin Product Type Does Not Exist',[]);
+            return sendError('Admin Product Type Does Not Exist',[]);
 
         $product = Product::where('id',$request->product_id)->where('admin_product_type_id',$admin_product_type->id)->first();
         if(NULL == $product)
-            return sendSuccess('Product Does Not Exist',[]);
+            return sendError('Product Does Not Exist',[]);
         }
 
         $order->product_id = $product->id ?? $order->product_id;
@@ -74,8 +75,8 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getOrder(Request $request)
-    {
+    public function getOrder(Request $request){
+
         $validator = Validator::make($request->all(),[
 
             'user_id' => 'exists:users,id|numeric',
@@ -109,9 +110,28 @@ class OrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function analytics(Request $request){
+        
+        $validator = Validator::make($request->all(),[
+
+            'month' => 'required',
+            'user_id' => 'required|exists:users,id',
+        ]);
+
+        if($validator->fails()){
+            $data['validation_error'] = $validator->getMessageBag();
+                return sendError($validator->errors()->all()[0], $data);
+        }
+
+        $purchase = PurchaseList::where('user_id',$request->user_id);
+        $sale = order::where('user_id',$request->user_id);
+
+        $data['purchase'] =  $purchase->pluck('price')->sum();
+        $data['sale'] =  $sale->pluck('advance_payment')->sum();
+
+        return $data;
+
+
     }
 
     /**
