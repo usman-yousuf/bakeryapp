@@ -19,15 +19,16 @@ class OrderController extends Controller
 
         $validator = Validator::make($request->all(),[
 
-        'client_name' => 'required|string',
-        'phone_number' => 'required|numeric',
-        'delivery_address' => 'required|string',
-        'user_id' => 'required|exists:users,id',
-        'product_id' => 'required|exists:products,id',
-        'admin_product_type_id' => 'required|exists:admin_product_types,id',
-        'order_status' => 'required|in:new-order,in-baking,ready-to-deliver,sold,other',
-        'advance_payment' => 'required|integer',
-        'order_id' => 'exists:orders,id',
+        'client_name' => 'required_without:order_id|string',
+        'phone_number' => 'required_without:order_id|numeric',
+        'delivery_address' => 'required_without:order_id|string',
+        'user_id' => 'required_without:order_id|exists:users,id',
+        'product_id' => 'required_without:order_id|exists:products,id',
+        'admin_product_type_id' => 'required_without:order_id|exists:admin_product_types,id',
+        'order_status' => 'required_with:order_id,product_id|in:new-order,in-baking,ready-to-deliver,sold,other',
+        'advance_payment' => 'required_without:order_id|integer',
+        'order_id' => 'string|exists:orders,id',
+
         ]);
 
         if($validator->fails()){
@@ -39,22 +40,27 @@ class OrderController extends Controller
         if(NULL == $order)
             $order = new Order;
 
-        $product = Product::where('id',$request->product_id)->first();
-        if(NULL == $product)
-            return sendSuccess('Product Does Not Exist',[]);
+        if(!isset($request->order_id)){
+
+
         $admin_product_type = AdminProductType::where('id',$request->admin_product_type_id)->first();
         if(NULL == $admin_product_type)
-            return sendSuccess('Admin Product Type Does Not Exist',[]);                
+            return sendSuccess('Admin Product Type Does Not Exist',[]);
 
-        $order->product_id = $product->id;
-        $order->user_id = $request->user_id;
-        $order->admin_product_type_id = $admin_product_type->id;
-        $order->client_name = $request->client_name;
+        $product = Product::where('id',$request->product_id)->where('admin_product_type_id',$admin_product_type->id)->first();
+        if(NULL == $product)
+            return sendSuccess('Product Does Not Exist',[]);
+        }
+
+        $order->product_id = $product->id ?? $order->product_id;
+        $order->user_id = $request->user_id ?? $order->user_id;
+        $order->admin_product_type_id = $admin_product_type->id ?? $order->admin_product_type_id;
+        $order->client_name = $request->client_name ?? $order->client_name;
         $order->phone_code = '+92';
-        $order->phone_number = $request->phone_number;
-        $order->delivery_address = $request->delivery_address;
+        $order->phone_number = $request->phone_number ?? $order->phone_number;
+        $order->delivery_address = $request->delivery_address ?? $order->delivery_address;
         $order->order_status = $request->order_status;
-        $order->advance_payment = $request->advance_payment;
+        $order->advance_payment = $request->advance_payment ?? $order->advance_payment;
         $order->save();
         if(!$order->save())
             return sendError('Order not saved',[]);
