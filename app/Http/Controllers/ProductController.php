@@ -146,7 +146,7 @@ class ProductController extends Controller
          $validator = Validator::make($request->all(),[
 
             'purchase_list_id' => 'exists:purchase_lists,id',
-            'user_id' => 'exists:users,id',
+            'user_id' => 'required|exists:users,id',
             'store_name' => 'string',
             'brand_name' => 'string',
             'price' => 'integer',
@@ -159,7 +159,7 @@ class ProductController extends Controller
         }
 
 
-        $purchase_list = PurchaseList::where('user_id', $request->user_id ?? $request->user()->id);
+        $purchase_list = PurchaseList::where('user_id', $request->user_id);
 
             if(isset($request->product_name)){
                 $product_name = $request->product_name;
@@ -229,9 +229,6 @@ class ProductController extends Controller
 
         return sendSuccess("Product",$data);
     }
-<<<<<<< HEAD
-}
-=======
 
     // product ingredients
 
@@ -296,5 +293,3 @@ class ProductController extends Controller
                 // if($compared_size == 0)
                 //     return sendError("Wrong size ",[]);
 
-
->>>>>>> ea9498bb07fee80c6cdba1f83df54846c2def7a4
