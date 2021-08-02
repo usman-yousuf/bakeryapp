@@ -110,6 +110,7 @@ class ProductController extends Controller
             'price' => 'required|integer',
             'quantity' => 'required|integer',
             'store_name' => 'required|string',
+            'user_id' => 'required|exists:users,id',
         ]);
 
         if($validator->fails()){
@@ -123,11 +124,12 @@ class ProductController extends Controller
         if($ingredient == null)
             $ingredient = new PurchaseList;
 
-            $ingredient->admin_ingredient_id = $request->admin_ingredient_id ?? $ingredient->admin_ingredient_id;
-            $ingredient->admin_ingredient_type_id = $request->admin_ingredient_type_id ?? $ingredient->admin_ingredient_type_id;
-            $ingredient->store_name = $request->store_name ?? $ingredient->store_name;
-            $ingredient->quantity = $request->quantity ?? $ingredient->quantity;
-            $ingredient->price = $request->price ?? $ingredient->price;
+            $ingredient->user_id = $request->user_id;
+            $ingredient->admin_ingredient_id = $request->admin_ingredient_id;
+            $ingredient->admin_ingredient_type_id = $request->admin_ingredient_type_id;
+            $ingredient->store_name = $request->store_name;
+            $ingredient->quantity = $request->quantity;
+            $ingredient->price = $request->price;
             $ingredient->save();
 
         if(!$ingredient->save())
