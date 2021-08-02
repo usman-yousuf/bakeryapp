@@ -32,7 +32,6 @@ class Product extends Model
     ];
 
     protected $with = [
-        'productType',
         'adminProduct',
         'adminProductType',
         'productIngredient',
@@ -51,8 +50,5 @@ class Product extends Model
         return $this->hasMany(ProductIngredient::class, 'product_id', 'id');
     }
 
-    function productType(){
-        return $this->hasMany(ProductType::class, 'product_id', 'id');
-    }
 
 }

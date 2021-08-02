@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminProductController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -34,7 +35,10 @@ Route::group([ 'prefix' => 'auth'], function () {
     Route::post('recover_password', 'App\Http\Controllers\AuthController@recoverPassword');
     Route::post('verify_user', 'App\Http\Controllers\AuthController@verifyUserWithCode');
 
+    Route::post('update_order', [OrderController::class,'updateOrder']);
+    
     Route::group([ 'middleware' => 'auth:api'], function() {
+
 
         Route::post('get_user', 'App\Http\Controllers\AuthController@getUser');
         Route::get('logout', 'App\Http\Controllers\AuthController@logout');
@@ -56,8 +60,8 @@ Route::group([ 'prefix' => 'auth'], function () {
         // Route::post('admin_products_Ingredients', ['App\Http\Controllers\AdminProductController@getIngredientProducts']);
 
         // purchase list routes
-
         Route::post('purchase_list', 'App\Http\Controllers\ProductController@addUpdatePurchaseList');
+
 
     });
 
