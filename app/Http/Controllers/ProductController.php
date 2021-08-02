@@ -150,7 +150,8 @@ class ProductController extends Controller
             'store_name' => 'string',
             'brand_name' => 'string',
             'price' => 'integer',
-            'date'=> 'date'
+            'date'=> 'date',
+            'is_inventory' => 'in:1',
         ]);
 
         if($validator->fails()){
@@ -160,6 +161,8 @@ class ProductController extends Controller
 
 
         $purchase_list = PurchaseList::where('user_id', $request->user_id);
+        if(isset($request->is_inventory))
+            $purchase_list = $purchase_list->where('quantity','<>',0);
 
             if(isset($request->product_name)){
                 $product_name = $request->product_name;

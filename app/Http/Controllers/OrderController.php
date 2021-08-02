@@ -19,15 +19,15 @@ class OrderController extends Controller
 
         $validator = Validator::make($request->all(),[
 
-        'client_name' => 'required_without:order_id|string',
-        'phone_number' => 'required_without:order_id|numeric',
-        'delivery_address' => 'required_without:order_id|string',
-        'user_id' => 'required_without:order_id|exists:users,id',
-        'product_id' => 'required_without:order_id|exists:products,id',
-        'admin_product_type_id' => 'required_without:order_id|exists:admin_product_types,id',
-        'order_status' => 'required_with:order_id,product_id|in:new-order,in-baking,ready-to-deliver,sold,other',
-        'advance_payment' => 'required_without:order_id|integer',
-        'order_id' => 'string|exists:orders,id',
+            'client_name' => 'required_without:order_id|string',
+            'phone_number' => 'required_without:order_id|numeric',
+            'delivery_address' => 'required_without:order_id|string',
+            'user_id' => 'required_without:order_id|exists:users,id',
+            'product_id' => 'required_without:order_id|exists:products,id',
+            'admin_product_type_id' => 'required_without:order_id|exists:admin_product_types,id',
+            'order_status' => 'required_with:order_id,product_id|in:new-order,in-baking,ready-to-deliver,sold,other',
+            'advance_payment' => 'required_without:order_id|integer',
+            'order_id' => 'numeric|exists:orders,id',
 
         ]);
 
@@ -74,9 +74,33 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function getOrder(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(),[
+
+            'user_id' => 'exists:users,id|numeric',
+            'order_id' => 'exists:orders,id|numeric',
+
+        ]);
+
+        if($validator->fails()){
+            $data['validation_error'] = $validator->getMessageBag();
+                return sendError($validator->errors()->all()[0], $data);
+        }
+
+        $order = Order::orderBy('created_at', 'DESC');
+
+        if(isset($request->user_id)){
+            $order = $order->where('user_id', $request->user_id);
+            $order = $order->get();
+        }
+        if(isset($request->order_id)){
+            $order = $order->where('id',$request->order_id);
+            $order = $order->first();
+        }
+
+
+        return sendSuccess('Order',$order);
     }
 
     /**
