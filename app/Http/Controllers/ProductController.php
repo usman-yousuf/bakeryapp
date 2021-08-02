@@ -80,7 +80,6 @@ class ProductController extends Controller
                     return sendError('Admin Ingredient type does not exist or dont belongs to the same Admin Ingredient',[]);
 
                 $purchase_list = Purchaselist::where('id', $request->purchase_list_id[$key] ?? NULL)->first();
-
                 $product_ingredient = new ProductIngredient;
                 $product_ingredient->product_id = $product->id;
                 $product_ingredient->purchase_list_id = $purchase_list->id ?? NULL;
@@ -117,7 +116,7 @@ class ProductController extends Controller
             return sendError($validator->errors()->all()[0], $data);
         }
 
-        $check = 
+        $check =
 
         $ingredient = PurchaseList::where('id', $request->purchase_list_id)->first();
         if($ingredient == null)
@@ -136,8 +135,68 @@ class ProductController extends Controller
 
         $data['ingredient'] = PurchaseList::where('id',$ingredient->id)->first();
         return sendSuccess('Ingredient Saved', $data);
-        
+
     }
+
+    // search Purchase List
+
+    public function searchPurchaseList(Request $request){
+
+
+         $validator = Validator::make($request->all(),[
+
+            'purchase_list_id' => 'exists:purchase_lists,id',
+            'user_id' => 'exists:users,id',
+            'store_name' => 'string',
+            'brand_name' => 'string',
+            'price' => 'integer',
+            'date'=> 'date'
+        ]);
+
+        if($validator->fails()){
+            $data['validation_error'] = $validator->getMessageBag();
+            return sendError($validator->errors()->all()[0], $data);
+        }
+
+
+        $purchase_list = PurchaseList::where('user_id', $request->user_id ?? $request->user()->id);
+
+            if(isset($request->product_name)){
+                $product_name = $request->product_name;
+                $purchase_list = $purchase_list->whereHas( 'adminIngredient' , function($q) use ($product_name) {
+                    $q->where('name','like',"%{$product_name}%");
+                });
+            }
+
+            if(isset($request->brand_name)){
+                $brand_name = $request->brand_name;
+                // return gettype($brand_name);
+                $purchase_list = $purchase_list->whereHas('adminIngredientType' , function($q) use($brand_name) {
+                    $q->where('brand_name','like',"%{$brand_name}%");
+                });
+            }
+
+            // search by store name
+            if(isset($request->store_name)){
+                $purchase_list = $purchase_list->where('store_name','like',"%{$request->store_name}%");
+            }
+
+            // search by price
+            if(isset($request->price)){
+                $purchase_list = $purchase_list->where('price','>=',$request->price);
+            }
+
+            // search by date
+            if(isset($request->date)){
+                $purchase_list = $purchase_list->where('created_at','like',"%{$request->date}%");
+            }
+
+            $data['purchase_list'] = $purchase_list->get();
+
+            return sendSuccess("purchase_list",$data);
+
+
+}
 
     // get products
 
@@ -170,4 +229,72 @@ class ProductController extends Controller
 
         return sendSuccess("Product",$data);
     }
+<<<<<<< HEAD
 }
+=======
+
+    // product ingredients
+
+    public function productIngredient(Request $request){
+
+        $validator = Validator::make($request->all(),[
+
+            'product_ingredient_id' => 'exists:product_ingredients, id',
+            'purchase_list_id' => 'required|exists:purchase_lists,id',
+            'product_id' => 'required|exists:products,id',
+        ]);
+
+        if($validator->fails()){
+            $data['validation_error'] = $validator->getMessageBag();
+            return sendError($validator->errors()->all()[0], $data);
+        }
+
+        $pro_ingredient = ProductIngredient::where('id', $request->product_ingredient_id)->first();
+
+        if($pro_ingredient == null)
+            $pro_ingredient = new ProductIngredient;
+
+            $pro_ingredient->id = $request->product_ingredient_id;
+            $pro_ingredient->purchase_list_id = $request->purchase_list_id;
+            $pro_ingredient->product_id = $request->product_id;
+            $pro_ingredient->quantity = $request->quantity;
+            $pro_ingredient->save();
+
+        }
+
+
+    }
+        /**
+         *  Extra
+         */
+
+         // product ingredient
+                // foreach($request->purchase_list_id as $purchase_list){
+                //     $product_ingredient = PurchaseList::where('product_id', $purchase_list);
+                //     if($product_ingredient == null)
+                //         $product_ingredient = new PurchaseList;
+                // }
+
+                // foreach($request->purchase_list_id as $ingredient_id){
+
+                //     $pro_ingredient = new ProductIngredient;
+                //     $pro_ingredient->purchase_list_id = $ingredient_id;
+                //     $pro_ingredient->product_id = $product->id;
+                //     $pro_ingredient->quantity = $request->quantity;
+                //     $pro_ingredient->save();
+                //     if(!$pro_ingredient->save())
+                //         return sendError('ingredients not save',[]);
+
+                // }
+
+
+                // $clone_admin_product_type = $clone_admin_product_type->pluck('size')->toArray();
+
+                //     $dbSizes = explode(',', $clone_admin_product_type[0]);
+                //     $compared_size = in_array($request->size, $dbSizes);
+
+                // if($compared_size == 0)
+                //     return sendError("Wrong size ",[]);
+
+
+>>>>>>> ea9498bb07fee80c6cdba1f83df54846c2def7a4
