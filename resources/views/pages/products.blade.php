@@ -13,7 +13,7 @@
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
                         <div class="float-md-right">
                             <a href="" class="btn btn py-3 px-4 add_product_btn-s" data-toggle="modal" data-target="#add_product-d">
-                                <img src="assets/preview/add_button.svg" width="20" id="add_course-d" class="mx-2" alt="">
+                                <img src="{{ asset('assets/preview/add_button.svg') }}" width="20" id="add_course-d" class="mx-2" alt="">
                                 <span class="mx-2 text-white">Add Product</span>
                             </a>
                         </div>
@@ -48,8 +48,8 @@
                                                     <span>Size:</span> <strong class=" fg_blue-s ">small medium larger</strong>
                                                 </td>
                                                 <td>
-                                                    <a href="javascript:void(0)"><img src="assets/preview/edit_icon.svg" alt=""></a>
-                                                    <a href="javascript:void(0)"><img src="assets/preview/delete_icon.svg" alt=""></a>
+                                                    <a href="javascript:void(0)"><img src="{{ asset('assets/preview/edit_icon.svg') }}" alt=""></a>
+                                                    <a href="javascript:void(0)"><img src="{{ asset('assets/preview/delete_icon.svg') }}" alt=""></a>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -64,8 +64,8 @@
                                                     <span>Size:</span> <strong class=" fg_blue-s ">small medium larger</strong>
                                                 </td>
                                                 <td>
-                                                    <a href="javascript:void(0)"><img src="assets/preview/edit_icon.svg" alt=""></a>
-                                                    <a href="javascript:void(0)"><img src="assets/preview/delete_icon.svg" alt=""></a>
+                                                    <a href="javascript:void(0)"><img src="{{ asset('assets/preview/edit_icon.svg') }}" alt=""></a>
+                                                    <a href="javascript:void(0)"><img src="{{ asset('assets/preview/delete_icon.svg') }}" alt=""></a>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -80,8 +80,8 @@
                                                     <span>Size:</span> <strong class=" fg_blue-s ">small medium larger</strong>
                                                 </td>
                                                 <td>
-                                                    <a href="javascript:void(0)"><img src="assets/preview/edit_icon.svg" alt=""></a>
-                                                    <a href="javascript:void(0)"><img src="assets/preview/delete_icon.svg" alt=""></a>
+                                                    <a href="javascript:void(0)"><img src="{{ asset('assets/preview/edit_icon.svg') }}" alt=""></a>
+                                                    <a href="javascript:void(0)"><img src="{{ asset('assets/preview/delete_icon.svg') }}" alt=""></a>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -96,8 +96,8 @@
                                                     <span>Size:</span> <strong class=" fg_blue-s ">small medium larger</strong>
                                                 </td>
                                                 <td>
-                                                    <a href="javascript:void(0)"><img src="assets/preview/edit_icon.svg" alt=""></a>
-                                                    <a href="javascript:void(0)"><img src="assets/preview/delete_icon.svg" alt=""></a>
+                                                    <a href="javascript:void(0)"><img src="{{ asset('assets/preview/edit_icon.svg') }}" alt=""></a>
+                                                    <a href="javascript:void(0)"><img src="{{ asset('assets/preview/delete_icon.svg') }}" alt=""></a>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -112,8 +112,8 @@
                                                     <span>Size:</span> <strong class=" fg_blue-s ">small medium larger</strong>
                                                 </td>
                                                 <td>
-                                                    <a href="javascript:void(0)"><img src="assets/preview/edit_icon.svg" alt=""></a>
-                                                    <a href="javascript:void(0)"><img src="assets/preview/delete_icon.svg" alt=""></a>
+                                                    <a href="javascript:void(0)"><img src="{{ asset('assets/preview/edit_icon.svg') }}" alt=""></a>
+                                                    <a href="javascript:void(0)"><img src="{{ asset('assets/preview/delete_icon.svg') }}" alt=""></a>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -128,8 +128,8 @@
                                                     <span>Size:</span> <strong class=" fg_blue-s ">small medium larger</strong>
                                                 </td>
                                                 <td>
-                                                    <a href="javascript:void(0)"><img src="assets/preview/edit_icon.svg" alt=""></a>
-                                                    <a href="javascript:void(0)"><img src="assets/preview/delete_icon.svg" alt=""></a>
+                                                    <a href="javascript:void(0)"><img src="{{ asset('assets/preview/edit_icon.svg') }}" alt=""></a>
+                                                    <a href="javascript:void(0)"><img src="{{ asset('assets/preview/delete_icon.svg') }}" alt=""></a>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -144,8 +144,8 @@
                                                     <span>Size:</span> <strong class=" fg_blue-s ">small medium larger</strong>
                                                 </td>
                                                 <td>
-                                                    <a href="javascript:void(0)"><img src="assets/preview/edit_icon.svg" alt=""></a>
-                                                    <a href="javascript:void(0)"><img src="assets/preview/delete_icon.svg" alt=""></a>
+                                                    <a href="javascript:void(0)"><img src="{{ asset('assets/preview/edit_icon.svg') }}" alt=""></a>
+                                                    <a href="javascript:void(0)"><img src="{{ asset('assets/preview/delete_icon.svg') }}" alt=""></a>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -160,8 +160,8 @@
                                                     <span>Size:</span> <strong class=" fg_blue-s ">small medium larger</strong>
                                                 </td>
                                                 <td>
-                                                    <a href="javascript:void(0)"><img src="assets/preview/edit_icon.svg" alt=""></a>
-                                                    <a href="javascript:void(0)"><img src="assets/preview/delete_icon.svg" alt=""></a>
+                                                    <a href="javascript:void(0)"><img src="{{ asset('assets/preview/edit_icon.svg') }}" alt=""></a>
+                                                    <a href="javascript:void(0)"><img src="{{ asset('assets/preview/delete_icon.svg') }}" alt=""></a>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -176,8 +176,8 @@
                                                     <span>Size:</span> <strong class=" fg_blue-s ">small medium larger</strong>
                                                 </td>
                                                 <td>
-                                                    <a href="javascript:void(0)"><img src="assets/preview/edit_icon.svg" alt=""></a>
-                                                    <a href="javascript:void(0)"><img src="assets/preview/delete_icon.svg" alt=""></a>
+                                                    <a href="javascript:void(0)"><img src="{{ asset('assets/preview/edit_icon.svg') }}" alt=""></a>
+                                                    <a href="javascript:void(0)"><img src="{{ asset('assets/preview/delete_icon.svg') }}" alt=""></a>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -192,8 +192,8 @@
                                                     <span>Size:</span> <strong class=" fg_blue-s ">small medium larger</strong>
                                                 </td>
                                                 <td>
-                                                    <a href="javascript:void(0)"><img src="assets/preview/edit_icon.svg" alt=""></a>
-                                                    <a href="javascript:void(0)"><img src="assets/preview/delete_icon.svg" alt=""></a>
+                                                    <a href="javascript:void(0)"><img src="{{ asset('assets/preview/edit_icon.svg') }}" alt=""></a>
+                                                    <a href="javascript:void(0)"><img src="{{ asset('assets/preview/delete_icon.svg') }}" alt=""></a>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -208,8 +208,8 @@
                                                     <span>Size:</span> <strong class=" fg_blue-s ">small medium larger</strong>
                                                 </td>
                                                 <td>
-                                                    <a href="javascript:void(0)"><img src="assets/preview/edit_icon.svg" alt=""></a>
-                                                    <a href="javascript:void(0)"><img src="assets/preview/delete_icon.svg" alt=""></a>
+                                                    <a href="javascript:void(0)"><img src="{{ asset('assets/preview/edit_icon.svg') }}" alt=""></a>
+                                                    <a href="javascript:void(0)"><img src="{{ asset('assets/preview/delete_icon.svg') }}" alt=""></a>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -224,8 +224,8 @@
                                                     <span>Size:</span> <strong class=" fg_blue-s ">small medium larger</strong>
                                                 </td>
                                                 <td>
-                                                    <a href="javascript:void(0)"><img src="assets/preview/edit_icon.svg" alt=""></a>
-                                                    <a href="javascript:void(0)"><img src="assets/preview/delete_icon.svg" alt=""></a>
+                                                    <a href="javascript:void(0)"><img src="{{ asset('assets/preview/edit_icon.svg') }}" alt=""></a>
+                                                    <a href="javascript:void(0)"><img src="{{ asset('assets/preview/delete_icon.svg') }}" alt=""></a>
                                                 </td>
                                             </tr>
 
