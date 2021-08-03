@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\AdminProduct;
 use App\Models\AdminProductType;
 use App\Models\AdminIngredient;
@@ -14,10 +13,14 @@ use App\Models\ProductIngrediant;
 use App\Models\PurchaseList;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
 
-class WebController extends Controller
+class UserController extends Controller
 {
-    public function index(){
-    	
+    public function getUser(Request $request){
+
+    	$user = User::get();
+    	if(isset($request->limit))
+            $user->offset($request->offset??0)->limit($request->limit);
     }
 }

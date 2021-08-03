@@ -121,6 +121,7 @@ class OrderController extends Controller
             'month' => 'required',
             'year' => 'required',
             'user_id' => 'required|exists:users,id',
+            'is_purchased' => 'required|in:1,0'
         ]);
 
         if($validator->fails()){
@@ -131,27 +132,53 @@ class OrderController extends Controller
         $purchase = PurchaseList::where('user_id',$request->user_id)->whereMonth('created_at', $request->month)->whereYear('created_at', $request->year);
         $sale = order::where('order_status','sold')->where('user_id',$request->user_id)->whereMonth('created_at', $request->month)->whereYear('created_at', $request->year);
 
-        $sale_ten = clone $sale;
-        $sale_2 = clone $sale;
-        $sale_3 = clone $sale;
-        $sale_4 = clone $sale;
-        $sale_5 = clone $sale;
-        $sale_6 = clone $sale;
-        $sale_7 = clone $sale;
+        if($request->is_purchased == 1){
 
-        $data['For 10'] = $sale_ten->where('total_price','>=',10)->where('total_price','<=',10)->pluck('total_price')->sum(); 
-        $data['For 20'] = $sale_2->where('total_price','>=',20)->where('total_price','<=',20)->pluck('total_price')->sum(); 
-        $data['For 30'] = $sale_3->where('total_price','>=',30)->where('total_price','<=',30)->pluck('total_price')->sum(); 
-        $data['For 40'] = $sale_4->where('total_price','>=',40)->where('total_price','<=',40)->pluck('total_price')->sum(); 
-        $data['For 50'] = $sale_5->where('total_price','<=',50)->where('total_price','>=',50)->pluck('total_price')->sum(); 
-        $data['For 60'] = $sale_6->where('total_price','>=',60)->where('total_price','<=',60)->pluck('total_price')->sum(); 
-        $data['For 70'] = $sale_7->where('total_price','>=',70)->where('total_price','<=',70)->pluck('total_price')->sum(); 
+            $purchase_1 = clone $purchase;
+            $purchase_2 = clone $purchase;
+            $purchase_3 = clone $purchase;
+            $purchase_4 = clone $purchase;
+            $purchase_5 = clone $purchase;
+            $purchase_6 = clone $purchase;
+            $purchase_7 = clone $purchase;
+
+            $data['For 10'] = $purchase_1->where('price','>=',10)->where('price','<=',10)->pluck('price')->sum(); 
+            $data['For 20'] = $purchase_2->where('price','>=',20)->where('price','<=',20)->pluck('price')->sum(); 
+            $data['For 30'] = $purchase_3->where('price','>=',30)->where('price','<=',30)->pluck('price')->sum(); 
+            $data['For 40'] = $purchase_4->where('price','>=',40)->where('price','<=',40)->pluck('price')->sum(); 
+            $data['For 50'] = $purchase_5->where('price','<=',50)->where('price','>=',50)->pluck('price')->sum(); 
+            $data['For 60'] = $purchase_6->where('price','>=',60)->where('price','<=',60)->pluck('price')->sum(); 
+            $data['For 70'] = $purchase_7->where('price','>=',70)->where('price','<=',70)->pluck('price')->sum(); 
+
+            $msg = 'Purchase';
+        }
+        else{
+
+
+            $sale_ten = clone $sale;
+            $sale_2 = clone $sale;
+            $sale_3 = clone $sale;
+            $sale_4 = clone $sale;
+            $sale_5 = clone $sale;
+            $sale_6 = clone $sale;
+            $sale_7 = clone $sale;
+
+            $data['For 10'] = $sale_ten->where('total_price','>=',10)->where('total_price','<=',10)->pluck('total_price')->sum(); 
+            $data['For 20'] = $sale_2->where('total_price','>=',20)->where('total_price','<=',20)->pluck('total_price')->sum(); 
+            $data['For 30'] = $sale_3->where('total_price','>=',30)->where('total_price','<=',30)->pluck('total_price')->sum(); 
+            $data['For 40'] = $sale_4->where('total_price','>=',40)->where('total_price','<=',40)->pluck('total_price')->sum(); 
+            $data['For 50'] = $sale_5->where('total_price','<=',50)->where('total_price','>=',50)->pluck('total_price')->sum(); 
+            $data['For 60'] = $sale_6->where('total_price','>=',60)->where('total_price','<=',60)->pluck('total_price')->sum(); 
+            $data['For 70'] = $sale_7->where('total_price','>=',70)->where('total_price','<=',70)->pluck('total_price')->sum(); 
+
+            $msg = 'Sale';
+        }
 
         $data['purchase_sum'] =  $purchase->pluck('price')->sum();
         $data['sale_sum'] =  $sale->pluck('total_price')->sum();
 
 
-        return $data;
+        return sendSuccess($msg,$data);
 
 
     }
