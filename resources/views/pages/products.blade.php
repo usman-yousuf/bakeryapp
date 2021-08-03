@@ -296,5 +296,5 @@
     </div>
     <!-- Add product modal - END -->
 
-        
+
 @endsection

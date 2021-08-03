@@ -14,8 +14,12 @@
     <!-- Bootstrap core JavaScript -->
     <script src="http://www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script>
 
-     <!-- custom js  -->
-     <script src="{{ asset('assets/js/javascript.js') }}"></script>
+    <!-- select 2 library -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+
+    <!-- custom js  -->
+    <script src="{{ asset('assets/js/javascript.js') }}"></script>
 </body>
 
 </html>
