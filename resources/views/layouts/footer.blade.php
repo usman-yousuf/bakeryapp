@@ -13,6 +13,9 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!-- Bootstrap core JavaScript -->
     <script src="http://www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script>
+
+     <!-- custom js  -->
+     <script src="{{ asset('assets/js/javascript.js') }}"></script>
 </body>
 
 </html>

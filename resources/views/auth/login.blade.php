@@ -14,8 +14,7 @@
 
 
     <!-- custom stylesheet -->
-    <link rel="stylesheet" href="{{asset('assets/css/stylesheet.css')}}">
-
+    <link rel="stylesheet" href="{{ asset('assets/css/stylesheet.css') }}" >
 </head>
 
 <body class='custom_body-s'>
@@ -61,7 +60,7 @@
                                     <input class="border-0 w-75 ml-2 bg-light" type="password " name="" id="" placeholder="Password" />
                                 </div>
                                 <div class="mt-5 text-center">
-                                    <button class="w-75 shadow button_outline-s bg-primary-s py-3 br_30px-s text-white border-0" type="submit" data-toggle="modal" data-target="#country_name-d"> 
+                                    <button class="w-75 shadow button_outline-s bg-primary-s py-3 br_30px-s text-white border-0" type="submit" data-toggle="modal" data-target="#country_name-d">
                                         Log In
                                     </button>
                                 </div>
