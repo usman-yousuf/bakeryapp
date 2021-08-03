@@ -7,7 +7,7 @@
 /* login page - START */
 
 .custom_body-s {
-    background-image: url('../assets/preview/login_page_border_img1.png'), url('../assets/preview/login_page_border_img2.png'), url('../assets/preview/login_page_border_img3.png');
+    background-image: url('../preview/login_page_border_img1.png'), url('../preview/login_page_border_img2.png'), url('../preview/login_page_border_img3.png');
     background-position: top left, bottom left, bottom right;
     background-repeat: no-repeat, no-repeat no-repeat;
     background-size: 40px 240px, 240px 45px, 40px 240px;
