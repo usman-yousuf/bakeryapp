@@ -30,6 +30,7 @@ class OrderController extends Controller
             'advance_payment' => 'required_without:order_id|integer',
             'order_id' => 'numeric|exists:orders,id',
             'quantity' => 'required_without:order_id|numeric',
+            'phone_code' => 'string',
 
         ]);
 
@@ -51,14 +52,14 @@ class OrderController extends Controller
 
         $product = Product::where('id',$request->product_id)->where('admin_product_type_id',$admin_product_type->id)->first();
         if(NULL == $product)
-            return sendError('Product Does Not Exist',[]);
+            return sendError('Product Does Not Exist or Type Dont belongs to the product',[]);
         }
 
         $order->product_id = $product->id ?? $order->product_id;
         $order->user_id = $request->user_id ?? $order->user_id;
         $order->admin_product_type_id = $admin_product_type->id ?? $order->admin_product_type_id;
         $order->client_name = $request->client_name ?? $order->client_name;
-        $order->phone_code = '+92';
+        $order->phone_code = $request->phone_code ?? $order->phone_code ?? '+92';
         $order->phone_number = $request->phone_number ?? $order->phone_number;
         $order->delivery_address = $request->delivery_address ?? $order->delivery_address;
         $order->order_status = $request->order_status;
@@ -130,8 +131,25 @@ class OrderController extends Controller
         $purchase = PurchaseList::where('user_id',$request->user_id)->whereMonth('created_at', $request->month)->whereYear('created_at', $request->year);
         $sale = order::where('order_status','sold')->where('user_id',$request->user_id)->whereMonth('created_at', $request->month)->whereYear('created_at', $request->year);
 
+        $sale_ten = clone $sale;
+        $sale_2 = clone $sale;
+        $sale_3 = clone $sale;
+        $sale_4 = clone $sale;
+        $sale_5 = clone $sale;
+        $sale_6 = clone $sale;
+        $sale_7 = clone $sale;
+
+        $data['For 10'] = $sale_ten->where('total_price','>=',10)->where('total_price','<=',10)->pluck('total_price')->sum(); 
+        $data['For 20'] = $sale_2->where('total_price','>=',20)->where('total_price','<=',20)->pluck('total_price')->sum(); 
+        $data['For 30'] = $sale_3->where('total_price','>=',30)->where('total_price','<=',30)->pluck('total_price')->sum(); 
+        $data['For 40'] = $sale_4->where('total_price','>=',40)->where('total_price','<=',40)->pluck('total_price')->sum(); 
+        $data['For 50'] = $sale_5->where('total_price','<=',50)->where('total_price','>=',50)->pluck('total_price')->sum(); 
+        $data['For 60'] = $sale_6->where('total_price','>=',60)->where('total_price','<=',60)->pluck('total_price')->sum(); 
+        $data['For 70'] = $sale_7->where('total_price','>=',70)->where('total_price','<=',70)->pluck('total_price')->sum(); 
+
         $data['purchase_sum'] =  $purchase->pluck('price')->sum();
-        $data['sale_sum'] =  $sale->pluck('advance_payment')->sum();
+        $data['sale_sum'] =  $sale->pluck('total_price')->sum();
+
 
         return $data;
 
