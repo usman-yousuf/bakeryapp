@@ -7,7 +7,7 @@
                 <div class="row">
                     <div class="w-100 col-12 text-right my-4">
                         <a href="" class="btn btn py-3 px-4 add_product_btn-s" data-toggle="modal" data-target="#add_subscription-d">
-                            <img src="assets/preview/add_button.svg" width="20" id="add_course-d" class="mx-2" alt="">
+                            <img src="{{    asset('assets/preview/add_button.svg') }}" width="20" id="add_course-d" class="mx-2" alt="">
                             <span class="mx-2 text-white">Add Subscription Plan</span>
                         </a>
                     </div>
