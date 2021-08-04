@@ -32,7 +32,7 @@ class OrderController extends Controller
             'order_id' => 'numeric|exists:orders,id',
             'quantity' => 'required_without:order_id|numeric',
             'phone_code' => 'string',
-            'raw_material' => 'required_without_all:product_id|string',
+            'raw_material' => 'string',
             'tax' => 'required_with:raw_material|numeric',
             'packing' => 'required_with:raw_material|numeric',
             'profit' => 'required_with:raw_material|numeric',
