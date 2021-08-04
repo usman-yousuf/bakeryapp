@@ -33,6 +33,10 @@ class CreateOrdersTable extends Migration
             $table->decimal('advance_payment')->nullable();
             $table->decimal('quantity')->nullable();
             $table->decimal('total_price')->nullable();
+            $table->decimal('raw_material')->nullable();
+            $table->decimal('tax')->nullable();
+            $table->decimal('packing')->nullable();
+            $table->decimal('profit')->nullable();
 
             $table->softDeletes();
             $table->timestamps();

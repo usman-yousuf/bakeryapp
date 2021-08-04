@@ -116,7 +116,6 @@ class ProductController extends Controller
             return sendError($validator->errors()->all()[0], $data);
         }
 
-        $check =
 
         $ingredient = PurchaseList::where('id', $request->purchase_list_id)->first();
         if($ingredient == null)
@@ -128,6 +127,7 @@ class ProductController extends Controller
             $ingredient->store_name = $request->store_name;
             $ingredient->quantity = $request->quantity;
             $ingredient->price = $request->price;
+            $ingredient->unit_price = $request->price/$request->quantity;
             $ingredient->save();
 
         if(!$ingredient->save())
