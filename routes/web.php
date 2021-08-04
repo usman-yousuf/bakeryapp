@@ -67,5 +67,12 @@ Route::get('/users', function () {
 
 
 Route::get('get_products', [WebController::class, 'webGetProducts'])->name('getproducts');
+<<<<<<< HEAD
 Route::get('get_sellers', [WebController::class, 'webGetSellers'])->name('getsellers');
 Route::get('get_buyers', [WebController::class, 'webGetbuyers'])->name('getsellers');
+=======
+Route::get('get_users', [WebController::class, 'webGetUsers'])->name('getusers');
+Route::get('get_purchase_list', [WebController::class, 'webGetPurchaseList'])->name('getpurchaselist');
+Route::get('get_subscription', [WebController::class, 'webGetSubscription'])->name('getsubscription');
+Route::get('get_user_management', [WebController::class, 'userManagement'])->name('usermanagement');
+>>>>>>> f049421565c4dd66e0c0a2f3346ef4d08568aaa9
