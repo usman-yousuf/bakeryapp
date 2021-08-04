@@ -2,7 +2,10 @@
 
 @section('content')
 
-
+{{ dd($get_product->data) }}
+{{-- @foreach ($get_product->data->products as $item)
+    <span>{{ $item->user_id }}</span>
+@endforeach --}}
     <div class="container-fluid bg-light py-4">
 
                 <div class="row mb-3">
@@ -36,198 +39,20 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @foreach ($get_product->data->products as $item)
                                             <tr>
-                                                <td class="">Cake</td>
-                                                <td class=""><span>Pie Cake</span><br>
-                                                    <span>Size:</span> <strong class=" fg_blue-s ">small medium larger</strong>
-                                                </td>
-                                                <td class=""><span>Cup Cake</span><br>
-                                                    <span>Size:</span> <strong class=" fg_blue-s ">small medium larger</strong>
-                                                </td>
-                                                <td class=""><span>Choclate Cake</span><br>
-                                                    <span>Size:</span> <strong class=" fg_blue-s ">small medium larger</strong>
+                                                <td class="">{{ $item->admin_product->name }}</td>
+                                                {{-- {{ dd($item) }} --}}
+                                                <td class=""><span>{{ $item->admin_product_type->type_name ?? NULL }}</span><br>
+                                                    <span>Size:</span> <strong class="fg_blue-s">{{ $item->admin_product_type->size ?? NULL }}</strong>
                                                 </td>
                                                 <td>
                                                     <a href="javascript:void(0)"><img src="{{ asset('assets/preview/edit_icon.svg') }}" alt=""></a>
                                                     <a href="javascript:void(0)"><img src="{{ asset('assets/preview/delete_icon.svg') }}" alt=""></a>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td class="">Cake</td>
-                                                <td class=""><span>Pie Cake</span><br>
-                                                    <span>Size:</span> <strong class=" fg_blue-s ">small medium larger</strong>
-                                                </td>
-                                                <td class=""><span>Cup Cake</span><br>
-                                                    <span>Size:</span> <strong class=" fg_blue-s ">small medium larger</strong>
-                                                </td>
-                                                <td class=""><span>Choclate Cake</span><br>
-                                                    <span>Size:</span> <strong class=" fg_blue-s ">small medium larger</strong>
-                                                </td>
-                                                <td>
-                                                    <a href="javascript:void(0)"><img src="{{ asset('assets/preview/edit_icon.svg') }}" alt=""></a>
-                                                    <a href="javascript:void(0)"><img src="{{ asset('assets/preview/delete_icon.svg') }}" alt=""></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">Cake</td>
-                                                <td class=""><span>Pie Cake</span><br>
-                                                    <span>Size:</span> <strong class=" fg_blue-s ">small medium larger</strong>
-                                                </td>
-                                                <td class=""><span>Cup Cake</span><br>
-                                                    <span>Size:</span> <strong class=" fg_blue-s ">small medium larger</strong>
-                                                </td>
-                                                <td class=""><span>Choclate Cake</span><br>
-                                                    <span>Size:</span> <strong class=" fg_blue-s ">small medium larger</strong>
-                                                </td>
-                                                <td>
-                                                    <a href="javascript:void(0)"><img src="{{ asset('assets/preview/edit_icon.svg') }}" alt=""></a>
-                                                    <a href="javascript:void(0)"><img src="{{ asset('assets/preview/delete_icon.svg') }}" alt=""></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">Cake</td>
-                                                <td class=""><span>Pie Cake</span><br>
-                                                    <span>Size:</span> <strong class=" fg_blue-s ">small medium larger</strong>
-                                                </td>
-                                                <td class=""><span>Cup Cake</span><br>
-                                                    <span>Size:</span> <strong class=" fg_blue-s ">small medium larger</strong>
-                                                </td>
-                                                <td class=""><span>Choclate Cake</span><br>
-                                                    <span>Size:</span> <strong class=" fg_blue-s ">small medium larger</strong>
-                                                </td>
-                                                <td>
-                                                    <a href="javascript:void(0)"><img src="{{ asset('assets/preview/edit_icon.svg') }}" alt=""></a>
-                                                    <a href="javascript:void(0)"><img src="{{ asset('assets/preview/delete_icon.svg') }}" alt=""></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">Cake</td>
-                                                <td class=""><span>Pie Cake</span><br>
-                                                    <span>Size:</span> <strong class=" fg_blue-s ">small medium larger</strong>
-                                                </td>
-                                                <td class=""><span>Cup Cake</span><br>
-                                                    <span>Size:</span> <strong class=" fg_blue-s ">small medium larger</strong>
-                                                </td>
-                                                <td class=""><span>Choclate Cake</span><br>
-                                                    <span>Size:</span> <strong class=" fg_blue-s ">small medium larger</strong>
-                                                </td>
-                                                <td>
-                                                    <a href="javascript:void(0)"><img src="{{ asset('assets/preview/edit_icon.svg') }}" alt=""></a>
-                                                    <a href="javascript:void(0)"><img src="{{ asset('assets/preview/delete_icon.svg') }}" alt=""></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">Cake</td>
-                                                <td class=""><span>Pie Cake</span><br>
-                                                    <span>Size:</span> <strong class=" fg_blue-s ">small medium larger</strong>
-                                                </td>
-                                                <td class=""><span>Cup Cake</span><br>
-                                                    <span>Size:</span> <strong class=" fg_blue-s ">small medium larger</strong>
-                                                </td>
-                                                <td class=""><span>Choclate Cake</span><br>
-                                                    <span>Size:</span> <strong class=" fg_blue-s ">small medium larger</strong>
-                                                </td>
-                                                <td>
-                                                    <a href="javascript:void(0)"><img src="{{ asset('assets/preview/edit_icon.svg') }}" alt=""></a>
-                                                    <a href="javascript:void(0)"><img src="{{ asset('assets/preview/delete_icon.svg') }}" alt=""></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">Cake</td>
-                                                <td class=""><span>Pie Cake</span><br>
-                                                    <span>Size:</span> <strong class=" fg_blue-s ">small medium larger</strong>
-                                                </td>
-                                                <td class=""><span>Cup Cake</span><br>
-                                                    <span>Size:</span> <strong class=" fg_blue-s ">small medium larger</strong>
-                                                </td>
-                                                <td class=""><span>Choclate Cake</span><br>
-                                                    <span>Size:</span> <strong class=" fg_blue-s ">small medium larger</strong>
-                                                </td>
-                                                <td>
-                                                    <a href="javascript:void(0)"><img src="{{ asset('assets/preview/edit_icon.svg') }}" alt=""></a>
-                                                    <a href="javascript:void(0)"><img src="{{ asset('assets/preview/delete_icon.svg') }}" alt=""></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">Cake</td>
-                                                <td class=""><span>Pie Cake</span><br>
-                                                    <span>Size:</span> <strong class=" fg_blue-s ">small medium larger</strong>
-                                                </td>
-                                                <td class=""><span>Cup Cake</span><br>
-                                                    <span>Size:</span> <strong class=" fg_blue-s ">small medium larger</strong>
-                                                </td>
-                                                <td class=""><span>Choclate Cake</span><br>
-                                                    <span>Size:</span> <strong class=" fg_blue-s ">small medium larger</strong>
-                                                </td>
-                                                <td>
-                                                    <a href="javascript:void(0)"><img src="{{ asset('assets/preview/edit_icon.svg') }}" alt=""></a>
-                                                    <a href="javascript:void(0)"><img src="{{ asset('assets/preview/delete_icon.svg') }}" alt=""></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">Cake</td>
-                                                <td class=""><span>Pie Cake</span><br>
-                                                    <span>Size:</span> <strong class=" fg_blue-s ">small medium larger</strong>
-                                                </td>
-                                                <td class=""><span>Cup Cake</span><br>
-                                                    <span>Size:</span> <strong class=" fg_blue-s ">small medium larger</strong>
-                                                </td>
-                                                <td class=""><span>Choclate Cake</span><br>
-                                                    <span>Size:</span> <strong class=" fg_blue-s ">small medium larger</strong>
-                                                </td>
-                                                <td>
-                                                    <a href="javascript:void(0)"><img src="{{ asset('assets/preview/edit_icon.svg') }}" alt=""></a>
-                                                    <a href="javascript:void(0)"><img src="{{ asset('assets/preview/delete_icon.svg') }}" alt=""></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">Cake</td>
-                                                <td class=""><span>Pie Cake</span><br>
-                                                    <span>Size:</span> <strong class=" fg_blue-s ">small medium larger</strong>
-                                                </td>
-                                                <td class=""><span>Cup Cake</span><br>
-                                                    <span>Size:</span> <strong class=" fg_blue-s ">small medium larger</strong>
-                                                </td>
-                                                <td class=""><span>Choclate Cake</span><br>
-                                                    <span>Size:</span> <strong class=" fg_blue-s ">small medium larger</strong>
-                                                </td>
-                                                <td>
-                                                    <a href="javascript:void(0)"><img src="{{ asset('assets/preview/edit_icon.svg') }}" alt=""></a>
-                                                    <a href="javascript:void(0)"><img src="{{ asset('assets/preview/delete_icon.svg') }}" alt=""></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">Cake</td>
-                                                <td class=""><span>Pie Cake</span><br>
-                                                    <span>Size:</span> <strong class=" fg_blue-s ">small medium larger</strong>
-                                                </td>
-                                                <td class=""><span>Cup Cake</span><br>
-                                                    <span>Size:</span> <strong class=" fg_blue-s ">small medium larger</strong>
-                                                </td>
-                                                <td class=""><span>Choclate Cake</span><br>
-                                                    <span>Size:</span> <strong class=" fg_blue-s ">small medium larger</strong>
-                                                </td>
-                                                <td>
-                                                    <a href="javascript:void(0)"><img src="{{ asset('assets/preview/edit_icon.svg') }}" alt=""></a>
-                                                    <a href="javascript:void(0)"><img src="{{ asset('assets/preview/delete_icon.svg') }}" alt=""></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">Cake</td>
-                                                <td class=""><span>Pie Cake</span><br>
-                                                    <span>Size:</span> <strong class=" fg_blue-s ">small medium larger</strong>
-                                                </td>
-                                                <td class=""><span>Cup Cake</span><br>
-                                                    <span>Size:</span> <strong class=" fg_blue-s ">small medium larger</strong>
-                                                </td>
-                                                <td class=""><span>Choclate Cake</span><br>
-                                                    <span>Size:</span> <strong class=" fg_blue-s ">small medium larger</strong>
-                                                </td>
-                                                <td>
-                                                    <a href="javascript:void(0)"><img src="{{ asset('assets/preview/edit_icon.svg') }}" alt=""></a>
-                                                    <a href="javascript:void(0)"><img src="{{ asset('assets/preview/delete_icon.svg') }}" alt=""></a>
-                                                </td>
-                                            </tr>
+                                            @endforeach
+
 
                                         </tbody>
                                     </table>

@@ -15,6 +15,6 @@ class AdminProductType extends Model
         }
 
     function product(){
-        return $this->hasMany(Product::class, 'id', 'Admin_product_type_id');
+        return $this->belongsTo(Product::class, 'admin_product_type_id', 'id' );
     }
 }

@@ -43,7 +43,7 @@ class Product extends Model
     }
 
     function adminProductType(){
-        return $this->belongsTo(AdminProductType::class, 'admin_product_type_id', 'id');
+        return $this->hasMany(AdminProductType::class, 'admin_product_type_id', 'id');
     }
 
     function productIngredient(){
