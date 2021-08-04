@@ -40,7 +40,14 @@ class WebController extends Controller
 
     	$get_seller = $this->UserController->mostSeller($request)->getdata();
 
-        return view('pages.dashboard', [ 'get_seller' => $get_seller ]);
+        return view('pages.top_seller', [ 'get_seller' => $get_seller ]);
+    }    
+
+    public function webGetBuyers(Request $request){
+
+        $get_buyer = $this->UserController->mostBuyers($request)->getdata();
+
+        return view('pages.top_buyers', [ 'get_buyer' => $get_buyer ]);
     }
 
 

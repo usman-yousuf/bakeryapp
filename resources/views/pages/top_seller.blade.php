@@ -2,7 +2,7 @@
 
 @section('content')
 
-
+{{ dd($get_seller) }}
             <div class="container-fluid bg-light py-4">
 
                 <div class="row mb-3">
