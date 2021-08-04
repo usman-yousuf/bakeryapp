@@ -14,10 +14,26 @@ use App\Models\ProductIngrediant;
 use App\Models\PurchaseList;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Controllers\ProductController;
 
 class WebController extends Controller
 {
-    public function index(){
-    	
+
+    public function __construct(ProductController $ProductController)
+    {
+        $this->ProductController = $ProductController;
     }
+
+
+
+    public function webGetProducts(Request $request){
+
+        $request->user_id = $request->user_id ?? 6;
+
+        $get_product = $this->ProductController->getProducts($request)->getdata();
+
+        return view('pages.products', [ 'get_product' => $get_product ]);
+    }
+
+
 }

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\WebController;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,3 +64,6 @@ Route::get('/user_management', function () {
 Route::get('/users', function () {
     return view('pages.users');
 })->name('users');
+
+
+Route::get('get_products', [WebController::class, 'webGetProducts'])->name('getproducts');
