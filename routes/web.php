@@ -67,3 +67,6 @@ Route::get('/users', function () {
 
 
 Route::get('get_products', [WebController::class, 'webGetProducts'])->name('getproducts');
+Route::get('get_users', [WebController::class, 'webGetUsers'])->name('getusers');
+Route::get('get_purchase_list', [WebController::class, 'webGetPurchaseList'])->name('getpurchaselist');
+Route::get('get_subscription', [WebController::class, 'webGetSubscription'])->name('getsubscription');

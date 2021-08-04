@@ -2,8 +2,6 @@
 
 @section('content')
 
-
-
             <div class="container-fluid bg-light py-4">
 
                 <div class="row mb-3">
@@ -30,109 +28,19 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @foreach ( $get_purchaselists->data->purchase_list as $list )
                                             <tr>
-                                                <td class="">Sugar</td>
-                                                <td class="">Yum Sugar</td>
-                                                <td class=""><span>90</span> kg</td>
-                                                <td class=" fg_pink-s"> $ 2345</td>
+                                                <td class="">{{ $list->admin_ingredient->name ?? '' }}</td>
+                                                <td class="">{{ $list->admin_ingredient_type->brand_name ?? '' }}</td>
+                                                <td class=""><span>{{ $list->quantity ?? '' }}</span> kg</td>
+                                                <td class=" fg_pink-s"> $ {{ $list->price ?? '' }}</td>
                                             </tr>
-                                            <tr>
-                                                <td class="">Oil</td>
-                                                <td class="">Shan</td>
-                                                <td class=""><span>90</span> ltr</td>
-                                                <td class=" fg_pink-s"> $ 2345</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">Biscuits</td>
-                                                <td class="">Super</td>
-                                                <td class=""><span>90</span> boxes</td>
-                                                <td class=" fg_pink-s"> $ 2345</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">Choclate</td>
-                                                <td class="">Dairy Milk</td>
-                                                <td class=""><span>90</span> pieces</td>
-                                                <td class=" fg_pink-s"> $ 2345</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">Sugar</td>
-                                                <td class="">Yum Sugar</td>
-                                                <td class=""><span>90</span> kg</td>
-                                                <td class=" fg_pink-s"> $ 2345</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">Oil</td>
-                                                <td class="">Shan</td>
-                                                <td class=""><span>90</span> ltr</td>
-                                                <td class=" fg_pink-s"> $ 2345</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">Biscuits</td>
-                                                <td class="">Super</td>
-                                                <td class=""><span>90</span> boxes</td>
-                                                <td class=" fg_pink-s"> $ 2345</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">Choclate</td>
-                                                <td class="">Dairy Milk</td>
-                                                <td class=""><span>90</span> pieces</td>
-                                                <td class=" fg_pink-s"> $ 2345</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">Sugar</td>
-                                                <td class="">Yum Sugar</td>
-                                                <td class=""><span>90</span> kg</td>
-                                                <td class=" fg_pink-s"> $ 2345</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">Oil</td>
-                                                <td class="">Shan</td>
-                                                <td class=""><span>90</span> ltr</td>
-                                                <td class=" fg_pink-s"> $ 2345</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">Biscuits</td>
-                                                <td class="">Super</td>
-                                                <td class=""><span>90</span> boxes</td>
-                                                <td class=" fg_pink-s"> $ 2345</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">Choclate</td>
-                                                <td class="">Dairy Milk</td>
-                                                <td class=""><span>90</span> pieces</td>
-                                                <td class=" fg_pink-s"> $ 2345</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">Sugar</td>
-                                                <td class="">Yum Sugar</td>
-                                                <td class=""><span>90</span> kg</td>
-                                                <td class=" fg_pink-s"> $ 2345</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">Oil</td>
-                                                <td class="">Shan</td>
-                                                <td class=""><span>90</span> ltr</td>
-                                                <td class=" fg_pink-s"> $ 2345</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">Biscuits</td>
-                                                <td class="">Super</td>
-                                                <td class=""><span>90</span> boxes</td>
-                                                <td class=" fg_pink-s"> $ 2345</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">Choclate</td>
-                                                <td class="">Dairy Milk</td>
-                                                <td class=""><span>90</span> pieces</td>
-                                                <td class=" fg_pink-s"> $ 2345</td>
-                                            </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>
-
                             </div>
                         </div>
-
                     </div>
                 </div>
                 <!-- table - END -->

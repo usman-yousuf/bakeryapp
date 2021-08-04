@@ -2,7 +2,6 @@
 
 @section('content')
 
-
             <div class="container-fluid bg-light py-4">
 
                 <div class="row mb-3">
@@ -30,147 +29,17 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                             @foreach ($get_user->data as $user)
                                             <tr>
-                                                <td class="">John</td>
-                                                <td class=""><span>+123</span> <span>000</span> <span>000</span> <span>000</span></td>
-                                                <td class="">Plot-5, George street, 25.</td>
-                                                <td class="fg_pink-s"> Bakery Shop</td>
-                                                <td class="fg_blue-s">john@example.com</td>
+                                                <td class="">{{ $user->name ?? '' }}</td>
+                                                <td class=""><span> {{ $user->phone_code ?? '' }}</span> <span>{{ $user->phone_number ?? ''  }}</span></td>
+                                                <td class="">
+                                                    {{ $user->address->address ?? '' }}
+                                                </td>
+                                                <td class="fg_pink-s"> {{ $user->bussiness_name ?? '' }}</td>
+                                                <td class="fg_blue-s">{{ $user->email ?? '' }}</td>
                                             </tr>
-                                            <tr>
-                                                <td class="">John</td>
-                                                <td class=""><span>+123</span> <span>000</span> <span>000</span> <span>000</span></td>
-                                                <td class="">Plot-5, George street, 25.</td>
-                                                <td class="fg_pink-s"> Bakery Shop</td>
-                                                <td class="fg_blue-s">john@example.com</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">John</td>
-                                                <td class=""><span>+123</span> <span>000</span> <span>000</span> <span>000</span></td>
-                                                <td class="">Plot-5, George street, 25.</td>
-                                                <td class="fg_pink-s"> Bakery Shop</td>
-                                                <td class="fg_blue-s">john@example.com</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">John</td>
-                                                <td class=""><span>+123</span> <span>000</span> <span>000</span> <span>000</span></td>
-                                                <td class="">Plot-5, George street, 25.</td>
-                                                <td class="fg_pink-s"> Bakery Shop</td>
-                                                <td class="fg_blue-s">john@example.com</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">John</td>
-                                                <td class=""><span>+123</span> <span>000</span> <span>000</span> <span>000</span></td>
-                                                <td class="">Plot-5, George street, 25.</td>
-                                                <td class="fg_pink-s"> Bakery Shop</td>
-                                                <td class="fg_blue-s">john@example.com</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">John</td>
-                                                <td class=""><span>+123</span> <span>000</span> <span>000</span> <span>000</span></td>
-                                                <td class="">Plot-5, George street, 25.</td>
-                                                <td class="fg_pink-s"> Bakery Shop</td>
-                                                <td class="fg_blue-s">john@example.com</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">John</td>
-                                                <td class=""><span>+123</span> <span>000</span> <span>000</span> <span>000</span></td>
-                                                <td class="">Plot-5, George street, 25.</td>
-                                                <td class="fg_pink-s"> Bakery Shop</td>
-                                                <td class="fg_blue-s">john@example.com</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">John</td>
-                                                <td class=""><span>+123</span> <span>000</span> <span>000</span> <span>000</span></td>
-                                                <td class="">Plot-5, George street, 25.</td>
-                                                <td class="fg_pink-s"> Bakery Shop</td>
-                                                <td class="fg_blue-s">john@example.com</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">John</td>
-                                                <td class=""><span>+123</span> <span>000</span> <span>000</span> <span>000</span></td>
-                                                <td class="">Plot-5, George street, 25.</td>
-                                                <td class="fg_pink-s"> Bakery Shop</td>
-                                                <td class="fg_blue-s">john@example.com</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">John</td>
-                                                <td class=""><span>+123</span> <span>000</span> <span>000</span> <span>000</span></td>
-                                                <td class="">Plot-5, George street, 25.</td>
-                                                <td class="fg_pink-s"> Bakery Shop</td>
-                                                <td class="fg_blue-s">john@example.com</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">John</td>
-                                                <td class=""><span>+123</span> <span>000</span> <span>000</span> <span>000</span></td>
-                                                <td class="">Plot-5, George street, 25.</td>
-                                                <td class="fg_pink-s"> Bakery Shop</td>
-                                                <td class="fg_blue-s">john@example.com</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">John</td>
-                                                <td class=""><span>+123</span> <span>000</span> <span>000</span> <span>000</span></td>
-                                                <td class="">Plot-5, George street, 25.</td>
-                                                <td class="fg_pink-s"> Bakery Shop</td>
-                                                <td class="fg_blue-s">john@example.com</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">John</td>
-                                                <td class=""><span>+123</span> <span>000</span> <span>000</span> <span>000</span></td>
-                                                <td class="">Plot-5, George street, 25.</td>
-                                                <td class="fg_pink-s"> Bakery Shop</td>
-                                                <td class="fg_blue-s">john@example.com</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">John</td>
-                                                <td class=""><span>+123</span> <span>000</span> <span>000</span> <span>000</span></td>
-                                                <td class="">Plot-5, George street, 25.</td>
-                                                <td class="fg_pink-s"> Bakery Shop</td>
-                                                <td class="fg_blue-s">john@example.com</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">John</td>
-                                                <td class=""><span>+123</span> <span>000</span> <span>000</span> <span>000</span></td>
-                                                <td class="">Plot-5, George street, 25.</td>
-                                                <td class="fg_pink-s"> Bakery Shop</td>
-                                                <td class="fg_blue-s">john@example.com</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">John</td>
-                                                <td class=""><span>+123</span> <span>000</span> <span>000</span> <span>000</span></td>
-                                                <td class="">Plot-5, George street, 25.</td>
-                                                <td class="fg_pink-s"> Bakery Shop</td>
-                                                <td class="fg_blue-s">john@example.com</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">John</td>
-                                                <td class=""><span>+123</span> <span>000</span> <span>000</span> <span>000</span></td>
-                                                <td class="">Plot-5, George street, 25.</td>
-                                                <td class="fg_pink-s"> Bakery Shop</td>
-                                                <td class="fg_blue-s">john@example.com</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">John</td>
-                                                <td class=""><span>+123</span> <span>000</span> <span>000</span> <span>000</span></td>
-                                                <td class="">Plot-5, George street, 25.</td>
-                                                <td class="fg_pink-s"> Bakery Shop</td>
-                                                <td class="fg_blue-s">john@example.com</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">John</td>
-                                                <td class=""><span>+123</span> <span>000</span> <span>000</span> <span>000</span></td>
-                                                <td class="">Plot-5, George street, 25.</td>
-                                                <td class="fg_pink-s"> Bakery Shop</td>
-                                                <td class="fg_blue-s">john@example.com</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">John</td>
-                                                <td class=""><span>+123</span> <span>000</span> <span>000</span> <span>000</span></td>
-                                                <td class="">Plot-5, George street, 25.</td>
-                                                <td class="fg_pink-s"> Bakery Shop</td>
-                                                <td class="fg_blue-s">john@example.com</td>
-                                            </tr>
-
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>

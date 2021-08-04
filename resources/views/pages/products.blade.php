@@ -42,7 +42,6 @@
                                             @foreach ($get_product->data->products as $item)
                                             <tr>
                                                 <td class="">{{ $item->admin_product->name }}</td>
-                                                {{-- {{ dd($item) }} --}}
                                                 <td class=""><span>{{ $item->admin_product_type->type_name ?? NULL }}</span><br>
                                                     <span>Size:</span> <strong class="fg_blue-s">{{ $item->admin_product_type->size ?? NULL }}</strong>
                                                 </td>

@@ -19,9 +19,13 @@ use App\Http\Controllers\ProductController;
 class WebController extends Controller
 {
 
-    public function __construct(ProductController $ProductController)
+    public function __construct(ProductController $ProductController,
+    UserController $UserController,
+    SubscriptionController $SubscriptionController)
     {
         $this->ProductController = $ProductController;
+        $this->UserController = $UserController;
+        $this->SubscriptionController = $SubscriptionController;
     }
 
 
@@ -35,5 +39,45 @@ class WebController extends Controller
         return view('pages.products', [ 'get_product' => $get_product ]);
     }
 
+    /**
+     * All users for implementation in user page
+     *
+     * @param Request $request
+     * @return void
+     */
+
+    public function webGetUsers(Request $request){
+
+        $get_user = $this->UserController->getUser($request)->getdata();
+        return view('pages.users', [ 'get_user' => $get_user]);
+    }
+
+    /**
+     * All purchase lists for implementation in purchased item page
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function webGetPurchaseList(Request $request){
+
+
+        $request->merge(['user_id' => 1]);
+
+        $get_purchaselists = $this->ProductController->searchPurchaseList($request)->getdata();
+        return view('pages.purchased_item', [ 'get_purchaselists' => $get_purchaselists]);
+    }
+
+    /**
+     * Get all subscriptions for implementation on subscription page
+     *
+     * @param Request $request
+     * @return void
+     */
+
+    public function webGetSubscription(Request $request){
+
+        $get_subscription = $this->SubscriptionController->getSubscription($request)->getdata();
+        return view('pages.subscription', [ 'get_subscription' => $get_subscription]);
+    }
 
 }

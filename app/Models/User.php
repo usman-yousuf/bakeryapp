@@ -69,10 +69,14 @@ class User extends Authenticatable
         'phone_verified_at' => 'datetime',
     ];
 
+    protected $with =[
+        'address'
+    ];
+
     // relation with address
 
     function address(){
-        return $this->belongsTo(Address::class, 'id', 'user_id');
+        return $this->hasOne(Address::class, 'user_id', 'id');
     }
 
     // relation with subscription

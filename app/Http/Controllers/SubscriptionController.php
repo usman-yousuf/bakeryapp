@@ -11,7 +11,13 @@ use Illuminate\Support\Facades\Validator;
 
 class SubscriptionController extends Controller
 {
-    // subscription validation
+    //
+    /**
+     * subscription validation
+     *
+     * @param Request $request
+     * @return void
+     */
     public function updateSubscription(Request $request)
     {
     	$validator = Validator::make($request->all(), [
@@ -62,7 +68,7 @@ class SubscriptionController extends Controller
         }
         $models = Subscription::orderBy('created_at', 'DESC');
 
-        if(isset($request->subscription_id) && ('' != $request->subscription_id)){  
+        if(isset($request->subscription_id) && ('' != $request->subscription_id)){
             $models->where('id', $request->subscription_id);
         }
 
