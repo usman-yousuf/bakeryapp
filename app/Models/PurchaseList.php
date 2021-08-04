@@ -44,4 +44,9 @@ class PurchaseList extends Model
     {
         return $this->belongsTo(AdminIngredientType::class, 'admin_ingredient_type_id', 'id');
     }
+
+    function user(){
+        
+        return $this->belongsTo(User::class, 'user_id' , 'id');
+    }
 }

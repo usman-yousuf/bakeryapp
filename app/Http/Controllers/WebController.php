@@ -19,9 +19,10 @@ use App\Http\Controllers\ProductController;
 class WebController extends Controller
 {
 
-    public function __construct(ProductController $ProductController)
+    public function __construct(ProductController $ProductController, UserController $UserController)
     {
         $this->ProductController = $ProductController;
+        $this->UserController = $UserController;
     }
 
 
@@ -33,6 +34,13 @@ class WebController extends Controller
         $get_product = $this->ProductController->getProducts($request)->getdata();
 
         return view('pages.products', [ 'get_product' => $get_product ]);
+    }
+
+    public function webGetSellers(Request $request){
+
+    	$get_seller = $this->UserController->mostSeller($request)->getdata();
+
+        return view('pages.dashboard', [ 'get_seller' => $get_seller ]);
     }
 
 
