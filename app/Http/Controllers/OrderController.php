@@ -72,14 +72,14 @@ class OrderController extends Controller
         $order->advance_payment = $request->advance_payment ?? $order->advance_payment;
         $order->quantity = $request->quantity ?? $order->quantity;
 
-        // if(isset($request->order_id)){
+        if(isset($request->order_id)){
 
-        //     // $order->raw_material = $request->raw_material ?? $order->raw_material;
-        //     $order->tax = $request->tax ?? $order->tax ??;
-        //     $order->packing = $request->packing ?? $order->packing;
-        //     $order->profit = $request->profit ?? $order->profit;
-        //     $order->total_price = $request->raw_material + $request->tax + $request->packing + $order->profit ?? 0;
-        // }
+            $order->raw_material = (int)$request->raw_material ?? $order->raw_material;
+            $order->tax = (int)$request->tax ?? $order->tax ;
+            $order->packing = (int)$request->packing ?? $order->packing;
+            $order->profit = (int)$request->profit ?? $order->profit;
+            $order->total_price = (int)$request->raw_material + $request->tax + $request->packing + $order->profit ?? 0;
+        }
 
         $order->save();
         if(!$order->save())
