@@ -13,6 +13,7 @@ use App\Models\Product;
 use App\Models\ProductIngrediant;
 use App\Models\PurchaseList;
 use App\Models\User;
+use App\Models\Subscription;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\ProductController;
 
@@ -50,6 +51,19 @@ class WebController extends Controller
 
         $get_user = $this->UserController->getUser($request)->getdata();
         return view('pages.users', [ 'get_user' => $get_user]);
+    }
+
+    /**
+     * All users for implementation in user page
+     *
+     * @param Request $request
+     * @return void
+     */
+
+    public function userManagement(Request $request){
+
+        $get_user = $this->UserController->getUser($request)->getdata();
+        return view('pages.user_management', [ 'get_user' => $get_user]);
     }
 
     /**

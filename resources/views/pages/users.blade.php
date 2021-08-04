@@ -29,7 +29,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                             @foreach ($get_user->data as $user)
+                                            @foreach ($get_user->data as $user)
                                             <tr>
                                                 <td class="">{{ $user->name ?? '' }}</td>
                                                 <td class=""><span> {{ $user->phone_code ?? '' }}</span> <span>{{ $user->phone_number ?? ''  }}</span></td>

@@ -70,3 +70,4 @@ Route::get('get_products', [WebController::class, 'webGetProducts'])->name('getp
 Route::get('get_users', [WebController::class, 'webGetUsers'])->name('getusers');
 Route::get('get_purchase_list', [WebController::class, 'webGetPurchaseList'])->name('getpurchaselist');
 Route::get('get_subscription', [WebController::class, 'webGetSubscription'])->name('getsubscription');
+Route::get('get_user_management', [WebController::class, 'userManagement'])->name('usermanagement');
