@@ -19,8 +19,12 @@ class UserController extends Controller
 {
     public function getUser(Request $request){
 
-    	$user = User::get();
+    	$user = User::where('password','<>',NULL);
     	if(isset($request->limit))
             $user->offset($request->offset??0)->limit($request->limit);
+
+        $user = $user->get();
+
+        return sendSuccess('Users',$user);
     }
 }

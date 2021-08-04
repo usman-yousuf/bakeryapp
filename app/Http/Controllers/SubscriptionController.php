@@ -80,6 +80,10 @@ class SubscriptionController extends Controller
 
         $models = $models->with(['plan','user'])->first();
 
+        if(isset($request->offset) && isset($request->limit) ){
+           $models->offset($request->offset)->limit($request->limit);
+        }
+
         if($models){
             $data['subscription'] = $models;
             return sendSuccess('Subscriptions Found.', $data);
