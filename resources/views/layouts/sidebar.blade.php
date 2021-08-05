@@ -11,7 +11,7 @@
                 <img src="{{asset('assets/preview/dashboard_icon.svg')}}" class="" width="25" alt="">
                 <span class=" font_size-s">Dashboard</span>
             </a>
-            <a href="{{route('products')}}" class="list-group-item py-3 mx-3">
+            <a href="{{route('getproducts')}}" class="list-group-item py-3 mx-3">
                 <img src="{{asset('assets/preview/product_icon.svg')}}" class="" width="25" alt="">
                 <span class=" font_size-s">Products</span>
             </a>
@@ -19,11 +19,11 @@
                 <img src="{{asset('assets/preview/brand_icon.svg')}}" class=" revert_icon_color-s " width="25" alt="">
                 <span class=" font_size-s">Brands</span>
             </a>
-            <a href="{{route('users')}}" class="list-group-item py-3 mx-3">
+            <a href="{{route('getusers')}}" class="list-group-item py-3 mx-3">
                 <img src="{{asset('assets/preview/user_icon.svg')}}" class="" width="25" alt="">
                 <span class=" font_size-s">All Users</span>
             </a>
-            <a href="{{route('purchased_item')}}" class="list-group-item py-3 mx-3">
+            <a href="{{route('getpurchaselist')}}" class="list-group-item py-3 mx-3">
                 <img src="{{asset('assets/preview/purchased_items_icon.svg')}}" class="" width="25" alt="">
                 <span class=" font_size-s">Purchased Items</span>
             </a>
@@ -31,19 +31,19 @@
                 <img src="{{asset('assets/preview/purchased_brand_icon.svg')}}" class="" width="25" alt="">
                 <span class=" font_size-s">Purchased Brands</span>
             </a>
-            <a href="{{route('top_seller')}}" class="list-group-item py-3 mx-3">
+            <a href="{{route('getsellers')}}" class="list-group-item py-3 mx-3">
                 <img src="{{asset('assets/preview/top_seller_icon.svg')}}" class="" width="25" alt="">
                 <span class=" font_size-s">Top Sellers</span>
             </a>
-            <a href="{{route('top_buyers')}}" class="list-group-item py-3 mx-3">
+            <a href="{{route('getbuyers')}}" class="list-group-item py-3 mx-3">
                 <img src="{{asset('assets/preview/top_buyer_icon.svg')}}" class="" width="25" alt="">
                 <span class=" font_size-s">Top Buyers</span>
             </a>
-            <a href="{{route('user_management')}}" class="list-group-item py-3 mx-3">
+            <a href="{{route('usermanagement')}}" class="list-group-item py-3 mx-3">
                 <img src="{{asset('assets/preview/user_management_icon.svg')}}" class="" width="25" alt="">
                 <span class=" font_size-s">User Management</span>
             </a>
-            <a href="{{route('subscription')}}" class="list-group-item py-3 mx-3">
+            <a href="{{route('getsubscription')}}" class="list-group-item py-3 mx-3">
                 <img src="{{asset('assets/preview/subscription_icon.svg')}}" class="" width="25" alt="">
                 <span class=" font_size-s">Subscription</span>
             </a>

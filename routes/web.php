@@ -29,50 +29,22 @@ Route::get('/brands', function () {
     return view('pages.brands');
 })->name('brands');
 
-Route::get('/products', function () {
-    return view('pages.products');
-})->name('products');
 
 Route::get('/purchased_brand', function () {
     return view('pages.purchased_brand');
 })->name('purchased_brand');
 
-Route::get('/purchased_item', function () {
-    return view('pages.purchased_item');
-})->name('purchased_item');
-
-Route::get('/subscription', function () {
-    return view('pages.subscription');
-})->name('subscription');
-
 Route::get('/subscription_plan', function () {
     return view('pages.subscription_plan');
 })->name('subscription_plan');
 
-Route::get('/top_buyers', function () {
-    return view('pages.top_buyers');
-})->name('top_buyers');
 
-Route::get('/top_seller', function () {
-    return view('pages.top_seller');
-})->name('top_seller');
-
-Route::get('/user_management', function () {
-    return view('pages.user_management');
-})->name('user_management');
-
-Route::get('/users', function () {
-    return view('pages.users');
-})->name('users');
 
 
 Route::get('get_products', [WebController::class, 'webGetProducts'])->name('getproducts');
-<<<<<<< HEAD
 Route::get('get_sellers', [WebController::class, 'webGetSellers'])->name('getsellers');
-Route::get('get_buyers', [WebController::class, 'webGetbuyers'])->name('getsellers');
-=======
+Route::get('get_buyers', [WebController::class, 'webGetbuyers'])->name('getbuyers');
 Route::get('get_users', [WebController::class, 'webGetUsers'])->name('getusers');
 Route::get('get_purchase_list', [WebController::class, 'webGetPurchaseList'])->name('getpurchaselist');
 Route::get('get_subscription', [WebController::class, 'webGetSubscription'])->name('getsubscription');
 Route::get('get_user_management', [WebController::class, 'userManagement'])->name('usermanagement');
->>>>>>> f049421565c4dd66e0c0a2f3346ef4d08568aaa9

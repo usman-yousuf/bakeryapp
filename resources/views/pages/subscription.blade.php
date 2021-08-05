@@ -51,15 +51,17 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ( $get_subscription->data as $subscription )
+                                                @forelse ( $get_subscription->data as $subscription )
                                                     <tr>
                                                         <td class="">{{ $subscription->user->name ?? '' }}</td>
                                                         <td class=""><span>{{ $subscription->user->phone_code ?? '' }}</span> <span>{{ $subscription->user->phone_number ?? '' }}</span></td>
                                                         <td class="">{{ $subscription->user->address->address ?? '' }}</td>
                                                         <td class="fg_pink-s"> {{ $subscription->user->bussiness_name ?? '' }}</td>
-                                                        <td class="fg_blue-s">{{ $subscription->user->email }}</td>
+                                                        <td class="fg_blue-s">{{ $subscription->user->email ?? '' }}</td>
                                                     </tr>
-                                                @endforeach
+                                                @empty
+                                                    <div> No Data Found</div>
+                                                @endforelse
                                             </tbody>
                                         </table>
                                     </div>
@@ -89,15 +91,17 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                 @foreach ( $get_subscription->data as $subscription )
+                                                 @forelse ( $get_subscription as $subscription )
                                                     <tr>
                                                         <td class="">{{ $subscription->user->name ?? '' }}</td>
                                                         <td class=""><span>{{ $subscription->user->phone_code ?? '' }}</span> <span>{{ $subscription->user->phone_number ?? '' }}</span></td>
                                                         <td class="">{{ $subscription->user->address->address ?? '' }}</td>
                                                         <td class="fg_pink-s"> {{ $subscription->user->bussiness_name ?? '' }}</td>
-                                                        <td class="fg_blue-s">{{ $subscription->user->email }}</td>
+                                                        <td class="fg_blue-s">{{ $subscription->user->email ?? '' }}</td>
                                                     </tr>
-                                                @endforeach
+                                                @empty
+                                                    <div> No Data Found </div>
+                                                @endforelse
                                             </tbody>
                                         </table>
                                     </div>
@@ -128,15 +132,17 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                 @foreach ( $get_subscription->data as $subscription )
+                                                 @forelse ( $get_subscription as $subscription )
                                                     <tr>
                                                         <td class="">{{ $subscription->user->name ?? '' }}</td>
                                                         <td class=""><span>{{ $subscription->user->phone_code ?? '' }}</span> <span>{{ $subscription->user->phone_number ?? '' }}</span></td>
                                                         <td class="">{{ $subscription->user->address->address ?? '' }}</td>
                                                         <td class="fg_pink-s"> {{ $subscription->user->bussiness_name ?? '' }}</td>
-                                                        <td class="fg_blue-s">{{ $subscription->user->email }}</td>
+                                                        <td class="fg_blue-s">{{ $subscription->user->email ?? '' }}</td>
                                                     </tr>
-                                                @endforeach
+                                                 @empty
+                                                    <div> No Data Found </div>
+                                                 @endforelse
                                             </tbody>
                                         </table>
                                     </div>
