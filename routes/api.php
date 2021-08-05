@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminProductController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\userController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -39,9 +40,9 @@ Route::group([ 'prefix' => 'auth'], function () {
     Route::post('get_order', [OrderController::class,'getOrder']);
     Route::post('get_analytics', [OrderController::class,'analytics']);
     Route::post('search_purchase_list', 'App\Http\Controllers\ProductController@searchPurchaseList');
+    Route::post('delete_user', 'App\Http\Controllers\UserController@deleteUser');
     
     Route::group([ 'middleware' => 'auth:api'], function() {
-
 
         Route::post('get_user', 'App\Http\Controllers\AuthController@getUser');
         Route::get('logout', 'App\Http\Controllers\AuthController@logout');
@@ -64,6 +65,7 @@ Route::group([ 'prefix' => 'auth'], function () {
 
         // purchase list routes
         Route::post('purchase_list', 'App\Http\Controllers\ProductController@addUpdatePurchaseList');
+
 
 
     });

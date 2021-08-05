@@ -22,14 +22,27 @@ class WebController extends Controller
 
     public function __construct(ProductController $ProductController,
     UserController $UserController,
-    SubscriptionController $SubscriptionController)
+    SubscriptionController $SubscriptionController,
+    AuthController $AuthController)
     {
         $this->ProductController = $ProductController;
         $this->UserController = $UserController;
         $this->SubscriptionController = $SubscriptionController;
+        $this->AuthController = $AuthController;
     }
 
 
+    public function webLogin(Request $request){
+    
+
+        $auth = $this->AuthController->login($request)->getdata();
+
+        if($auth->status)
+            return view('page.dashboard');
+        else{
+            return view('auth.login')->withErrors($auth);
+        }
+    }
 
     public function webGetProducts(Request $request){
 

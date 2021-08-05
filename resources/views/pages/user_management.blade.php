@@ -31,6 +31,7 @@
                                         </thead>
                                         <tbody>
                                             @foreach ($get_user->data as $user)
+                                            @if($user->id != Auth::user()->id)
                                             <tr>
                                                 <td class="">{{ $user->name ?? '' }}</td>
                                                 <td class=""><span> {{ $user->phone_code ?? '' }}</span> <span>{{ $user->phone_number ?? ''  }}</span></td>
@@ -40,9 +41,10 @@
                                                 <td class="fg_pink-s"> {{ $user->bussiness_name ?? '' }}</td>
                                                 <td class="fg_blue-s">{{ $user->email ?? '' }}</td>
                                                 <td>
-                                                    <a href="javascript:void"><img src="assets/preview/delete_icon.svg" alt=""></a>
+                                                    <a href="#" ><img src="{{ asset('assets/preview/delete_icon.svg') }}" alt="" data-id='{{ $user->id}}' id='delete_user' ></a>
                                                 </td>
                                             </tr>
+                                            @endif
                                             @endforeach
                                         </tbody>
                                     </table>

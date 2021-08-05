@@ -173,7 +173,6 @@ class ProductController extends Controller
 
             if(isset($request->brand_name)){
                 $brand_name = $request->brand_name;
-                // return gettype($brand_name);
                 $purchase_list = $purchase_list->whereHas('adminIngredientType' , function($q) use($brand_name) {
                     $q->where('brand_name','like',"%{$brand_name}%");
                 });
@@ -187,6 +186,10 @@ class ProductController extends Controller
             // search by price
             if(isset($request->price)){
                 $purchase_list = $purchase_list->where('price','>=',$request->price);
+            }
+
+            if(isset($request->quantity)){
+                $purchase_list = $purchase_list->where('quantity','=',$request->quantity);
             }
 
             // search by date

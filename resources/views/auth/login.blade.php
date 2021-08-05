@@ -50,17 +50,19 @@
                     <!-- login Form - START -->
                     <div class="row">
                         <div class="col-10 col-md-6 col-xl-6 col-lg-6 offset-1 offset-md-3 offset-lg-3 offset-xl-3 mt-3">
-                            <form action="#" method="">
+                            <form action="{{ route('webLogin') }}" method="POST">
+                                @csrf 
                                 <div class="bg-light py-2 mt-3 w-100">
                                     <span class="align-self-center ml-2"> <i class="fa fa-envelope login_form_icon-s"></i> </span>
-                                    <input class="border-0 w-75 ml-2 bg-light" type="email" name="" id="" placeholder="Email" />
+                                    <input class="border-0 w-75 ml-2 bg-light" type="email" name="email" id="" placeholder="Email" required />
+                                    {{$auth??''}}
                                 </div>
                                 <div class="bg-light py-2 mt-3 w-100">
                                     <span class="align-self-center ml-2"> <i class="fa fa-lock login_form_icon-s"></i> </span>
-                                    <input class="border-0 w-75 ml-2 bg-light" type="password " name="" id="" placeholder="Password" />
+                                    <input class="border-0 w-75 ml-2 bg-light" type="password " name="password" id="" placeholder="Password" required />
                                 </div>
                                 <div class="mt-5 text-center">
-                                    <button class="w-75 shadow button_outline-s bg-primary-s py-3 br_30px-s text-white border-0" type="submit" data-toggle="modal" data-target="#country_name-d">
+                                    <button class="w-75 shadow button_outline-s bg-primary-s py-3 br_30px-s text-white border-0" type="submit" >
                                         Log In
                                     </button>
                                 </div>
@@ -92,7 +94,7 @@
                         </div>
                     </div>
                     <div class="w-100 d-flex justify-content-around border-top-0 mt-5 mb-4">
-                        <a href="{{route('dashboard')}}" class="w-50 shadow font_20px-s text-center button_outline-s no_link-s text-white border-0 bg-primary-s py-3 br_50px-s " role="button"> OKAY </a>
+                        <a href="" class="w-50 shadow font_20px-s text-center button_outline-s no_link-s text-white border-0 bg-primary-s py-3 br_50px-s " role="button"> OKAY </a>
                     </div>
                 </div>
 

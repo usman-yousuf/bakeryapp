@@ -24,17 +24,17 @@
                             <a class="nav-link" href="#"><img src="{{asset('assets/preview/bell_icon.svg')}}" alt="" class="" width="20"></a>
                         </li>
                         <li>
-                            <img src="{{asset('assets/preview/user_img.png')}}" class="rounded-circle" width="40" alt="">
+                            <img src="{{ asset('assets/preview/user_img.png')}}" class="rounded-circle" width="40" alt="">
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Amelia Emily
+                            {{ Auth::user()->name }}
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="#">Profile</a>
-                                <a class="dropdown-item" href="#">Setting</a>
+                                <!-- <a class="dropdown-item" href="#">Setting</a> -->
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Log Out</a>
+                                <a class="dropdown-item" href="{{ route('logout') }}">Log Out</a>
                             </div>
                         </li>
                     </ul>

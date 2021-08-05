@@ -43,4 +43,12 @@ class UserController extends Controller
     	return sendSuccess('Top buyer',$buyer);
     }
 
+    public function deleteUser(Request $request){
+
+
+        // dd('DumpMan');
+        dd($request->all());
+        return $request->all();
+    }
+
 }

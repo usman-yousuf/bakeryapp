@@ -28,7 +28,7 @@ class OrderController extends Controller
             'product_id' => 'required_without:order_id|exists:products,id',
             'admin_product_type_id' => 'required_without:order_id|exists:admin_product_types,id',
             'order_status' => 'required_with:order_id,product_id|in:new-order,in-baking,ready-to-deliver,sold,other',
-            'advance_payment' => 'required_without:order_id|integer',
+            'advance_payment' => 'required_without:order_id|double',
             'order_id' => 'numeric|exists:orders,id',
             'quantity' => 'required_without:order_id|numeric',
             'phone_code' => 'string',

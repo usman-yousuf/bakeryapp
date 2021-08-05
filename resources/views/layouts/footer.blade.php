@@ -20,6 +20,34 @@
 
     <!-- custom js  -->
     <script src="{{ asset('assets/js/javascript.js') }}"></script>
+
+    <script type="text/javascript">
+
+        $( document ).ready(function() {
+          let endpoint = 'http://localhost/bakeryapp'
+            
+            //delete_user
+            $(`#delete_user`).click(function(){
+                let apiKey = '/api/auth/delete_user'
+                id = $(`#delete_user`).data('id') 
+                console.log(id);
+
+                    $.ajax({
+                        type: 'POST',
+                        url: endpoint + apiKey,
+                        contentType: "application/json",
+                        // dataType: 'json',
+                        data : {ids: id},
+                        // method: 'POST',
+                        success: function(result){
+                            console.log('result');
+                        }
+                    });
+
+            });
+        });
+
+    </script>
 </body>
 
 </html>
