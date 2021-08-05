@@ -189,7 +189,7 @@ class ProductController extends Controller
             }
 
             if(isset($request->quantity)){
-                $purchase_list = $purchase_list->where('quantity','=',$request->quantity);
+                $purchase_list = $purchase_list->where('quantity',$request->quantity);
             }
 
             // search by date
