@@ -27,8 +27,7 @@ class AdminProductController extends Controller
         }
         $data = [];
 
-        if(isset($request->products)){
-
+        if(isset($request->products) || (isset($request->should_get_admin_products) && ($request->should_get_admin_products))){
             $products = AdminProduct::get();
             $data['products'] = $products;
         }
@@ -40,6 +39,7 @@ class AdminProductController extends Controller
             $product_type = AdminProductType::where('admin_product_id', $request->product_id)->get();
             $data['product_type'] = $product_type;
         }
+
         if(isset($request->ingredient_id)){
             $ingredient_type = AdminIngredientType::where('admin_ingredient_id', $request->ingredient_id)->get();
             $data['ingredient_type'] = $ingredient_type;

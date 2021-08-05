@@ -57,7 +57,7 @@ class ProductController extends Controller
             $admin_product = AdminProduct::where('id',$request->admin_product_id)->first();
             $admin_product_type = AdminProductType::where('id',$request->admin_product_type_id)->get();
 
-            //Product_list 
+            //Product_list
             $product->user_id = $request->user_id??$product->user_id??$request->user()->id;
             $product->admin_product_id = $request->admin_product_id??$product->admin_product_id;
             $product->admin_product_type_id = $request->admin_product_type_id??$product->admin_product_type_id;

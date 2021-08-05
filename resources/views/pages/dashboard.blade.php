@@ -2,7 +2,7 @@
 
 @section('content')
 
-
+{{--  {{ dd ($user_info) }}  --}}
             <div class="container-fluid bg-light py-4">
 
                 <div class="row mb-3">
@@ -21,7 +21,7 @@
                                 <div class="d-flex justify-content-between w-100">
                                     <h5>All users</h5>
                                     <span class=" ">
-                                    <a class="view_link-s" href="javascript: void"> See All</a>
+                                    <a class="view_link-s" href="{{ route('getusers') }}"> See All</a>
                                 </span>
                                 </div>
                                 <div>
@@ -35,54 +35,18 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @forelse ($get_user['get_user']->data as $user)
                                             <tr>
-                                                <td class="">John</td>
-                                                <td class=""><span>+123</span> <span>000</span> <span>000</span> <span>000</span></td>
-                                                <td class="fg_pink-s"> Bakery Shop</td>
-                                                <td class="fg_blue-s">john@example.com</td>
+                                                <td class="">{{ $user->name ?? '' }}</td>
+                                                <td class=""><span> {{ $user->phone_code ?? '' }}</span> <span>{{ $user->phone_number ?? ''  }}</span></td>
+                                                <td class="fg_pink-s"> {{ $user->bussiness_name ?? '' }}</td>
+                                                <td class="fg_blue-s">{{ $user->email ?? '' }}</td>
                                             </tr>
+                                            @empty
                                             <tr>
-                                                <td class="">John</td>
-                                                <td class=""><span>+123</span> <span>000</span> <span>000</span> <span>000</span></td>
-                                                <td class="fg_pink-s"> Bakery Shop</td>
-                                                <td class="fg_blue-s">john@example.com</td>
+                                                <td class="text-center">--No User--</td>
                                             </tr>
-                                            <tr>
-                                                <td class="">John</td>
-                                                <td class=""><span>+123</span> <span>000</span> <span>000</span> <span>000</span></td>
-                                                <td class="fg_pink-s"> Bakery Shop</td>
-                                                <td class="fg_blue-s">john@example.com</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">John</td>
-                                                <td class=""><span>+123</span> <span>000</span> <span>000</span> <span>000</span></td>
-                                                <td class="fg_pink-s"> Bakery Shop</td>
-                                                <td class="fg_blue-s">john@example.com</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">John</td>
-                                                <td class=""><span>+123</span> <span>000</span> <span>000</span> <span>000</span></td>
-                                                <td class="fg_pink-s"> Bakery Shop</td>
-                                                <td class="fg_blue-s">john@example.com</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">John</td>
-                                                <td class=""><span>+123</span> <span>000</span> <span>000</span> <span>000</span></td>
-                                                <td class="fg_pink-s"> Bakery Shop</td>
-                                                <td class="fg_blue-s">john@example.com</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">John</td>
-                                                <td class=""><span>+123</span> <span>000</span> <span>000</span> <span>000</span></td>
-                                                <td class="fg_pink-s"> Bakery Shop</td>
-                                                <td class="fg_blue-s">john@example.com</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">John</td>
-                                                <td class=""><span>+123</span> <span>000</span> <span>000</span> <span>000</span></td>
-                                                <td class="fg_pink-s"> Bakery Shop</td>
-                                                <td class="fg_blue-s">john@example.com</td>
-                                            </tr>
+                                            @endforelse
                                         </tbody>
                                     </table>
                                 </div>
@@ -97,36 +61,22 @@
                                 <div class="d-flex justify-content-between w-100">
                                     <h5>Top Sellers</h5>
                                     <span class=" ">
-                                    <a class="view_link-s" href="javascript:void"> See All</a>
+                                    <a class="view_link-s" href="{{ route('getsellers') }}"> See All</a>
                                 </span>
                                 </div>
                                 <div>
                                     <table class="table">
                                         <tbody>
+                                            {{--  {{ dd($seller_info) }}  --}}
+                                            @forelse($seller_info['get_seller']->data as $seller)
                                             <tr>
-                                                <td class="border-top-0">John</td>
+                                                <td class="border-top-0">{{ $seller->user->name ?? 'other' }}</td>
                                             </tr>
+                                            @empty
                                             <tr>
-                                                <td class="">John</td>
-                                            </tr>
+                                                <td class="text-center">    --No Seller--   </td>
                                             <tr>
-                                                <td class="">John</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">John</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">John</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">John</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">John</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">John</td>
-                                            </tr>
+                                            @endforelse
                                         </tbody>
                                     </table>
                                 </div>
@@ -144,36 +94,22 @@
                                 <div class="d-flex justify-content-between w-100">
                                     <h5>Top Buyers</h5>
                                     <span class=" ">
-                                    <a class="view_link-s" href="javascript: void"> See All</a>
+                                    <a class="view_link-s" href="{{ route('getbuyers') }}"> See All</a>
                                 </span>
                                 </div>
                                 <div>
                                     <table class="table">
                                         <tbody>
+                                            @forelse ($buyer_info['get_buyer']->data as $buyer)
                                             <tr>
-                                                <td class="border-top-0">John</td>
+                                                <td class="border-top-0">{{ $buyer->user->name ?? ' other'  }}</td>
                                             </tr>
+                                            @empty
                                             <tr>
-                                                <td class="">John</td>
+                                                <td class="text-center">--No Buyer--</td>
                                             </tr>
-                                            <tr>
-                                                <td class="">John</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">John</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">John</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">John</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">John</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">John</td>
-                                            </tr>
+
+                                            @endforelse
                                         </tbody>
                                     </table>
                                 </div>
@@ -200,37 +136,23 @@
                                                 <th class="">Price</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        {{--  <tbody>{{ dd($purchased_items_info['get_purchaselists']->data) }}  --}}
+                                            @forelse ($purchased_items_info['get_purchaselists']->data->purchase_list as $key => $purchase_item)
+                                            {{--  {{ dd($purchase_item->admin_ingredient_type) }};  --}}
                                             <tr>
-                                                <td class="">Sugar</td>
-                                                <td class="">Yum Sugar</td>
-                                                <td class="">$ <span>90</span> /kg</td>
+                                                <th class="">{{ $purchase_item->admin_ingredient->name }}</th>
+                                                <th class="">{{ $purchase_item->admin_ingredient_type->brand_name }}</th>
+                                                <th class="">{{ $purchase_item->price }}</th>
                                             </tr>
+
+                                            @empty
+
                                             <tr>
-                                                <td class="">Chicken Msalah</td>
-                                                <td class="">Shan</td>
-                                                <td class="">$ <span>90</span> /kg</td>
-                                            </tr>
+                                                <th>No item Found in Purchase List</th>
                                             <tr>
-                                                <td class="">Oil</td>
-                                                <td class="">Shan</td>
-                                                <td class="">$ <span>90</span> /kg</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">Cup Cake</td>
-                                                <td class="">Halal</td>
-                                                <td class="">$ <span>90</span> /kg</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">Choclate</td>
-                                                <td class="">Dairy Milk</td>
-                                                <td class="">$ <span>90</span> /kg</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="">Biscuits</td>
-                                                <td class="">Super</td>
-                                                <td class="">$ <span>90</span> /kg</td>
-                                            </tr>
+
+                                            @endforelse
+
 
                                         </tbody>
                                     </table>
@@ -307,8 +229,8 @@
 
             </div>
 
-        
-        
+
+
 @endsection
 
 
