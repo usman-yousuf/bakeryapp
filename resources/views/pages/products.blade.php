@@ -2,7 +2,7 @@
 
 @section('content')
 
-{{ dd($get_product->data) }}
+{{--  {{ dd($get_product->data) }}  --}}
 {{-- @foreach ($get_product->data->products as $item)
     <span>{{ $item->user_id }}</span>
 @endforeach --}}
@@ -39,20 +39,25 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($get_product->data->products as $item)
-                                            <tr>
-                                                <td class="">{{ $item->admin_product->name }}</td>
-                                                <td class=""><span>{{ $item->admin_product_type->type_name ?? NULL }}</span><br>
-                                                    <span>Size:</span> <strong class="fg_blue-s">{{ $item->admin_product_type->size ?? NULL }}</strong>
-                                                </td>
-                                                <td>
-                                                    <a href="javascript:void(0)"><img src="{{ asset('assets/preview/edit_icon.svg') }}" alt=""></a>
-                                                    <a href="javascript:void(0)"><img src="{{ asset('assets/preview/delete_icon.svg') }}" alt=""></a>
-                                                </td>
-                                            </tr>
+                                            @foreach ($get_product->data->products as $admin_product)
+                                                <tr>
+                                                    {{--  {{ dd($admin_product->admin_product_types[1]) }}  --}}
+                                                    <td class="">{{ $admin_product->name ?? NULL }}</td>
+
+                                                    @for ($i = 0; $i < 3; $i++)
+                                                        <td class="">
+                                                                <span>{{ $admin_product->admin_product_types[$i]->type_name ?? 'None' }}</span><br>
+                                                                <span>Size:</span> <strong class="fg_blue-s">{{ $admin_product->admin_product_types[$i]->size ?? 'None' }}</strong>
+
+                                                        </td>
+                                                    @endfor
+                                                    {{--  $admin_product->admin_product_types  --}}
+                                                    <td>
+                                                        <a href="javascript:void(0)"><img src="{{ asset('assets/preview/edit_icon.svg') }}" alt=""></a>
+                                                        <a href="javascript:void(0)"><img src="{{ asset('assets/preview/delete_icon.svg') }}" alt=""></a>
+                                                    </td>
+                                                </tr>
                                             @endforeach
-
-
                                         </tbody>
                                     </table>
                                 </div>

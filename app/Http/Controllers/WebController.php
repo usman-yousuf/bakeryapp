@@ -22,30 +22,55 @@ class WebController extends Controller
 
     public function __construct(ProductController $ProductController,
     UserController $UserController,
-    SubscriptionController $SubscriptionController)
+    SubscriptionController $SubscriptionController,
+    AdminProductController $AdminProductController)
     {
         $this->ProductController = $ProductController;
         $this->UserController = $UserController;
         $this->SubscriptionController = $SubscriptionController;
+        $this->AdminProductController = $AdminProductController;
     }
 
 
+    /**
+     * All products for implementation in product page
+     *
+     * @param Request $request
+     * @return void
+     */
 
     public function webGetProducts(Request $request){
-
         $request->user_id = $request->user_id ?? 6;
+        $request->merge([
+            'should_get_admin_products' => true,
+        ]);
 
-        $get_product = $this->ProductController->getProducts($request)->getdata();
+        $get_product = $this->AdminProductController->getIngredientProducts($request)->getData();
 
         return view('pages.products', [ 'get_product' => $get_product ]);
     }
+
+    /**
+     * All top seller for implementation in top seller page
+     *
+     * @param Request $request
+     * @return void
+     */
 
     public function webGetSellers(Request $request){
 
     	$get_seller = $this->UserController->mostSeller($request)->getdata();
 
         return view('pages.top_seller', [ 'get_seller' => $get_seller ]);
-    }    
+    }
+
+
+    /**
+     * All top buyers for implementation in top buyers page
+     *
+     * @param Request $request
+     * @return void
+     */
 
     public function webGetBuyers(Request $request){
 
@@ -68,7 +93,7 @@ class WebController extends Controller
     }
 
     /**
-     * All users for implementation in user page
+     * All users for implementation in user management page
      *
      * @param Request $request
      * @return void
@@ -96,7 +121,7 @@ class WebController extends Controller
     }
 
     /**
-     * Get all subscriptions for implementation on subscription page
+     * All subscriptions for implementation on subscription page
      *
      * @param Request $request
      * @return void
@@ -107,5 +132,29 @@ class WebController extends Controller
         $get_subscription = $this->SubscriptionController->getSubscription($request)->getdata();
         return view('pages.subscription', [ 'get_subscription' => $get_subscription]);
     }
+
+    /**
+     * All information of dashboard page
+     *
+     * @param Request $request
+     * @return void
+     */
+
+    public function dashboard(Request $request){
+
+        $get_user = $this->webGetUsers($request)->getdata();
+        $seller_info = $this->webGetSellers($request)->getdata();
+        $buyer_info = $this->webGetBuyers($request)->getdata();
+        $purchased_items_info = $this->webGetPurchaseList($request)->getdata();
+
+        $request->merge([
+            'offset' => 0,
+            'limit' => 10,
+        ]);
+
+        return view('pages.dashboard')->with(compact(['get_user','seller_info','buyer_info','purchased_items_info']));
+
+    }
+
 
 }
