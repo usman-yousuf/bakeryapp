@@ -204,7 +204,6 @@ class WebController extends Controller
             $adminProductsIngredients->admin_product_id  =  $adminProduct->id;
             $adminProductsIngredients->save();
         }
-
         if(isset($request->type_name_2)){
             $adminProductsIngredients = new AdminProductType;
             $adminProductsIngredients->type_name = $request->type_name_2;
@@ -212,7 +211,6 @@ class WebController extends Controller
             $adminProductsIngredients->admin_product_id = $adminProduct->id;
             $adminProductsIngredients->save();
         }
-
         if(isset($request->type_name_3)){
             $adminProductsIngredients = new AdminProductType;
             $adminProductsIngredients->type_name = $request->type_name_3;
