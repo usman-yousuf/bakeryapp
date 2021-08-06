@@ -74,9 +74,9 @@ class WebController extends Controller
         ]);
 
         $admin_ingredient = $this->AdminProductController->getIngredientProducts($request)->getData();
-        dd($admin_ingredient);
+        // dd($admin_ingredient);
 
-        return view('pages.products', [ 'get_product' => $get_product ]);
+        return view('pages.brands', [ 'admin_ingredient' => $admin_ingredient ]);
 
     }
 
@@ -144,7 +144,10 @@ class WebController extends Controller
     public function webGetPurchaseList(Request $request){
 
 
-        $request->merge(['user_id' => 1]);
+        $request->merge([
+            'user_id' => 10,
+            'webGetPurchaseList' => (int)true,
+        ]);
 
         $get_purchaselists = $this->ProductController->searchPurchaseList($request)->getdata();
         return view('pages.purchased_item', [ 'get_purchaselists' => $get_purchaselists]);
@@ -172,18 +175,23 @@ class WebController extends Controller
 
     public function dashboard(Request $request){
 
-        $get_user = $this->webGetUsers($request)->getdata();
-        $seller_info = $this->webGetSellers($request)->getdata();
-        $buyer_info = $this->webGetBuyers($request)->getdata();
-        $purchased_items_info = $this->webGetPurchaseList($request)->getdata();
-
         $request->merge([
             'offset' => 0,
             'limit' => 10,
+            'mostPurchasedItems' => true
         ]);
+        $get_user = $this->webGetUsers($request)->getdata();
+        $seller_info = $this->webGetSellers($request)->getdata();
+        $buyer_info = $this->webGetBuyers($request)->getdata();
+        $most_purchased_items = $this->webGetPurchaseList($request)->getdata();
 
-        return view('pages.dashboard')->with(compact(['get_user','seller_info','buyer_info','purchased_items_info']));
 
+        return view('pages.dashboard')->with(compact(['get_user','seller_info','buyer_info','most_purchased_items']));
+
+    }
+
+    public function add_product(Request $request){
+        dd($request->all());
     }
 
 

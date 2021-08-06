@@ -64,7 +64,7 @@
                                 </div>
                                 <div class="bg-light py-2 mt-3 w-100">
                                     <span class="align-self-center ml-2"> <i class="fa fa-lock login_form_icon-s"></i> </span>
-                                    <input class="border-0 w-75 ml-2 bg-light" type="password " name="password" id="" placeholder="Password"  />
+                                    <input class="border-0 w-75 ml-2 bg-light" type="password" name="password" id="" placeholder="Password"  />
 
                                     @error('password')
                                     <span class="invalid-feedback" role="alert">

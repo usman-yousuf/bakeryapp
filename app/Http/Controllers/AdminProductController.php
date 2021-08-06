@@ -36,6 +36,10 @@ class AdminProductController extends Controller
             $ingredients = AdminIngredient::get();
             $data['ingredients'] = $ingredients;
         }
+        if(isset($request->mostPurchasedItems)){
+            $most_purchased = PurchaseList::select('admin_ingredient_type_id')->groupBy('admin_ingredient_type_id')->orderByRaw('COUNT(*) DESC')->get();
+            $data['most_purchased'] = $most_purchased;
+        }
         if(isset($request->product_id)){
             $product_type = AdminProductType::where('admin_product_id', $request->product_id)->get();
             $data['product_type'] = $product_type;

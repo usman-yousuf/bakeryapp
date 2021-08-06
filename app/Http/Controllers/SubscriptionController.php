@@ -84,7 +84,7 @@ class SubscriptionController extends Controller
             $models->where('status', $request->status);
         }
 
-        $models = $models->with(['plan','user'])->first();
+        $models = $models->with(['plan','user'])->get();
 
         if(isset($request->offset) && isset($request->limit) ){
            $models->offset($request->offset)->limit($request->limit);

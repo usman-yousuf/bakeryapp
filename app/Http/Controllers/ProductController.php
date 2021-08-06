@@ -159,6 +159,17 @@ class ProductController extends Controller
             return sendError($validator->errors()->all()[0], $data);
         }
 
+        if(isset($request->webGetPurchaseList)){
+            $purchase_list = PurchaseList::where('quantity','<>',0);
+
+            if(isset($request->offset) && isset($request->limit))
+                $purchase_list->offset($request->offset)->limit($request->limit);
+
+            $purchase_list = $purchase_list->get();
+
+            return sendSuccess('purchase_list',$purchase_list);
+        }
+
 
         $purchase_list = PurchaseList::where('user_id', $request->user_id);
         if(isset($request->is_inventory))
@@ -226,6 +237,7 @@ class ProductController extends Controller
             $products->where('user_id',$request->user_id);
 
         $clone_products = $products;
+
         if(isset($request->offset) && isset($request->limit)){
             $products->offset($request->offset)->limit($request->limit);
         }

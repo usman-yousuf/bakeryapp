@@ -28,8 +28,9 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @if( isset($get_purchaselists->data->purchase_list) )
-                                            @foreach ( $get_purchaselists->data->purchase_list as $list )
+                                            <!-- dd() -->
+                                            @if( isset($get_purchaselists->data) )
+                                            @foreach ( $get_purchaselists->data as $list )
                                             <tr>
                                                 <td class="">{{ $list->admin_ingredient->name ?? '' }}</td>
                                                 <td class="">{{ $list->admin_ingredient_type->brand_name ?? '' }}</td>

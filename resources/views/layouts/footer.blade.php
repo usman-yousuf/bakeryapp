@@ -27,7 +27,7 @@
           let endpoint = 'http://localhost/bakeryapp'
             
             //delete_user
-            $(`#delete_user`).click(function(){
+            $(`#delete_user`).click( function(){
                 let apiKey = '/api/auth/delete_user'
                 id = $(`#delete_user`).data('id') 
                 console.log(id);
@@ -43,6 +43,15 @@
                             console.log('result');
                         }
                     });
+            });
+
+            $(`#add_product`).click( function(){
+                let apiKey = '/api/auth/add_product'
+                id = $(`#product_name-d`).value()
+                debugger;
+                console.log('saddsa');
+                alert(id);
+
 
             });
         });

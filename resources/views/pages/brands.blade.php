@@ -2,7 +2,6 @@
 
 @section('content')
 
-
             <div class="container-fluid bg-light py-4">
 
                 <div class="row mb-3">
@@ -23,16 +22,17 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="row">
+                                @forelse ($admin_ingredient->data->ingredients as $product)
                             <div class="col-12 col-md-6 col-lg-6 col-xl-3 mt-3 mb-3">
                                 <div class="card border-0 shadow">
                                     <div class="card-body">
                                         <div>
                                             <p class="mb-0">Product Name</p>
-                                            <strong>Pizza</strong>
+                                            <strong>{{ $product->name }}</strong>
                                         </div>
                                         <div class="mt-4">
                                             <p class="mb-0">Brand Name</p>
-                                            <strong>Smokein's Joe's Pizza</strong>
+                                            <strong>{{ $product->admin_ingredient_types[0]->brand_name }}</strong>
                                         </div>
                                         <div class="text-right mt-3">
                                             <!-- <a href="javascript:void(0)"><img class="" src="{{ asset('assets/preview/edit_icon.svg') }}" alt="" /></a>
@@ -40,285 +40,10 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-12 col-md-6 col-lg-6 col-xl-3 mt-3 mb-3">
-                                <div class="card border-0 shadow">
-                                    <div class="card-body">
-                                        <div>
-                                            <p class="mb-0">Product Name</p>
-                                            <strong>Pizza</strong>
-                                        </div>
-                                        <div class="mt-4">
-                                            <p class="mb-0">Brand Name</p>
-                                            <strong>Smokein's Joe's Pizza</strong>
-                                        </div>
-                                        <div class="text-right mt-3">
-                                            <a href="javascript:void(0)"><img class="" src="assets/preview/edit_icon.svg" alt="" /></a>
-                                            <a href="javascript:void(0)"><img class="" src="assets/preview/delete_icon.svg" alt="" /></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-6 col-lg-6 col-xl-3 mt-3 mb-3">
-                                <div class="card border-0 shadow">
-                                    <div class="card-body">
-                                        <div>
-                                            <p class="mb-0">Product Name</p>
-                                            <strong>Pizza</strong>
-                                        </div>
-                                        <div class="mt-4">
-                                            <p class="mb-0">Brand Name</p>
-                                            <strong>Smokein's Joe's Pizza</strong>
-                                        </div>
-                                        <div class="text-right mt-3">
-                                            <a href="javascript:void(0)"><img class="" src="assets/preview/edit_icon.svg" alt="" /></a>
-                                            <a href="javascript:void(0)"><img class="" src="assets/preview/delete_icon.svg" alt="" /></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-6 col-lg-6 col-xl-3 mt-3 mb-3">
-                                <div class="card border-0 shadow">
-                                    <div class="card-body">
-                                        <div>
-                                            <p class="mb-0">Product Name</p>
-                                            <strong>Pizza</strong>
-                                        </div>
-                                        <div class="mt-4">
-                                            <p class="mb-0">Brand Name</p>
-                                            <strong>Smokein's Joe's Pizza</strong>
-                                        </div>
-                                        <div class="text-right mt-3">
-                                            <a href="javascript:void(0)"><img class="" src="assets/preview/edit_icon.svg" alt="" /></a>
-                                            <a href="javascript:void(0)"><img class="" src="assets/preview/delete_icon.svg" alt="" /></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
 
-                        </div>
-                        <div class="row">
-                            <div class="col-12 col-md-6 col-lg-6 col-xl-3 mt-3 mb-3">
-                                <div class="card border-0 shadow">
-                                    <div class="card-body">
-                                        <div>
-                                            <p class="mb-0">Product Name</p>
-                                            <strong>Pizza</strong>
-                                        </div>
-                                        <div class="mt-4">
-                                            <p class="mb-0">Brand Name</p>
-                                            <strong>Smokein's Joe's Pizza</strong>
-                                        </div>
-                                        <div class="text-right mt-3">
-                                            <a href="javascript:void(0)"><img class="" src="assets/preview/edit_icon.svg" alt="" /></a>
-                                            <a href="javascript:void(0)"><img class="" src="assets/preview/delete_icon.svg" alt="" /></a>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
-                            <div class="col-12 col-md-6 col-lg-6 col-xl-3 mt-3 mb-3">
-                                <div class="card border-0 shadow">
-                                    <div class="card-body">
-                                        <div>
-                                            <p class="mb-0">Product Name</p>
-                                            <strong>Pizza</strong>
-                                        </div>
-                                        <div class="mt-4">
-                                            <p class="mb-0">Brand Name</p>
-                                            <strong>Smokein's Joe's Pizza</strong>
-                                        </div>
-                                        <div class="text-right mt-3">
-                                            <a href="javascript:void(0)"><img class="" src="assets/preview/edit_icon.svg" alt="" /></a>
-                                            <a href="javascript:void(0)"><img class="" src="assets/preview/delete_icon.svg" alt="" /></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-6 col-lg-6 col-xl-3 mt-3 mb-3">
-                                <div class="card border-0 shadow">
-                                    <div class="card-body">
-                                        <div>
-                                            <p class="mb-0">Product Name</p>
-                                            <strong>Pizza</strong>
-                                        </div>
-                                        <div class="mt-4">
-                                            <p class="mb-0">Brand Name</p>
-                                            <strong>Smokein's Joe's Pizza</strong>
-                                        </div>
-                                        <div class="text-right mt-3">
-                                            <a href="javascript:void(0)"><img class="" src="assets/preview/edit_icon.svg" alt="" /></a>
-                                            <a href="javascript:void(0)"><img class="" src="assets/preview/delete_icon.svg" alt="" /></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-6 col-lg-6 col-xl-3 mt-3 mb-3">
-                                <div class="card border-0 shadow">
-                                    <div class="card-body">
-                                        <div>
-                                            <p class="mb-0">Product Name</p>
-                                            <strong>Pizza</strong>
-                                        </div>
-                                        <div class="mt-4">
-                                            <p class="mb-0">Brand Name</p>
-                                            <strong>Smokein's Joe's Pizza</strong>
-                                        </div>
-                                        <div class="text-right mt-3">
-                                            <a href="javascript:void(0)"><img class="" src="assets/preview/edit_icon.svg" alt="" /></a>
-                                            <a href="javascript:void(0)"><img class="" src="assets/preview/delete_icon.svg" alt="" /></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="row">
-                            <div class="col-12 col-md-6 col-lg-6 col-xl-3 mt-3 mb-3">
-                                <div class="card border-0 shadow">
-                                    <div class="card-body">
-                                        <div>
-                                            <p class="mb-0">Product Name</p>
-                                            <strong>Pizza</strong>
-                                        </div>
-                                        <div class="mt-4">
-                                            <p class="mb-0">Brand Name</p>
-                                            <strong>Smokein's Joe's Pizza</strong>
-                                        </div>
-                                        <div class="text-right mt-3">
-                                            <a href="javascript:void(0)"><img class="" src="assets/preview/edit_icon.svg" alt="" /></a>
-                                            <a href="javascript:void(0)"><img class="" src="assets/preview/delete_icon.svg" alt="" /></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-6 col-lg-6 col-xl-3 mt-3 mb-3">
-                                <div class="card border-0 shadow">
-                                    <div class="card-body">
-                                        <div>
-                                            <p class="mb-0">Product Name</p>
-                                            <strong>Pizza</strong>
-                                        </div>
-                                        <div class="mt-4">
-                                            <p class="mb-0">Brand Name</p>
-                                            <strong>Smokein's Joe's Pizza</strong>
-                                        </div>
-                                        <div class="text-right mt-3">
-                                            <a href="javascript:void(0)"><img class="" src="assets/preview/edit_icon.svg" alt="" /></a>
-                                            <a href="javascript:void(0)"><img class="" src="assets/preview/delete_icon.svg" alt="" /></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-6 col-lg-6 col-xl-3 mt-3 mb-3">
-                                <div class="card border-0 shadow">
-                                    <div class="card-body">
-                                        <div>
-                                            <p class="mb-0">Product Name</p>
-                                            <strong>Pizza</strong>
-                                        </div>
-                                        <div class="mt-4">
-                                            <p class="mb-0">Brand Name</p>
-                                            <strong>Smokein's Joe's Pizza</strong>
-                                        </div>
-                                        <div class="text-right mt-3">
-                                            <a href="javascript:void(0)"><img class="" src="assets/preview/edit_icon.svg" alt="" /></a>
-                                            <a href="javascript:void(0)"><img class="" src="assets/preview/delete_icon.svg" alt="" /></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-6 col-lg-6 col-xl-3 mt-3 mb-3">
-                                <div class="card border-0 shadow">
-                                    <div class="card-body">
-                                        <div>
-                                            <p class="mb-0">Product Name</p>
-                                            <strong>Pizza</strong>
-                                        </div>
-                                        <div class="mt-4">
-                                            <p class="mb-0">Brand Name</p>
-                                            <strong>Smokein's Joe's Pizza</strong>
-                                        </div>
-                                        <div class="text-right mt-3">
-                                            <a href="javascript:void(0)"><img class="" src="assets/preview/edit_icon.svg" alt="" /></a>
-                                            <a href="javascript:void(0)"><img class="" src="assets/preview/delete_icon.svg" alt="" /></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="row">
-                            <div class="col-12 col-md-6 col-lg-6 col-xl-3 mt-3 mb-3">
-                                <div class="card border-0 shadow">
-                                    <div class="card-body">
-                                        <div>
-                                            <p class="mb-0">Product Name</p>
-                                            <strong>Pizza</strong>
-                                        </div>
-                                        <div class="mt-4">
-                                            <p class="mb-0">Brand Name</p>
-                                            <strong>Smokein's Joe's Pizza</strong>
-                                        </div>
-                                        <div class="text-right mt-3">
-                                            <a href="javascript:void(0)"><img class="" src="assets/preview/edit_icon.svg" alt="" /></a>
-                                            <a href="javascript:void(0)"><img class="" src="assets/preview/delete_icon.svg" alt="" /></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-6 col-lg-6 col-xl-3 mt-3 mb-3">
-                                <div class="card border-0 shadow">
-                                    <div class="card-body">
-                                        <div>
-                                            <p class="mb-0">Product Name</p>
-                                            <strong>Pizza</strong>
-                                        </div>
-                                        <div class="mt-4">
-                                            <p class="mb-0">Brand Name</p>
-                                            <strong>Smokein's Joe's Pizza</strong>
-                                        </div>
-                                        <div class="text-right mt-3">
-                                            <a href="javascript:void(0)"><img class="" src="assets/preview/edit_icon.svg" alt="" /></a>
-                                            <a href="javascript:void(0)"><img class="" src="assets/preview/delete_icon.svg" alt="" /></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-6 col-lg-6 col-xl-3 mt-3 mb-3">
-                                <div class="card border-0 shadow">
-                                    <div class="card-body">
-                                        <div>
-                                            <p class="mb-0">Product Name</p>
-                                            <strong>Pizza</strong>
-                                        </div>
-                                        <div class="mt-4">
-                                            <p class="mb-0">Brand Name</p>
-                                            <strong>Smokein's Joe's Pizza</strong>
-                                        </div>
-                                        <div class="text-right mt-3">
-                                            <a href="javascript:void(0)"><img class="" src="assets/preview/edit_icon.svg" alt="" /></a>
-                                            <a href="javascript:void(0)"><img class="" src="assets/preview/delete_icon.svg" alt="" /></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-6 col-lg-6 col-xl-3 mt-3 mb-3">
-                                <div class="card border-0 shadow">
-                                    <div class="card-body">
-                                        <div>
-                                            <p class="mb-0">Product Name</p>
-                                            <strong>Pizza</strong>
-                                        </div>
-                                        <div class="mt-4">
-                                            <p class="mb-0">Brand Name</p>
-                                            <strong>Smokein's Joe's Pizza</strong>
-                                        </div>
-                                        <div class="text-right mt-3">
-                                            <a href="javascript:void(0)"><img class="" src="assets/preview/edit_icon.svg" alt="" /></a>
-                                            <a href="javascript:void(0)"><img class="" src="assets/preview/delete_icon.svg" alt="" /></a>
-                                        </div>
-                                    </div>
-                                </div>
+                                @empty
+                                @endforelse
                             </div>
                         </div>
 

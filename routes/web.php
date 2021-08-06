@@ -39,7 +39,8 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
+// Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
+Route::get('/', [WebController::class, 'dashboard'])->name('dashboard');
 Route::get('get_products', [WebController::class, 'webGetProducts'])->name('getproducts');
 Route::get('get_sellers', [WebController::class, 'webGetSellers'])->name('getsellers');
 Route::get('get_buyers', [WebController::class, 'webGetbuyers'])->name('getbuyers');
@@ -47,8 +48,8 @@ Route::get('get_users', [WebController::class, 'webGetUsers'])->name('getusers')
 Route::get('get_purchase_list', [WebController::class, 'webGetPurchaseList'])->name('getpurchaselist');
 Route::get('get_subscription', [WebController::class, 'webGetSubscription'])->name('getsubscription');
 Route::get('get_user_management', [WebController::class, 'userManagement'])->name('usermanagement');
-Route::get('get_dashboard', [WebController::class, 'dashboard'])->name('dashboard');
-Route::get('get_brands', [WebController::class, 'webGetBrands'])->name('dashboard');
+Route::get('get_brands', [WebController::class, 'webGetBrands'])->name('brands');
+Route::get('add_product', [WebController::class, 'add_product'])->name('add_product');
 
 
 });

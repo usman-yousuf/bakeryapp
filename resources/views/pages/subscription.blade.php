@@ -1,7 +1,6 @@
 @extends('layouts.master')
 
 @section('content')
-{{--  {{ dd($get_subscription->data) }}  --}}
             <div class="container-fluid bg-light py-4">
                 <!-- subscription cards - START -->
                 <div class="row mb-3 sub_cards-d">
@@ -50,8 +49,10 @@
                                                     <th class="">Email</th>
                                                 </tr>
                                             </thead>
+                                                        
                                             <tbody>
-                                                @forelse ( $get_subscription->data as $subscription )
+                                                @forelse ( $get_subscription->data->subscription as $subscription )
+                                                    @if( $subscription->plan_id == 1 )
                                                     <tr>
                                                         <td class="">{{ $subscription->user->name ?? '' }}</td>
                                                         <td class=""><span>{{ $subscription->user->phone_code ?? '' }}</span> <span>{{ $subscription->user->phone_number ?? '' }}</span></td>
@@ -59,8 +60,9 @@
                                                         <td class="fg_pink-s"> {{ $subscription->user->bussiness_name ?? '' }}</td>
                                                         <td class="fg_blue-s">{{ $subscription->user->email ?? '' }}</td>
                                                     </tr>
+                                                    @endif
                                                 @empty
-                                                    <div> No Data Found</div>
+                                                    <div> No Data Found 1</div>
                                                 @endforelse
                                             </tbody>
                                         </table>
@@ -91,7 +93,8 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                 @forelse ( $get_subscription as $subscription )
+                                                @forelse ( $get_subscription->data->subscription as $subscription )
+                                                    @if( $subscription->plan_id == 2 )
                                                     <tr>
                                                         <td class="">{{ $subscription->user->name ?? '' }}</td>
                                                         <td class=""><span>{{ $subscription->user->phone_code ?? '' }}</span> <span>{{ $subscription->user->phone_number ?? '' }}</span></td>
@@ -99,8 +102,9 @@
                                                         <td class="fg_pink-s"> {{ $subscription->user->bussiness_name ?? '' }}</td>
                                                         <td class="fg_blue-s">{{ $subscription->user->email ?? '' }}</td>
                                                     </tr>
+                                                    @endif
                                                 @empty
-                                                    <div> No Data Found </div>
+                                                    <div> No Data Found 1</div>
                                                 @endforelse
                                             </tbody>
                                         </table>
@@ -132,7 +136,8 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                 @forelse ( $get_subscription as $subscription )
+                                                @forelse ( $get_subscription->data->subscription as $subscription )
+                                                    @if( $subscription->plan_id == 3 )
                                                     <tr>
                                                         <td class="">{{ $subscription->user->name ?? '' }}</td>
                                                         <td class=""><span>{{ $subscription->user->phone_code ?? '' }}</span> <span>{{ $subscription->user->phone_number ?? '' }}</span></td>
@@ -140,9 +145,10 @@
                                                         <td class="fg_pink-s"> {{ $subscription->user->bussiness_name ?? '' }}</td>
                                                         <td class="fg_blue-s">{{ $subscription->user->email ?? '' }}</td>
                                                     </tr>
-                                                 @empty
-                                                    <div> No Data Found </div>
-                                                 @endforelse
+                                                    @endif
+                                                @empty
+                                                    <div> No Data Found 1</div>
+                                                @endforelse
                                             </tbody>
                                         </table>
                                     </div>

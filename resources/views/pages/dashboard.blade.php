@@ -2,7 +2,6 @@
 
 @section('content')
 
-{{--  {{ dd ($user_info) }}  --}}
             <div class="container-fluid bg-light py-4">
 
                 <div class="row mb-3">
@@ -141,9 +140,9 @@
                                                 <th class="">Price</th>
                                             </tr>
                                         </thead>
-                                            @if( isset($purchased_items_info['get_purchaselists']->data->purchase_list) )
+                                            @if( isset($most_purchased_items['get_purchaselists']->data) )
 
-                                            @forelse ( $purchased_items_info['get_purchaselists']->data->purchase_list as $key => $purchase_item )
+                                            @forelse ( $most_purchased_items['get_purchaselists']->data as $key => $purchase_item )
 
                                             <tr>
                                                 <th class="">{{ $purchase_item->admin_ingredient->name }}</th>
@@ -181,7 +180,7 @@
 
 
                 <!-- subscription heading and cards - START -->
-                <div class="row py-3">
+<!--                 <div class="row py-3">
                     <div class="col">
                         <h4 class="mb-0">Latest Subscriptions</h4>
                     </div>
@@ -239,7 +238,8 @@
                         </div>
                     </div>
                 </div>
-                <!-- subscription heading and cards - END -->
+                -->
+                <!-- subscription heading and cards - END --> 
 
             </div>
 
