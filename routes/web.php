@@ -48,6 +48,7 @@ Route::get('get_purchase_list', [WebController::class, 'webGetPurchaseList'])->n
 Route::get('get_subscription', [WebController::class, 'webGetSubscription'])->name('getsubscription');
 Route::get('get_user_management', [WebController::class, 'userManagement'])->name('usermanagement');
 Route::get('get_dashboard', [WebController::class, 'dashboard'])->name('dashboard');
+Route::get('get_brands', [WebController::class, 'webGetBrands'])->name('dashboard');
 
 
 });

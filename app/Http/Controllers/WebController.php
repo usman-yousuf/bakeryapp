@@ -67,6 +67,19 @@ class WebController extends Controller
         return view('pages.products', [ 'get_product' => $get_product ]);
     }
 
+    public function webGetBrands(Request $request){
+        $request->user_id = $request->user_id ?? 6;
+        $request->merge([
+            'ingredients' => (int)true,
+        ]);
+
+        $admin_ingredient = $this->AdminProductController->getIngredientProducts($request)->getData();
+        dd($admin_ingredient);
+
+        return view('pages.products', [ 'get_product' => $get_product ]);
+
+    }
+
     /**
      * All top seller for implementation in top seller page
      *

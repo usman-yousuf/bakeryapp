@@ -27,6 +27,7 @@ class AdminProductController extends Controller
         }
         $data = [];
 
+
         if(isset($request->products) || (isset($request->should_get_admin_products) && ($request->should_get_admin_products))){
             $products = AdminProduct::get();
             $data['products'] = $products;
