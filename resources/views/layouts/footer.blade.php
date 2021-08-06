@@ -52,6 +52,16 @@
                 console.log('saddsa');
                 alert(id);
 
+                $.ajax({
+                        type: 'POST',
+                        url: endpoint + apiKey,
+                        contentType: "application/json",
+                        data : {ids: test},
+                        success: function(result){
+                            console.log('result');
+                        }
+                    });
+
 
             });
         });

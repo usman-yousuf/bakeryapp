@@ -49,7 +49,8 @@ Route::get('get_purchase_list', [WebController::class, 'webGetPurchaseList'])->n
 Route::get('get_subscription', [WebController::class, 'webGetSubscription'])->name('getsubscription');
 Route::get('get_user_management', [WebController::class, 'userManagement'])->name('usermanagement');
 Route::get('get_brands', [WebController::class, 'webGetBrands'])->name('brands');
-Route::get('add_product', [WebController::class, 'add_product'])->name('add_product');
+Route::post('add_product', [WebController::class, 'add_product'])->name('add_product');
+Route::post('add_brand', [WebController::class, 'add_brand'])->name('add_brand');
 
 
 });

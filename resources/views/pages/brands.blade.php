@@ -32,7 +32,7 @@
                                         </div>
                                         <div class="mt-4">
                                             <p class="mb-0">Brand Name</p>
-                                            <strong>{{ $product->admin_ingredient_types[0]->brand_name }}</strong>
+                                            <strong>{{ $product->admin_ingredient_types[0]->brand_name ?? 'other' }}</strong>
                                         </div>
                                         <div class="text-right mt-3">
                                             <!-- <a href="javascript:void(0)"><img class="" src="{{ asset('assets/preview/edit_icon.svg') }}" alt="" /></a>
@@ -57,42 +57,49 @@
 
     <!-- Add Brand modal - START -->
     <div class="modal fade" id="add_brands-d" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content br_15px-s">
-                <div class="modal-header border-bottom-0">
-                    <h5 class="modal-title ml-3" id="exampleModalLongTitle">Add Brand</h5>
-                </div>
-                <div class="modal-body d-flex">
-                    <div class="col-12 form-group mt-4">
-                        <div class="row">
-                            <div class="col-12">
-                                <input type="text" class="w-100 py-3 my-2 rounded border-0 bg_gray-s button_outline-s" name="" id="" placeholder=" Product Name">
+        <form action="{{ route('add_brand') }}" method="post" role="form">
+            @csrf
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content br_15px-s">
+                    <div class="modal-header border-bottom-0">
+                        <h5 class="modal-title ml-3" id="exampleModalLongTitle">Add Brand</h5>
+                    </div>
+                    <div class="modal-body d-flex">
+                        <div class="col-12 form-group mt-4">
+                            <div class="row">
+                                <div class="col-12">
+                                    <input type="text" class="w-100 py-3 my-2 rounded border-0 bg_gray-s button_outline-s" 
+                                        name="ingredient_name" 
+                                        id="" 
+                                        placeholder=" Product Name"
+                                        required>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12 mt-4">
-                                <select class="form-group tagged_select2 select2" multiple="multiple" name="type" id="ddl_product" placeholder="Brands Type">
-                                    <option value="">Sugar</option>
-                                    <option value="">Brown Sugar</option>
-                                </select>
+                            <div class="row">
+                                <div class="col-12 mt-4">
+                                    <select class="form-group tagged_select2 select2" multiple="multiple" name="product_types[]" id="ddl_product" placeholder="Brands Type" required>
+                                        <option value="">Sugar</option>
+                                        <option value="">Brown Sugar</option>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12 mt-4">
-                                <select class="form-group tagged_select2 select2" multiple="multiple" name="type" id="ddl_brand" placeholder="Brands Type">
-                                    <option value="">Sugar</option>
-                                    <option value="">Brown Sugar</option>
-                                </select>
+                            <div class="row">
+                                <div class="col-12 mt-4">
+                                    <select class="form-group tagged_select2 select2" multiple="multiple" name="brand_types[]" id="ddl_brand" placeholder="Brands Type" required>
+                                        <option value="">Sugar</option>
+                                        <option value="">Brown Sugar</option>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
 
+                        </div>
+                    </div>
+                    <div class="w-100 d-flex justify-content-around border-top-0 mt-5 mb-4">
+                        <a href="javascript:void(0)" class="w-50 font_20px-s font-weight-bold shadow text-center no_link-s button_outline-s text-white border-0 bg-primary-s py-3 br_50px-s " role="button"> <button class="btn" type="submit">Save</button></a>
                     </div>
                 </div>
-                <div class="w-100 d-flex justify-content-around border-top-0 mt-5 mb-4">
-                    <a href="javascript:void(0)" class="w-50 font_20px-s font-weight-bold shadow text-center no_link-s button_outline-s text-white border-0 bg-primary-s py-3 br_50px-s " role="button"> Save</a>
-                </div>
             </div>
-        </div>
+        </form>
     </div>
     <!-- Add Brand modal - END -->
 

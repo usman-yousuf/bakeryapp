@@ -191,7 +191,59 @@ class WebController extends Controller
     }
 
     public function add_product(Request $request){
-        dd($request->all());
+
+        $adminProduct = new AdminProduct;
+        $adminProduct->name =  $request->product_name;
+        $adminProduct->save();
+
+
+        if(isset($request->type_name_1)){
+            $adminProductsIngredients = new AdminProductType;
+            $adminProductsIngredients->type_name = $request->type_name_1;
+            $adminProductsIngredients->size = 'other';
+            $adminProductsIngredients->admin_product_id  =  $adminProduct->id;
+            $adminProductsIngredients->save();
+        }
+
+        if(isset($request->type_name_2)){
+            $adminProductsIngredients = new AdminProductType;
+            $adminProductsIngredients->type_name = $request->type_name_2;
+            $adminProductsIngredients->size = 'other';
+            $adminProductsIngredients->admin_product_id = $adminProduct->id;
+            $adminProductsIngredients->save();
+        }
+
+        if(isset($request->type_name_3)){
+            $adminProductsIngredients = new AdminProductType;
+            $adminProductsIngredients->type_name = $request->type_name_3;
+            $adminProductsIngredients->size = 'other';
+            $adminProductsIngredients->admin_product_id = $adminProduct->id;
+            $adminProductsIngredients->save();
+        }
+
+        // dd($adminProduct);
+        return back();
+        return $this->webGetProducts($request);
+
+        // return view('pages.products', [ 'get_product' => $get_product ]);
+    }
+
+    public function add_brand(Request $request){
+
+        $adminIngredient =  new AdminIngredient;
+        $adminIngredient->name = $request->ingredient_name;
+        $adminIngredient->save();
+
+        foreach( $request->brand_types as $key => $brandType ){
+
+            $adminIngredientType = new AdminIngredientType;
+            $adminIngredientType->admin_ingredient_id = $adminIngredient->id;
+            $adminIngredientType->brand_name = $brandType;
+            $adminIngredientType->type_name = $product_types[$key] ?? 'other';
+            $adminIngredientType->save();
+        }
+        return back();
+        // return $this->webGetBrands($request);        
     }
 
 
