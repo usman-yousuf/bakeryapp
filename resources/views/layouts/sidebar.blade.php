@@ -8,7 +8,7 @@
         </div>
         <div class=" list-group-flush sidebar_text-s">
             <a href="{{route('dashboard')}}" class="list-group-item py-3 mx-3">
-                <img src="{{ asset('assets/preview/dashboard_icon.svg') }}" class="" width="25" alt="">
+                <img src="{{ asset('assets/preview/Dashboard_icon.svg') }}" class="" width="25" alt="">
                 <span class=" font_size-s">Dashboard</span>
             </a>
             <a href="{{route('getproducts')}}" class="list-group-item py-3 mx-3">
