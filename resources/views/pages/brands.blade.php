@@ -35,8 +35,8 @@
                                             <strong>Smokein's Joe's Pizza</strong>
                                         </div>
                                         <div class="text-right mt-3">
-                                            <a href="javascript:void(0)"><img class="" src="assets/preview/edit_icon.svg" alt="" /></a>
-                                            <a href="javascript:void(0)"><img class="" src="assets/preview/delete_icon.svg" alt="" /></a>
+                                            <a href="javascript:void(0)"><img class="" src="{{ asset('assets/preview/edit_icon.svg') }}" alt="" /></a>
+                                            <a href="javascript:void(0)"><img class="" src="{{ asset('assets/preview/delete_icon.svg') }}" alt="" /></a>
                                         </div>
                                     </div>
                                 </div>

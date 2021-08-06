@@ -35,6 +35,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @if( isset($get_user['get_user']->data) )
                                             @forelse ($get_user['get_user']->data as $user)
                                             <tr>
                                                 <td class="">{{ $user->name ?? '' }}</td>
@@ -47,6 +48,7 @@
                                                 <td class="text-center">--No User--</td>
                                             </tr>
                                             @endforelse
+                                            @endif
                                         </tbody>
                                     </table>
                                 </div>
@@ -67,8 +69,8 @@
                                 <div>
                                     <table class="table">
                                         <tbody>
-                                            {{--  {{ dd($seller_info) }}  --}}
-                                            @forelse($seller_info['get_seller']->data as $seller)
+                                            @if( isset($seller_info['get_seller']->data) )
+                                            @forelse( $seller_info['get_seller']->data as $seller )
                                             <tr>
                                                 <td class="border-top-0">{{ $seller->user->name ?? 'other' }}</td>
                                             </tr>
@@ -77,6 +79,7 @@
                                                 <td class="text-center">    --No Seller--   </td>
                                             <tr>
                                             @endforelse
+                                            @endif
                                         </tbody>
                                     </table>
                                 </div>
@@ -100,6 +103,7 @@
                                 <div>
                                     <table class="table">
                                         <tbody>
+                                            @if( isset($buyer_info['get_buyer']->data) )
                                             @forelse ($buyer_info['get_buyer']->data as $buyer)
                                             <tr>
                                                 <td class="border-top-0">{{ $buyer->user->name ?? ' other'  }}</td>
@@ -110,6 +114,7 @@
                                             </tr>
 
                                             @endforelse
+                                            @endif
                                         </tbody>
                                     </table>
                                 </div>
@@ -124,7 +129,7 @@
                                 <div class="d-flex justify-content-between w-100">
                                     <h5>Most Purchased Items</h5>
                                     <span class=" ">
-                                    <a class="view_link-s" href="javascript: void"> See All</a>
+                                    <a class="view_link-s" href="{{ route('getpurchaselist') }}"> See All</a>
                                 </span>
                                 </div>
                                 <div>
@@ -136,9 +141,10 @@
                                                 <th class="">Price</th>
                                             </tr>
                                         </thead>
-                                        {{--  <tbody>{{ dd($purchased_items_info['get_purchaselists']->data) }}  --}}
-                                            @forelse ($purchased_items_info['get_purchaselists']->data->purchase_list as $key => $purchase_item)
-                                            {{--  {{ dd($purchase_item->admin_ingredient_type) }};  --}}
+                                            @if( isset($purchased_items_info['get_purchaselists']->data->purchase_list) )
+
+                                            @forelse ( $purchased_items_info['get_purchaselists']->data->purchase_list as $key => $purchase_item )
+
                                             <tr>
                                                 <th class="">{{ $purchase_item->admin_ingredient->name }}</th>
                                                 <th class="">{{ $purchase_item->admin_ingredient_type->brand_name }}</th>
@@ -148,10 +154,18 @@
                                             @empty
 
                                             <tr>
-                                                <th>No item Found in Purchase List</th>
+                                                <th class="text-center">No item Found in Purchase List</th>
                                             <tr>
 
                                             @endforelse
+
+                                            @else
+
+                                            <tr>
+                                                <th class="text-center">No item Found in Purchase List</th>
+                                            <tr>
+
+                                            @endif
 
 
                                         </tbody>

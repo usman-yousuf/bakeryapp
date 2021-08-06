@@ -23,7 +23,7 @@ class WebController extends Controller
     public function __construct(ProductController $ProductController,
     UserController $UserController,
     SubscriptionController $SubscriptionController,
-    AuthController $AuthController
+    AuthController $AuthController,
     AdminProductController $AdminProductController)
     {
         $this->ProductController = $ProductController;
@@ -40,8 +40,10 @@ class WebController extends Controller
         $auth = $this->AuthController->login($request)->getdata();
 
         if($auth->status)
-            return view('page.dashboard');
+            return redirect()->route('dashboard');
         else{
+
+            dd($auth);
             return view('auth.login')->withErrors($auth);
         }
     }

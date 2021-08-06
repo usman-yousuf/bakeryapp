@@ -50,16 +50,28 @@
                     <!-- login Form - START -->
                     <div class="row">
                         <div class="col-10 col-md-6 col-xl-6 col-lg-6 offset-1 offset-md-3 offset-lg-3 offset-xl-3 mt-3">
-                            <form action="{{ route('webLogin') }}" method="POST">
+                            <form action="{{ route('login') }}" method="POST">
                                 @csrf 
                                 <div class="bg-light py-2 mt-3 w-100">
                                     <span class="align-self-center ml-2"> <i class="fa fa-envelope login_form_icon-s"></i> </span>
-                                    <input class="border-0 w-75 ml-2 bg-light" type="email" name="email" id="" placeholder="Email" required />
-                                    {{$auth??''}}
+                                    <input class="border-0 w-75 ml-2 bg-light" type="email" name="email" id="" placeholder="Email" />
+
+                                    @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                                 <div class="bg-light py-2 mt-3 w-100">
                                     <span class="align-self-center ml-2"> <i class="fa fa-lock login_form_icon-s"></i> </span>
-                                    <input class="border-0 w-75 ml-2 bg-light" type="password " name="password" id="" placeholder="Password" required />
+                                    <input class="border-0 w-75 ml-2 bg-light" type="password " name="password" id="" placeholder="Password"  />
+
+                                    @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+
                                 </div>
                                 <div class="mt-5 text-center">
                                     <button class="w-75 shadow button_outline-s bg-primary-s py-3 br_30px-s text-white border-0" type="submit" >

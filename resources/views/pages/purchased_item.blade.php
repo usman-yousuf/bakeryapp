@@ -28,6 +28,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @if( isset($get_purchaselists->data->purchase_list) )
                                             @foreach ( $get_purchaselists->data->purchase_list as $list )
                                             <tr>
                                                 <td class="">{{ $list->admin_ingredient->name ?? '' }}</td>
@@ -36,6 +37,7 @@
                                                 <td class=" fg_pink-s"> $ {{ $list->price ?? '' }}</td>
                                             </tr>
                                             @endforeach
+                                            @endif
                                         </tbody>
                                     </table>
                                 </div>

@@ -1,7 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\WebController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,20 +15,16 @@ use App\Http\Controllers\WebController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::post('get_login', [WebController::class, 'webLogin'])->name('webLogin');
 
 Auth::routes();
 
-Route::get('test', [UserController::class, 'test']); 	
+Route::any('logout', [LoginController::class, 'logout']);
 
-Route::get('/login', function () {
-    return view('auth.login');
-});
+// Route::post('get_login', [WebController::class, 'webLogin'])->name('webLogin');
 
 Route::get('/brands', function () {
     return view('pages.brands');
 })->name('brands');
-
 
 Route::get('/purchased_brand', function () {
     return view('pages.purchased_brand');
@@ -37,10 +35,11 @@ Route::get('/subscription_plan', function () {
 })->name('subscription_plan');
 
 
-// Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => 'auth'], function () {
 
-	Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
 
+
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
 Route::get('get_products', [WebController::class, 'webGetProducts'])->name('getproducts');
 Route::get('get_sellers', [WebController::class, 'webGetSellers'])->name('getsellers');
 Route::get('get_buyers', [WebController::class, 'webGetbuyers'])->name('getbuyers');
@@ -50,3 +49,5 @@ Route::get('get_subscription', [WebController::class, 'webGetSubscription'])->na
 Route::get('get_user_management', [WebController::class, 'userManagement'])->name('usermanagement');
 Route::get('get_dashboard', [WebController::class, 'dashboard'])->name('dashboard');
 
+
+});
