@@ -22,7 +22,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="row">
-                                @forelse ($admin_ingredient->data->ingredients as $product)
+                                @forelse ($admin_ingredient->data->ingredients as $key => $product)
                             <div class="col-12 col-md-6 col-lg-6 col-xl-3 mt-3 mb-3">
                                 <div class="card border-0 shadow">
                                     <div class="card-body">
@@ -32,7 +32,7 @@
                                         </div>
                                         <div class="mt-4">
                                             <p class="mb-0">Brand Name</p>
-                                            <strong>{{ $product->admin_ingredient_types[0]->brand_name ?? 'other' }}</strong>
+                                            <strong>{{ $product->admin_ingredient_types[$key]->brand_name ?? 'other' }}</strong>
                                         </div>
                                         <div class="text-right mt-3">
                                             <!-- <a href="javascript:void(0)"><img class="" src="{{ asset('assets/preview/edit_icon.svg') }}" alt="" /></a>
