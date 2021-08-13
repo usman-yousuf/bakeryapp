@@ -163,14 +163,20 @@ class OrderController extends Controller
             $data['validation_error'] = $validator->getMessageBag();
                 return sendError($validator->errors()->all()[0], $data);
         }
+
+        $month_sale = [];
+        $month_purchase = [];
         for($i=1;$i<13;$i++){
 
-            $data['order'][$i] = order::where('user_id',$request->user_id)->whereYear('created_at', $request->year)->whereMonth('created_at',$i)->pluck('total_price')->sum();
-            $data['purchase'][$i] = PurchaseList::where('user_id',$request->user_id)->whereYear('created_at', $request->year)->whereMonth('created_at',$i)->pluck('price')->sum();
+            $month_sale[] = order::where('user_id',$request->user_id)->whereYear('created_at', $request->year)->whereMonth('created_at',$i)->pluck('total_price')->sum();
+            $month_purchase[] = PurchaseList::where('user_id',$request->user_id)->whereYear('created_at', $request->year)->whereMonth('created_at',$i)->pluck('price')->sum();
+            
         }
         $sale = order::where('order_status','sold')->where('user_id',$request->user_id)->whereMonth('created_at', $request->month)->whereYear('created_at', $request->year);
         $purchase = PurchaseList::where('user_id',$request->user_id)->whereMonth('created_at', $request->month)->whereYear('created_at', $request->year);
 
+        $data['order'] = $month_sale;
+        $data['purchase'] = $month_purchase;
         $data['purchase_sum'] =  $purchase->pluck('price')->sum();
         $data['sale_sum'] =  $sale->pluck('total_price')->sum();
 
