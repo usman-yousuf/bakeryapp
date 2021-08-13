@@ -95,13 +95,13 @@ class OrderController extends Controller
                 $purchase = PurchaseList::whereIn('id',$ingredient);
                 $quantity = clone $purchase;
                 $quantity = $quantity->pluck('quantity')->sum();
-                if($quantity < $request->quantity)
-                    return sendError('Quantity Over Reached',[]);
 
                 $purchase = $purchase->pluck('unit_price')->sum();
                 }
                 if(NULL != $purchase){
                     foreach($product->productIngredient as $key => $qt){
+                        if($qt->quantity < $request->quantity)
+                            return sendError('Quantity Over Reached',[]);
 
                     $data ['raw_material'] += $purchase * $qt->quantity * $request->quantity;
                     if(isset($request->raw_material))
