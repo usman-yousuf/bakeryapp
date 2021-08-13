@@ -101,9 +101,12 @@ class OrderController extends Controller
                 $purchase = $purchase->pluck('unit_price')->sum();
                 }
                 if(NULL != $purchase){
-                    $data ['raw_material'] = $purchase * $product->productIngredient->quantity * $request->quantity;
+                    foreach$product->productIngredient->quantity as $qt){
+
+                    $data ['raw_material'] += $purchase * $qt * $request->quantity;
                     if(isset($request->raw_material))
-                        $purchase = PurchaseList::whereIn('id',$ingredient)->decrement('quantity', $request->quantity);
+                        $purchase = PurchaseList::whereIn('id',$ingredient)->decrement('quantity', $qt * $request->quantity);
+                    }
                 }
         }
 
