@@ -79,7 +79,8 @@ class ProductController extends Controller
                 if(NULL == $admin_ingredient_type)
                     return sendError('Admin Ingredient type does not exist or dont belongs to the same Admin Ingredient',[]);
 
-                $purchase_list = Purchaselist::where('id', $request->purchase_list_id[$key] ?? NULL)->first();
+                $purchase_list = Purchaselist::where('user_id',$product->user_id)->where('admin_ingredient_id',$admin_ingredient->id)->where('admin_ingredient_type_id',$admin_ingredient_type->id)->first();
+                dd($admin_ingredient->id,$admin_ingredient_type->id);
                 $product_ingredient = new ProductIngredient;
                 $product_ingredient->product_id = $product->id;
                 $product_ingredient->purchase_list_id = $purchase_list->id ?? NULL;
