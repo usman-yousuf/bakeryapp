@@ -61,25 +61,28 @@ class OrderController extends Controller
             return sendError('Product Does Not Exist or Type Dont belongs to the product',[]);
         }
 
-        $order->product_id = $product->id ?? $order->product_id;
-        $order->user_id = $request->user_id ?? $order->user_id;
-        $order->admin_product_type_id = $admin_product_type->id ?? $order->admin_product_type_id;
-        $order->client_name = $request->client_name ?? $order->client_name;
-        $order->phone_code = $request->phone_code ?? $order->phone_code ?? '+92';
-        $order->phone_number = $request->phone_number ?? $order->phone_number;
-        $order->delivery_address = $request->delivery_address ?? $order->delivery_address;
-        $order->order_status = $request->order_status;
-        $order->advance_payment = $request->advance_payment ?? $order->advance_payment;
-        $order->quantity = $request->quantity ?? $order->quantity;
-        $order->raw_material = $request->raw_material ?? $order->raw_material;
-        $order->tax = $request->tax ?? $order->tax ;
-        $order->packing = $request->packing ?? $order->packing;
-        $order->profit = $request->profit ?? $order->profit;
-        $order->total_price = $order->raw_material + $order->tax + $order->packing + $order->profit;
+        if(isset($request->raw_material)){
+            
+            $order->product_id = $product->id ?? $order->product_id;
+            $order->user_id = $request->user_id ?? $order->user_id;
+            $order->admin_product_type_id = $admin_product_type->id ?? $order->admin_product_type_id;
+            $order->client_name = $request->client_name ?? $order->client_name;
+            $order->phone_code = $request->phone_code ?? $order->phone_code ?? '+92';
+            $order->phone_number = $request->phone_number ?? $order->phone_number;
+            $order->delivery_address = $request->delivery_address ?? $order->delivery_address;
+            $order->order_status = $request->order_status;
+            $order->advance_payment = $request->advance_payment ?? $order->advance_payment;
+            $order->quantity = $request->quantity ?? $order->quantity;
+            $order->raw_material = $request->raw_material ?? $order->raw_material;
+            $order->tax = $request->tax ?? $order->tax ;
+            $order->packing = $request->packing ?? $order->packing;
+            $order->profit = $request->profit ?? $order->profit;
+            $order->total_price = $order->raw_material + $order->tax + $order->packing + $order->profit;
 
         $order->save();
         if(!$order->save())
             return sendError('Order not saved',[]);
+        }
 
         $data['order'] = Order::where('id', $order->id)->first();
         $data ['raw_material'] = 0;
