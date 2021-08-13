@@ -105,7 +105,7 @@ class OrderController extends Controller
 
                     $data ['raw_material'] += $purchase * $qt->quantity * $request->quantity;
                     if(isset($request->raw_material))
-                        $purchase = PurchaseList::whereIn('id',$ingredient)->decrement('quantity', $qt * $request->quantity);
+                        $purchase = PurchaseList::whereIn('id',$ingredient)->decrement('quantity', $qt->quantity * $request->quantity);
                     }
                 }
         }
