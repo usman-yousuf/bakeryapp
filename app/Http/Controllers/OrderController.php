@@ -90,8 +90,16 @@ class OrderController extends Controller
         if(!isset($request->order_id)){
 
             $ingredient = ProductIngredient::where('product_id',$product->id)->pluck('purchase_list_id');
-            if(NULL != $ingredient)
-                $purchase = PurchaseList::whereIn('id',$ingredient)->pluck('unit_price')->sum();
+            if(NULL != $ingredient){
+
+                $purchase = PurchaseList::whereIn('id',$ingredient);
+                $quantity = clone $purchase;
+                $quantity = $quantity->pluck('quantity')->sum();
+                if($quantity < $request->quantity)
+                    return sendError('Quantity Over Reached',[]);
+
+                $purchase = $purchase->pluck('unit_price')->sum();
+                }
                 if(NULL != $purchase){
                     $data ['raw_material'] = $purchase * $request->quantity;
                     if(isset($request->raw_material))
@@ -155,43 +163,13 @@ class OrderController extends Controller
             $data['validation_error'] = $validator->getMessageBag();
                 return sendError($validator->errors()->all()[0], $data);
         }
+        for($i=1;$i<13;$i++){
 
-        $purchase = PurchaseList::where('user_id',$request->user_id)->whereMonth('created_at', $request->month)->whereYear('created_at', $request->year);
+            $data['order'][$i] = order::where('user_id',$request->user_id)->whereYear('created_at', $request->year)->whereMonth('created_at',$i)->pluck('total_price')->sum();
+            $data['purchase'][$i] = PurchaseList::where('user_id',$request->user_id)->whereYear('created_at', $request->year)->whereMonth('created_at',$i)->pluck('price')->sum();
+        }
         $sale = order::where('order_status','sold')->where('user_id',$request->user_id)->whereMonth('created_at', $request->month)->whereYear('created_at', $request->year);
-
-        $purchase_1 = clone $purchase;
-        $purchase_2 = clone $purchase;
-        $purchase_3 = clone $purchase;
-        $purchase_4 = clone $purchase;
-        $purchase_5 = clone $purchase;
-        $purchase_6 = clone $purchase;
-        $purchase_7 = clone $purchase;
-
-        $data['purchase_For_10'] = $purchase_1->where('price','>=',10)->where('price','<=',10)->pluck('price')->sum(); 
-        $data['purchase_For_20'] = $purchase_2->where('price','>=',20)->where('price','<=',20)->pluck('price')->sum(); 
-        $data['purchase_For_30'] = $purchase_3->where('price','>=',30)->where('price','<=',30)->pluck('price')->sum(); 
-        $data['purchase_For_40'] = $purchase_4->where('price','>=',40)->where('price','<=',40)->pluck('price')->sum(); 
-        $data['purchase_For_50'] = $purchase_5->where('price','<=',50)->where('price','>=',50)->pluck('price')->sum(); 
-        $data['purchase_For_60'] = $purchase_6->where('price','>=',60)->where('price','<=',60)->pluck('price')->sum(); 
-        $data['purchase_For_70'] = $purchase_7->where('price','>=',70)->where('price','<=',70)->pluck('price')->sum(); 
-
-
-        $sale_1 = clone $sale;
-        $sale_2 = clone $sale;
-        $sale_3 = clone $sale;
-        $sale_4 = clone $sale;
-        $sale_5 = clone $sale;
-        $sale_6 = clone $sale;
-        $sale_7 = clone $sale;
-
-        $data['sale_For_10'] = $sale_1->where('total_price','>=',10)->where('total_price','<=',10)->pluck('total_price')->sum(); 
-        $data['sale_For_20'] = $sale_2->where('total_price','>=',20)->where('total_price','<=',20)->pluck('total_price')->sum(); 
-        $data['sale_For_30'] = $sale_3->where('total_price','>=',30)->where('total_price','<=',30)->pluck('total_price')->sum(); 
-        $data['sale_For_40'] = $sale_4->where('total_price','>=',40)->where('total_price','<=',40)->pluck('total_price')->sum(); 
-        $data['sale_For_50'] = $sale_5->where('total_price','<=',50)->where('total_price','>=',50)->pluck('total_price')->sum(); 
-        $data['sale_For_60'] = $sale_6->where('total_price','>=',60)->where('total_price','<=',60)->pluck('total_price')->sum(); 
-        $data['sale_For_70'] = $sale_7->where('total_price','>=',70)->where('total_price','<=',70)->pluck('total_price')->sum(); 
-
+        $purchase = PurchaseList::where('user_id',$request->user_id)->whereMonth('created_at', $request->month)->whereYear('created_at', $request->year);
 
         $data['purchase_sum'] =  $purchase->pluck('price')->sum();
         $data['sale_sum'] =  $sale->pluck('total_price')->sum();
