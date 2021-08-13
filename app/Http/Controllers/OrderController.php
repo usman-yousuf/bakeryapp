@@ -101,7 +101,7 @@ class OrderController extends Controller
                 $purchase = $purchase->pluck('unit_price')->sum();
                 }
                 if(NULL != $purchase){
-                    foreach$product->productIngredient->quantity as $qt){
+                    foreach($product->productIngredient->quantity as $qt){
 
                     $data ['raw_material'] += $purchase * $qt * $request->quantity;
                     if(isset($request->raw_material))
