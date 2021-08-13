@@ -61,7 +61,7 @@ class OrderController extends Controller
             return sendError('Product Does Not Exist or Type Dont belongs to the product',[]);
         }
 
-        if(isset($request->raw_material)){
+        if(isset($request->raw_material) || isset($request->order_id)){
             
             $order->product_id = $product->id ?? $order->product_id;
             $order->user_id = $request->user_id ?? $order->user_id;
@@ -92,8 +92,11 @@ class OrderController extends Controller
             $ingredient = ProductIngredient::where('product_id',$product->id)->pluck('purchase_list_id');
             if(NULL != $ingredient)
                 $purchase = PurchaseList::whereIn('id',$ingredient)->pluck('unit_price')->sum();
-                if(NULL != $purchase)
+                if(NULL != $purchase){
                     $data ['raw_material'] = $purchase * $request->quantity;
+                    if(isset($request->raw_material))
+                        $purchase = PurchaseList::whereIn('id',$ingredient)->decrement('quantity', $request->quantity);
+                }
         }
 
         return sendSuccess('Order Saved',$data);
