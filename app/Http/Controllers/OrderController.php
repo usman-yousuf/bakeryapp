@@ -169,19 +169,36 @@ class OrderController extends Controller
 
         $month_sale = [];
         $month_purchase = [];
-        for($i=1;$i<13;$i++){
+        $sum_order = [];
+        $month = cal_days_in_month(CAL_GREGORIAN,$request->month, $request->year);
 
-            $month_sale[] = order::where('user_id',$request->user_id)->whereYear('created_at', $request->year)->whereMonth('created_at',$i)->pluck('total_price')->sum();
-            $month_purchase[] = PurchaseList::where('user_id',$request->user_id)->whereYear('created_at', $request->year)->whereMonth('created_at',$i)->pluck('price')->sum();
-            
+        // dd($i);
+
+        $order = order::where('user_id',$request->user_id)->whereYear('created_at', $request->year)->whereMonth('created_at', $request->month);
+        $purchase = PurchaseList::where('user_id',$request->user_id)->whereYear('created_at', $request->year)->whereMonth('created_at', $request->month);
+
+        for($i=1;$i<$month;$i++){
+
+            $date_order  = clone $order;
+            $date_purchase  = clone $purchase;
+
+            $month_order[] = $date_order->whereDate('created_at',$i)->pluck('total_price')->sum();
+            $month_purchase[] = $date_purchase->whereDate('created_at',$i)->pluck('price')->sum();
         }
-        $sale = order::where('order_status','sold')->where('user_id',$request->user_id)->whereMonth('created_at', $request->month)->whereYear('created_at', $request->year);
-        $purchase = PurchaseList::where('user_id',$request->user_id)->whereMonth('created_at', $request->month)->whereYear('created_at', $request->year);
 
-        $data['order'] = $month_sale;
+        // for($i = 1; $i <= $month; $i += 5 ){
+        //     for( $j = $i; $j <= $i+5; $j++){
+
+        //         $sum_order[] += $month_order[$j];
+        //     }
+        //     dd($sum_order);
+        // }
+
+
+        $data['order'] = $month_order;
         $data['purchase'] = $month_purchase;
         $data['purchase_sum'] =  $purchase->pluck('price')->sum();
-        $data['sale_sum'] =  $sale->pluck('total_price')->sum();
+        $data['sale_sum'] =  $order->where('order_status','sold')->pluck('total_price')->sum();
 
 
         return sendSuccess("Data",$data);
