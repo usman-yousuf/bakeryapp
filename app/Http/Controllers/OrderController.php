@@ -189,10 +189,10 @@ class OrderController extends Controller
         // for($i = 1; $i <= $month; $i += 5 ){
         //     for( $j = $i; $j <= $i+5; $j++){
 
-        //         $sum_order[] += $month_order[$j];
+        //         $sum_order[] += $month_order[$j];   
         //     }
-        //     dd($sum_order);
         // }
+        //     dd($sum_order);
 
 
         $data['order'] = $month_order;
