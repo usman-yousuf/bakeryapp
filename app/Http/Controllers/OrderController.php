@@ -183,9 +183,9 @@ class OrderController extends Controller
             $date_purchase  = clone $purchase;
 
             // dd($i);
-            // dd($i);
+            // dd($i);git
             // return $date_order->where('user_id',$request->user_id)->whereDate('created_at',$i)->first();
-            $month_order[] = $date_order->where('user_id',$request->user_id)->whereDay('created_at',$i)->pluck('total_price')->sum();
+            $month_order[] = $date_order->where('user_id',$request->user_id)->whereDay('created_at',$i)->where('order_status','sold')->pluck('total_price')->sum();
             $month_purchase[] = $date_purchase->where('user_id',$request->user_id)->whereDay('created_at',$i)->pluck('price')->sum();
         }
 
