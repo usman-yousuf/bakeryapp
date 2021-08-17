@@ -182,17 +182,12 @@ class OrderController extends Controller
             $date_order  = clone $order;
             $date_purchase  = clone $purchase;
 
-            $month_order[] = $date_order->where('user_id',$request->user_id)->whereDate('created_at',$i)->pluck('total_price')->sum();
-            $month_purchase[] = $date_purchase->where('user_id',$request->user_id)->whereDate('created_at',$i)->pluck('price')->sum();
+            // dd($i);
+            // dd($i);
+            // return $date_order->where('user_id',$request->user_id)->whereDate('created_at',$i)->first();
+            $month_order[] = $date_order->where('user_id',$request->user_id)->whereDay('created_at',$i)->pluck('total_price')->sum();
+            $month_purchase[] = $date_purchase->where('user_id',$request->user_id)->whereDay('created_at',$i)->pluck('price')->sum();
         }
-
-        // for($i = 1; $i <= $month; $i += 5 ){
-        //     for( $j = $i; $j <= $i+5; $j++){
-
-        //         $sum_order[] += $month_order[$j];   
-        //     }
-        // }
-        //     dd($sum_order);
 
 
         $data['order'] = $month_order;
