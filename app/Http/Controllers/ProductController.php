@@ -32,6 +32,7 @@ class ProductController extends Controller
         'admin_ingredient_id' => 'required|exists:admin_ingredients,id|array',
         'admin_ingredient_type_id' => 'required|exists:admin_ingredient_types,id|array',
         'quantity' => 'required|array',
+        'unit' => 'required|array',
         'purchase_list_id' => 'exists:purchase_lists,id|array'
         // 'name' => 'required_without:product_id|regex:/^[\pL\s\-]+$/u',
         ]);
@@ -45,7 +46,8 @@ class ProductController extends Controller
         if(
             count($request->admin_ingredient_id) != count($request->admin_ingredient_type_id) ||
             count($request->quantity) != count($request->admin_ingredient_id) ||
-            count($request->quantity) != count($request->admin_ingredient_type_id)
+            count($request->quantity) != count($request->admin_ingredient_type_id) ||
+            count($request->quantity) != count($request->unit)
             )
             return sendError('Unequal amount of data provided',[]);
 
@@ -86,6 +88,7 @@ class ProductController extends Controller
                 $product_ingredient->admin_ingredient_id = $purchase_list->admin_ingredient_id ?? $admin_ingredient->id;
                 $product_ingredient->admin_ingredient_type_id = $purchase_list->admin_ingredient_type_id ?? $admin_ingredient_type->id;
                 $product_ingredient->quantity = $request->quantity[$key];
+                $product_ingredient->unit = $request->unit[$key];
                 $product_ingredient->save();
                 if(!$product_ingredient->save())
                     return sendError('ingredients not save',[]);
@@ -107,7 +110,7 @@ class ProductController extends Controller
             'admin_ingredient_type_id' => 'required|exists:admin_ingredient_types,id',
             'price' => 'required|integer',
             'quantity' => 'required|integer',
-            'unit' => 'required|integer',
+            'unit' => 'required|string',
             'store_name' => 'required|string',
             'user_id' => 'required|exists:users,id',
         ]);
@@ -260,7 +263,7 @@ class ProductController extends Controller
             'purchase_list_id'      => 'required|exists:purchase_lists,id',
             'product_id'            => 'required|exists:products,id',
             'quantity'              => 'required|numeric',
-            'unit'                  => 'required|numeric',
+            'unit'                  => 'required|string',
         ]);
 
         if($validator->fails()){
