@@ -191,8 +191,11 @@ class AuthController extends Controller
             if(isset($request->longitude))
                 $address->longitude = $request->longitude;
 
-             if(isset($request->country))
+            if(isset($request->country))
                 $address->country = $request->country;
+
+            if(isset($request->country_code))
+                $address->country_code = $request->country_code;
 
             $address->is_default = true;
 
