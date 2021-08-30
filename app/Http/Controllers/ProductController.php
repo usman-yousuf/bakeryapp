@@ -130,7 +130,7 @@ class ProductController extends Controller
             $ingredient->admin_ingredient_type_id = $request->admin_ingredient_type_id;
             $ingredient->store_name = $request->store_name;
             $ingredient->quantity = $request->quantity;
-            $ingredient->unti = $request->unit;
+            $ingredient->unit = $request->unit;
             $ingredient->price = $request->price;
             $ingredient->unit_price = $request->price/$request->quantity;
             $ingredient->save();
