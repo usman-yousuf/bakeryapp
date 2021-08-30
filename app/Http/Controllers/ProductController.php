@@ -157,6 +157,7 @@ class ProductController extends Controller
             'price' => 'integer',
             'date'=> 'date',
             'is_inventory' => 'in:1',
+            'unit' => 'string'
         ]);
 
         if($validator->fails()){
@@ -197,6 +198,10 @@ class ProductController extends Controller
             // search by store name
             if(isset($request->store_name)){
                 $purchase_list = $purchase_list->where('store_name','like',"%{$request->store_name}%");
+            }
+
+            if(isset($request->unit)){
+                $purchase_list = $purchase_list->where('unit',$request->unit");
             }
 
             // search by price
