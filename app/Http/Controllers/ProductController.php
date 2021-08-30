@@ -201,7 +201,7 @@ class ProductController extends Controller
             }
 
             if(isset($request->unit)){
-                $purchase_list = $purchase_list->where('unit',$request->unit");
+                $purchase_list = $purchase_list->where('unit',$request->unit);
             }
 
             // search by price
