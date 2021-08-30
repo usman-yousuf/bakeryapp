@@ -30,6 +30,7 @@ class CreateProductIngredientsTable extends Migration
             $table->foreign('admin_ingredient_type_id')->references('id')->on('admin_ingredient_types')->onDelete('cascade')->onUpdate('cascade');
 
             $table->integer('quantity');
+            $table->string('unit')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

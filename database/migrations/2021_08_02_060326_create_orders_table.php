@@ -32,6 +32,7 @@ class CreateOrdersTable extends Migration
             $table->enum('order_status', ['new-order','in-baking','ready-to-deliver','sold','other']);
             $table->decimal('advance_payment')->nullable();
             $table->decimal('quantity')->nullable();
+            $table->string('unit')->nullable();
             $table->decimal('total_price')->nullable();
             $table->decimal('raw_material')->nullable();
             $table->decimal('tax')->nullable();

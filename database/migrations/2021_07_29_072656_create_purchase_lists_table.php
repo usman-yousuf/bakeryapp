@@ -27,6 +27,7 @@ class CreatePurchaseListsTable extends Migration
 
             $table->string('store_name');
             $table->integer('quantity');
+            $table->string('unit')->nullable();
             $table->double('price');
 
 
