@@ -42,6 +42,7 @@ Route::group([ 'prefix' => 'auth'], function () {
     Route::post('search_purchase_list', 'App\Http\Controllers\ProductController@searchPurchaseList');
     Route::post('delete_user', 'App\Http\Controllers\UserController@deleteUser');
     Route::post('admin_products_Ingredients', [AdminProductController::class, 'getIngredientProducts']);
+    Route::post('get_units', 'App\Http\Controllers\ProductController@units');
     
     Route::group([ 'middleware' => 'auth:api'], function() {
 
@@ -65,7 +66,6 @@ Route::group([ 'prefix' => 'auth'], function () {
 
         // purchase list routes
         Route::post('purchase_list', 'App\Http\Controllers\ProductController@addUpdatePurchaseList');
-        Route::post('get_units', 'App\Http\Controllers\ProductController@units');
 
 
 
