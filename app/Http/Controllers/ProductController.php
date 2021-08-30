@@ -107,6 +107,7 @@ class ProductController extends Controller
             'admin_ingredient_type_id' => 'required|exists:admin_ingredient_types,id',
             'price' => 'required|integer',
             'quantity' => 'required|integer',
+            'unit' => 'required|integer',
             'store_name' => 'required|string',
             'user_id' => 'required|exists:users,id',
         ]);
@@ -126,6 +127,7 @@ class ProductController extends Controller
             $ingredient->admin_ingredient_type_id = $request->admin_ingredient_type_id;
             $ingredient->store_name = $request->store_name;
             $ingredient->quantity = $request->quantity;
+            $ingredient->unti = $request->unit;
             $ingredient->price = $request->price;
             $ingredient->unit_price = $request->price/$request->quantity;
             $ingredient->save();
@@ -143,7 +145,7 @@ class ProductController extends Controller
     public function searchPurchaseList(Request $request){
 
 
-         $validator = Validator::make($request->all(),[
+        $validator = Validator::make($request->all(),[
 
             'purchase_list_id' => 'exists:purchase_lists,id',
             'user_id' => 'required|exists:users,id',
@@ -213,7 +215,7 @@ class ProductController extends Controller
             return sendSuccess("purchase_list",$data);
 
 
-}
+    }
 
     // get products
 
@@ -255,8 +257,10 @@ class ProductController extends Controller
         $validator = Validator::make($request->all(),[
 
             'product_ingredient_id' => 'exists:product_ingredients, id',
-            'purchase_list_id' => 'required|exists:purchase_lists,id',
-            'product_id' => 'required|exists:products,id',
+            'purchase_list_id'      => 'required|exists:purchase_lists,id',
+            'product_id'            => 'required|exists:products,id',
+            'quantity'              => 'required|numeric',
+            'unit'                  => 'required|numeric',
         ]);
 
         if($validator->fails()){
@@ -269,16 +273,31 @@ class ProductController extends Controller
         if($pro_ingredient == null)
             $pro_ingredient = new ProductIngredient;
 
-            $pro_ingredient->id = $request->product_ingredient_id;
-            $pro_ingredient->purchase_list_id = $request->purchase_list_id;
-            $pro_ingredient->product_id = $request->product_id;
-            $pro_ingredient->quantity = $request->quantity;
-            $pro_ingredient->save();
-
-        }
-
-
+        $pro_ingredient->id               = $request->product_ingredient_id;
+        $pro_ingredient->purchase_list_id = $request->purchase_list_id;
+        $pro_ingredient->product_id       = $request->product_id;
+        $pro_ingredient->quantity         = $request->quantity;
+        $pro_ingredient->unit             = $request->unit;
+        $pro_ingredient->save();
     }
+
+
+    public function units(Request $request){
+        $units = [
+            'mg',
+            'g',
+            'kg',
+            'lb',
+            'oz',
+            'l',
+            'ml',
+            'gal',
+        ];
+
+        return sendSuccess('Units',$units);
+    }
+
+}
         /**
          *  Extra
          */

@@ -65,6 +65,7 @@ Route::group([ 'prefix' => 'auth'], function () {
 
         // purchase list routes
         Route::post('purchase_list', 'App\Http\Controllers\ProductController@addUpdatePurchaseList');
+        Route::post('get_units', 'App\Http\Controllers\ProductController@units');
 
 
 
