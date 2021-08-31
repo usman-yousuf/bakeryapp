@@ -92,17 +92,21 @@ class OrderController extends Controller
             $product_ingredients = ProductIngredient::where('product_id',$product->id)->get();
             foreach($product_ingredients as $product_ingredient){
 
-                $purchase_list = PurchaseList::where('admin_ingredient_id',$product_ingredient['admin_ingredient_id'])->where('admin_ingredient_type_id',$product_ingredient['admin_ingredient_type_id'])->first();
+                //get purchase_list of user 
+                $purchase_list = PurchaseList::where('user_id',$request->user_id)->where('admin_ingredient_id',$product_ingredient['admin_ingredient_id'])->where('admin_ingredient_type_id',$product_ingredient['admin_ingredient_type_id'])->first();
 
-                // return $purchase_list;`
+                // if $purchase_list is not null;
                 if(isset($purchase_list)){
                     $check = $purchase_list->quantity - ($product_ingredient['quantity'] * $request->quantity);
                    
+                   //is quanity is full filled
                     if($check<0)
                         return sendError('Quantity Over Reached',[]);
 
+                    //giving raw material price
                     $data['raw_material'] += $product_ingredient['quantity'] * $request->quantity * $purchase_list->unit_price;
 
+                    // subtracting
                     if(isset($request->raw_material))
                         $purchase_list->quantity = $purchase_list->quantity - ($product_ingredient['quantity'] * $request->quantity);
                         $purchase_list->save();
