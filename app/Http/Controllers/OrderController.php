@@ -45,21 +45,25 @@ class OrderController extends Controller
         }
 
 
+
         $order = Order::where('id',$request->order_id)->first();
         if(NULL == $order)
             $order = new Order;
-
-        $admin_product_type = AdminProductType::where('id',$request->admin_product_type_id)->first();
-
-        if(NULL == $admin_product_type)
-            return sendError('Admin Product Type Does Not Exist',[]);
-
-        $product = 0;
-
-        $product = Product::where('id',$request->product_id)->where('admin_product_type_id',$admin_product_type->id)->first();
-        if(NULL == $product)
-            return sendError('Product Does Not Exist or Type Dont belongs to the product',[]);
         
+        if(!isset($request->order_id)){
+
+            $admin_product_type = AdminProductType::where('id',$request->admin_product_type_id)->first();
+
+            if(NULL == $admin_product_type)
+                return sendError('Admin Product Type Does Not Exist',[]);
+
+            $product = 0;
+
+            $product = Product::where('id',$request->product_id)->where('admin_product_type_id',$admin_product_type->id)->first();
+            if(NULL == $product)
+                return sendError('Product Does Not Exist or Type Dont belongs to the product',[]);
+        
+        }
 
         if(isset($request->raw_material) || isset($request->order_id)){
             
