@@ -22,9 +22,9 @@ Route::any('logout', [LoginController::class, 'logout']);
 
 // Route::post('get_login', [WebController::class, 'webLogin'])->name('webLogin');
 
-Route::get('/brands', function () {
-    return view('pages.brands');
-})->name('brands');
+// Route::get('/brands', function () {
+//     return view('pages.brands');
+// })->name('brands');
 
 Route::get('/purchased_brand', function () {
     return view('pages.purchased_brand');
@@ -51,6 +51,7 @@ Route::get('get_user_management', [WebController::class, 'userManagement'])->nam
 Route::get('get_brands', [WebController::class, 'webGetBrands'])->name('brands');
 Route::post('add_product', [WebController::class, 'add_product'])->name('add_product');
 Route::post('add_brand', [WebController::class, 'add_brand'])->name('add_brand');
+Route::get('delete_product/{id?}', [WebController::class, 'delete_product'])->name('delete_product');
 
 
 });
