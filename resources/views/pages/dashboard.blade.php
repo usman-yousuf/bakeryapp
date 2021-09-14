@@ -35,18 +35,26 @@
                                         </thead>
                                         <tbody>
                                             @if( isset($get_user['get_user']->data) )
-                                            @forelse ($get_user['get_user']->data as $user)
+
+                                            @foreach ($get_user['get_user']->data as $user)
+
+                                            @if($user->id != Auth::User()->id)
+
                                             <tr>
                                                 <td class="">{{ $user->name ?? '' }}</td>
                                                 <td class=""><span> {{ $user->phone_code ?? '' }}</span> <span>{{ $user->phone_number ?? ''  }}</span></td>
                                                 <td class="fg_pink-s"> {{ $user->bussiness_name ?? '' }}</td>
                                                 <td class="fg_blue-s">{{ $user->email ?? '' }}</td>
                                             </tr>
-                                            @empty
+
+                                            @endif
+
+                                            @endforeach
+
+                                            @else
                                             <tr>
                                                 <td class="text-center">--No User--</td>
                                             </tr>
-                                            @endforelse
                                             @endif
                                         </tbody>
                                     </table>
@@ -69,6 +77,7 @@
                                     <table class="table">
                                         <tbody>
                                             @if( isset($seller_info['get_seller']->data) )
+
                                             @forelse( $seller_info['get_seller']->data as $seller )
                                             <tr>
                                                 <td class="border-top-0">{{ $seller->user->name ?? 'other' }}</td>
@@ -78,6 +87,7 @@
                                                 <td class="text-center">    --No Seller--   </td>
                                             <tr>
                                             @endforelse
+                                            
                                             @endif
                                         </tbody>
                                     </table>
