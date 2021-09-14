@@ -45,8 +45,6 @@
                                     <td class="item-d">
                                         <span class="type-d_{{$i}}">{{ $admin_product->admin_product_types[$i]->type_name ?? 'None' }}</span><br>
                                         <span class="type-id_{{$i}} d-none">{{ $admin_product->admin_product_types[$i]->id ?? ''}}</span><br>
-                                        <span>Size:</span> <strong class="fg_blue-s">{{ $admin_product->admin_product_types[$i]->size ?? 'None' }}</strong>
-
                                     </td>
                                     @endfor
                                     {{--  $admin_product->admin_product_types  --}}
