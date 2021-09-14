@@ -145,9 +145,9 @@
                                             @forelse ( $most_purchased_items['get_purchaselists']->data as $key => $purchase_item )
 
                                             <tr>
-                                                <th class="">{{ $purchase_item->admin_ingredient->name }}</th>
-                                                <th class="">{{ $purchase_item->admin_ingredient_type->brand_name }}</th>
-                                                <th class="">{{ $purchase_item->price }}</th>
+                                                <th class="">{{ $purchase_item->admin_ingredient->name ?? 'other' }}</th>
+                                                <th class="">{{ $purchase_item->admin_ingredient_type->brand_name ?? 'other' }}</th>
+                                                <th class="">{{ $purchase_item->price ?? 'other' }}</th>
                                             </tr>
 
                                             @empty
@@ -239,7 +239,7 @@
                     </div>
                 </div>
                 -->
-                <!-- subscription heading and cards - END --> 
+                <!-- subscription heading and cards - END -->
 
             </div>
 

@@ -68,9 +68,9 @@
                         <div class="col-12 form-group mt-4">
                             <div class="row">
                                 <div class="col-12">
-                                    <input type="text" class="w-100 py-3 my-2 rounded border-0 bg_gray-s button_outline-s" 
-                                        name="ingredient_name" 
-                                        id="" 
+                                    <input type="text" class="w-100 py-3 my-2 rounded border-0 bg_gray-s button_outline-s"
+                                        name="ingredient_name"
+                                        id=""
                                         placeholder=" Product Name"
                                         required>
                                 </div>

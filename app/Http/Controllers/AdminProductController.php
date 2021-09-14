@@ -62,4 +62,13 @@ class AdminProductController extends Controller
 
         return sendSuccess('Data',$data);
     }
+
+
+    public function deleteIngredientProduct(Request $request){
+
+        $product = AdminProduct::where('id', $request->product_id)->first();
+            $product->delete();
+            if($product->delete())
+                return sendSuccess('Product deleted successfully',[]);
+    }
 }

@@ -97,4 +97,23 @@ $(function(event) {
         tags: true,
         tokenSeparators: [',']
     });
+
+})
+
+$(document).ready(function() {
+
+    $(`.to_edit_product-d`).click(function() {
+        let parent = $(this).parent().parent();
+        var product = $(parent).find(`.product-d`).text();
+        var text_1 = $(parent).find(`.type-d_0`).text();
+        var text_2 = $(parent).find(`.type-d_1`).text();
+        var text_3 = $(parent).find(`.type-d_2`).text();
+
+        $(`#edit_product_name-d`).val(product);
+        $(`#edit_type_name_1-d`).val(text_1);
+        $(`#edit_type_name_2-d`).val(text_2);
+        $(`#edit_type_name_3-d`).val(text_3);
+        $(`#edit_product-d`).modal('show');
+
+    });
 })

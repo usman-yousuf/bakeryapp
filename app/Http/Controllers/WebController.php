@@ -33,9 +33,18 @@ class WebController extends Controller
         $this->AdminProductController = $AdminProductController;
     }
 
+    public function delete_product(Request $request,$id){
+        $request->merge(['product_id' => $id]);
+        $delete_product = $this->AdminProductController->deleteIngredientProduct($request);
+
+        return redirect()->back();
+
+
+    }
+
 
     public function webLogin(Request $request){
-    
+
 
         $auth = $this->AuthController->login($request)->getdata();
 
@@ -241,7 +250,7 @@ class WebController extends Controller
             $adminIngredientType->save();
         }
         return back();
-        // return $this->webGetBrands($request);        
+        // return $this->webGetBrands($request);
     }
 
 
