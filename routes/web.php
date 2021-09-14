@@ -51,6 +51,7 @@ Route::get('get_user_management', [WebController::class, 'userManagement'])->nam
 Route::get('get_brands', [WebController::class, 'webGetBrands'])->name('brands');
 Route::post('add_product', [WebController::class, 'add_product'])->name('add_product');
 Route::post('add_brand', [WebController::class, 'add_brand'])->name('add_brand');
+Route::post('edit_product', [WebController::class, 'update_product'])->name('edit_product');
 Route::get('delete_product/{id?}', [WebController::class, 'delete_product'])->name('delete_product');
 
 

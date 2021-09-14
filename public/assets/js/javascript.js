@@ -109,10 +109,21 @@ $(document).ready(function() {
         var text_2 = $(parent).find(`.type-d_1`).text();
         var text_3 = $(parent).find(`.type-d_2`).text();
 
+        var id_product = $(parent).find(`.product-id`).text();
+        var id_text_1 = $(parent).find(`.type-id_0`).text();
+        var id_text_2 = $(parent).find(`.type-id_1`).text();
+        var id_text_3 = $(parent).find(`.type-id_2`).text();
+
         $(`#edit_product_name-d`).val(product);
         $(`#edit_type_name_1-d`).val(text_1);
         $(`#edit_type_name_2-d`).val(text_2);
         $(`#edit_type_name_3-d`).val(text_3);
+
+        $(`#hidden_edit_product_name-d`).val(id_product);
+        $(`#hidden_edit_type_name_1-d`).val(id_text_1);
+        $(`#hidden_edit_type_name_2-d`).val(id_text_2);
+        $(`#hidden_edit_type_name_3-d`).val(id_text_3);
+        
         $(`#edit_product-d`).modal('show');
 
     });

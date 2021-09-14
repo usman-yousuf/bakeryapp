@@ -253,5 +253,27 @@ class WebController extends Controller
         // return $this->webGetBrands($request);
     }
 
+    public function update_product(Request $request){
+
+        $product = AdminProduct::where('id',$request['hidden_edit_product_name-d'])->update(['name' => $request->product_name ]);
+
+        if(null !== $request['hidden_edit_type_name_1-d']);
+            $AdminProductType = AdminProductType::where('id',$request['hidden_edit_type_name_1-d'])->update(['type_name' => $request->type_name_1]);
+
+        if(null !== $request['hidden_edit_type_name_2-d']);
+            $AdminProductType = AdminProductType::where('id',$request['hidden_edit_type_name_2-d'])->update(['type_name' => $request->type_name_2]);
+
+        if(null !== $request['hidden_edit_type_name_3-d']);
+            $AdminProductType = AdminProductType::where('id',$request['hidden_edit_type_name_3-d'])->update(['type_name' => $request->type_name_3]);
+
+        return redirect()->back();
+
+
+        // product_name
+
+        // type_name_1
+        // type_name_2
+        // type_name_3
+    }
 
 }

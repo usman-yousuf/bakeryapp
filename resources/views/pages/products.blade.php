@@ -39,10 +39,12 @@
                                 <tr>
                                     {{--  {{ dd($admin_product->admin_product_types[1]) }}  --}}
                                     <td class="product-d">{{ $admin_product->name ?? NULL }}</td>
+                                    <td class="product-id d-none">{{ $admin_product->id ?? NULL }}</td>
 
                                     @for ($i = 0; $i < 3; $i++)
                                     <td class="item-d">
                                         <span class="type-d_{{$i}}">{{ $admin_product->admin_product_types[$i]->type_name ?? 'None' }}</span><br>
+                                        <span class="type-id_{{$i}} d-none">{{ $admin_product->admin_product_types[$i]->id ?? ''}}</span><br>
                                         <span>Size:</span> <strong class="fg_blue-s">{{ $admin_product->admin_product_types[$i]->size ?? 'None' }}</strong>
 
                                     </td>
@@ -127,9 +129,9 @@
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content br_15px-s">
             <div class="modal-header border-bottom-0">
-                <h5 class="modal-title ml-3" id="exampleModalLongTitle">Add Products</h5>
+                <h5 class="modal-title ml-3" id="exampleModalLongTitle">Edit Products</h5>
             </div>
-            <form action="{{ route('add_product') }}" method="post">
+            <form action="{{ route('edit_product') }}" method="post">
                 @csrf
                 <div class="modal-body d-flex">
                         <div class="col-12 form-group mt-4">
@@ -138,6 +140,12 @@
                                     <input type="text" class="w-100 py-3 my-2 rounded border-0 bg_gray-s button_outline-s"
                                         name="product_name"
                                         id="edit_product_name-d"
+                                        placeholder=" Product Name" required
+                                        data-product="name">
+
+                                        <input type="hidden" class="w-100 py-3 my-2 rounded border-0 bg_gray-s button_outline-s"
+                                        name="hidden_edit_product_name-d"
+                                        id="hidden_edit_product_name-d"
                                         placeholder=" Product Name" required
                                         data-product="name">
                                 </div>
@@ -150,14 +158,26 @@
                                         id="edit_type_name_1-d"
                                         placeholder=" Type 1"
                                         data-product="type1">
+
+                                        <input type="hidden" class="w-100 py-3 my-2 rounded border-0 bg_gray-s button_outline-s"
+                                        name="hidden_edit_type_name_1-d"
+                                        id="hidden_edit_type_name_1-d"
+                                        placeholder=" Product Name" required
+                                        data-product="name">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-12 d-flex">
                                     <input type="text" class="w-100 py-3 my-2 rounded border-0 bg_gray-s button_outline-s"
-                                        name="type_name_2"
+                                        name="edit_type_name_2-d"
                                         id="edit_type_name_2-d" placeholder=" Type 2"
                                         data-product="type2">
+
+                                        <input type="hidden" class="w-100 py-3 my-2 rounded border-0 bg_gray-s button_outline-s"
+                                        name="hidden_edit_type_name_2-d"
+                                        id="hidden_edit_type_name_2-d"
+                                        placeholder=" Product Name" required
+                                        data-product="name">
                                 </div>
                             </div>
                             <div class="row">
@@ -166,6 +186,12 @@
                                         name="type_name_3"
                                         id="edit_type_name_3-d" placeholder=" Type 3"
                                         data-product="type3">
+
+                                        <input type="hidden" class="w-100 py-3 my-2 rounded border-0 bg_gray-s button_outline-s"
+                                        name="hidden_edit_type_name_3-d"
+                                        id="hidden_edit_type_name_3-d"
+                                        placeholder=" Product Name" required
+                                        data-product="name">
                                 </div>
                             </div>
                         </div>
