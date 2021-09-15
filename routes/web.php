@@ -54,6 +54,8 @@ Route::post('add_product', [WebController::class, 'add_product'])->name('add_pro
 Route::post('add_brand', [WebController::class, 'add_brand'])->name('add_brand');
 Route::post('edit_brand', [WebController::class, 'edit_brand'])->name('edit_brand');
 
+Route::get('set/{set?}', [WebController::class, 'set'])->name('set');
+
 Route::post('edit_product', [WebController::class, 'update_product'])->name('edit_product');
 Route::get('delete_product/{id?}', [WebController::class, 'delete_product'])->name('delete_product');
 Route::get('delete_ingredient_product/{id?}', [WebController::class, 'delete_ingredient_product'])->name('delete_ingredient_product');

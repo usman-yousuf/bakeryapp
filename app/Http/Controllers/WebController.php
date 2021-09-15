@@ -2,20 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\AdminProduct;
-use App\Models\AdminProductType;
+use App\Http\Controllers\ProductController;
 use App\Models\AdminIngredient;
 use App\Models\AdminIngredientType;
+use App\Models\AdminProduct;
+use App\Models\AdminProductType;
 use App\Models\Ingrediant;
-use App\Models\ProductIngredient;
 use App\Models\Product;
 use App\Models\ProductIngrediant;
+use App\Models\ProductIngredient;
 use App\Models\PurchaseList;
-use App\Models\User;
 use App\Models\Subscription;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
-use App\Http\Controllers\ProductController;
 
 class WebController extends Controller
 {
@@ -203,6 +204,7 @@ class WebController extends Controller
 
         $adminProduct = new AdminProduct;
         $adminProduct->name =  $request->product_name;
+        $adminProduct->country =  Session::get('country') ?? 'USA';
         $adminProduct->save();
 
 
@@ -247,6 +249,7 @@ class WebController extends Controller
 
         $adminIngredient =  new AdminIngredient;
         $adminIngredient->name = $request->ingredient_name;
+        $adminIngredient->country = Session::get('country') ?? 'USA';
         $adminIngredient->save();
 
         foreach( $request->brand_types as $key => $brandType ){
@@ -285,7 +288,8 @@ class WebController extends Controller
 
     public function update_product(Request $request){
 
-        $product = AdminProduct::where('id',$request['hidden_edit_product_name-d'])->update(['name' => $request->product_name ]);
+        $product = AdminProduct::where('id',$request['hidden_edit_product_name-d'])->update([
+            'name' => $request->product_name]);
 
         if(null !== $request['hidden_edit_type_name_1-d']);
             $AdminProductType = AdminProductType::where('id',$request['hidden_edit_type_name_1-d'])->update(['type_name' => $request->type_name_1]);
@@ -316,6 +320,12 @@ class WebController extends Controller
     public function delete_ingredient_product(AdminIngredient $id){
 
         $id->delete();
+
+        return redirect()->back();
+    }
+
+    public function set($country){
+        session()->put('country', $country);
 
         return redirect()->back();
     }

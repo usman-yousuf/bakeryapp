@@ -18,13 +18,16 @@
                 <div class="collapse navbar-collapse " id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
                         <li class="nav-item border-0">
-                            <a class="nav-link mx-lg-5" href="#">
-                                <img src="{{asset('assets/preview/map_pin.svg')}}" alt="" class="border-0" width="11"> 
-                                    <select class="border-0 text-white  rounded bg_blue-s">
-                                        <option class="border-0" value="">USA</option>
-                                        <option class="border-0" value="">Pakistan</option>
-                                    </select>
-                            </a>
+                                <div class="dropdown">
+                                <img src="{{asset('assets/preview/map_pin.svg')}}" alt="" class="border-0" width="13"> 
+                                  <button class="btn btn-secondary dropdown-toggle border-0 text-white rounded bg_blue-s" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                     {{Session::get('country') ?? 'Select Country' }}  
+                                  </button>
+                                  <div class="dropdown-menu border-0 text-white rounded bg_blue-s" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="{{route('set','USA')}}">USA</a>
+                                    <a class="dropdown-item" href="{{route('set','Pakistan')}}">Pakistan</a>
+                                  </div>
+                                </div>
                         </li>
                         <li class="nav-item mx-lg-5">
                             <a class="nav-link" href="#"><img src="{{asset('assets/preview/bell_icon.svg')}}" alt="" class="" width="20"></a>

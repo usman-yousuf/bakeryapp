@@ -36,6 +36,7 @@
                             </thead>
                             <tbody class="">
                                 @foreach ($get_product->data->products as $admin_product)
+                                @if($admin_product->country == Session::get('country') )
                                 <tr>
                                     {{--  {{ dd($admin_product->admin_product_types[1]) }}  --}}
                                     <td class="product-d">{{ $admin_product->name ?? NULL }}</td>
@@ -53,6 +54,7 @@
                                         <a href="{{ route('delete_product',$admin_product->id) }}"><img src="{{ asset('assets/preview/delete_icon.svg') }}" alt=""></a>
                                     </td>
                                 </tr>
+                                @endif
                                 @endforeach
                             </tbody>
                         </table>
