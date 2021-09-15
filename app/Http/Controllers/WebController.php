@@ -237,6 +237,14 @@ class WebController extends Controller
 
     public function add_brand(Request $request){
 
+
+        $this->validate($request,[
+            'ingredient_name' => 'required|unique:admin_ingredients,name',
+            'brand_types' => 'required',
+            'product_types' => 'required',
+        ]);
+
+
         $adminIngredient =  new AdminIngredient;
         $adminIngredient->name = $request->ingredient_name;
         $adminIngredient->save();
@@ -249,8 +257,30 @@ class WebController extends Controller
             $adminIngredientType->type_name = $product_types[$key] ?? 'other';
             $adminIngredientType->save();
         }
+
         return back();
         // return $this->webGetBrands($request);
+    }
+
+    public function edit_brand(Request $request){
+        $this->validate($request,[
+            'ingredient_name' => 'required|unique:admin_ingredients,name',
+            'product_types' => 'required',
+            'product_id' => 'required|exists:admin_ingredients,id',
+            'product_ingredient_id' => 'required|exists:admin_ingredient_types,id',
+        ]);
+
+        $adminIngredient =  AdminIngredient::where('id',$request->product_id)->update(['name' => $request->ingredient_name]);
+        $adminIngredient =  AdminIngredientType::where('id',$request->product_ingredient_id)->updateOrCreate([
+
+            'type_name'           => $request->ingredient_name,
+            'admin_ingredient_id' => $request->product_id,
+            'brand_name'          => $request->brand_types,
+
+        ]);
+
+        return redirect()->back();
+
     }
 
     public function update_product(Request $request){
@@ -274,6 +304,20 @@ class WebController extends Controller
         // type_name_1
         // type_name_2
         // type_name_3
+    }
+
+    public function delete_brand(AdminIngredient $id){
+
+        $id->delete();
+
+        return redirect()->back();
+    }
+
+    public function delete_ingredient_product(AdminIngredient $id){
+
+        $id->delete();
+
+        return redirect()->back();
     }
 
 }

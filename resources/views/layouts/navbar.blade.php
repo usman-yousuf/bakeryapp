@@ -17,8 +17,14 @@
                 <!-- nav bar list - START -->
                 <div class="collapse navbar-collapse " id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link mx-lg-5" href="#"><img src="{{asset('assets/preview/map_pin.svg')}}" alt="" class="" width="11"> <span class="country_text-s"> USA</span></a>
+                        <li class="nav-item border-0">
+                            <a class="nav-link mx-lg-5" href="#">
+                                <img src="{{asset('assets/preview/map_pin.svg')}}" alt="" class="border-0" width="11"> 
+                                    <select class="border-0 text-white  rounded bg_blue-s">
+                                        <option class="border-0" value="">USA</option>
+                                        <option class="border-0" value="">Pakistan</option>
+                                    </select>
+                            </a>
                         </li>
                         <li class="nav-item mx-lg-5">
                             <a class="nav-link" href="#"><img src="{{asset('assets/preview/bell_icon.svg')}}" alt="" class="" width="20"></a>

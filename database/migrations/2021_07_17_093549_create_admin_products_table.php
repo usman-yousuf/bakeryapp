@@ -17,6 +17,8 @@ class CreateAdminProductsTable extends Migration
             $table->Increments('id')->unsigned(false);
 
             $table->string('name')->unique();
+            
+            $table->string('country')->nullable();
 
             $table->timestamps();
             $table->softDeletes();

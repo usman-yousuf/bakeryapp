@@ -50,9 +50,13 @@ Route::get('get_subscription', [WebController::class, 'webGetSubscription'])->na
 Route::get('get_user_management', [WebController::class, 'userManagement'])->name('usermanagement');
 Route::get('get_brands', [WebController::class, 'webGetBrands'])->name('brands');
 Route::post('add_product', [WebController::class, 'add_product'])->name('add_product');
+
 Route::post('add_brand', [WebController::class, 'add_brand'])->name('add_brand');
+Route::post('edit_brand', [WebController::class, 'edit_brand'])->name('edit_brand');
+
 Route::post('edit_product', [WebController::class, 'update_product'])->name('edit_product');
 Route::get('delete_product/{id?}', [WebController::class, 'delete_product'])->name('delete_product');
+Route::get('delete_ingredient_product/{id?}', [WebController::class, 'delete_ingredient_product'])->name('delete_ingredient_product');
 
 
 });

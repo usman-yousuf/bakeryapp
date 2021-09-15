@@ -17,7 +17,7 @@
             </a>
             <a href="{{route('brands')}}" class="list-group-item py-3 mx-3">
                 <img src="{{ asset('assets/preview/brand_icon.svg') }}" class=" revert_icon_color-s " width="25" alt="">
-                <span class=" font_size-s">Brands</span>
+                <span class=" font_size-s">Ingredients</span>
             </a>
             <a href="{{route('getusers')}}" class="list-group-item py-3 mx-3">
                 <img src="{{ asset('assets/preview/user_icon.svg') }}" class="" width="25" alt="">
