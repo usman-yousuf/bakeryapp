@@ -20,6 +20,7 @@ class AdminProductController extends Controller
             'ingredient_id' => 'exists:admin_ingredients,id|numeric',
             'product_type_id' => 'exists:admin_ingredient_types,id|numeric',
             'ingredient_type_id' => 'exists:admin_product_types,id|numeric',
+            'country' => 'string',
         ]);
         if($validator->fails()){
             $data['validation_error'] = $validator->getMessageBag();
@@ -29,11 +30,26 @@ class AdminProductController extends Controller
 
 
         if(isset($request->products) || (isset($request->should_get_admin_products) && ($request->should_get_admin_products))){
-            $products = AdminProduct::get();
-            $data['products'] = $products;
+            $products = AdminProduct::orderBy('created_at', 'DESC');
+
+            if(isset($request->user()->address->country))
+                $products->where('country', $request->user()->address->country);
+
+            if(isset($request->country)){
+                $products->where('country', $request->country);
+            }
+            $data['products'] = $products->get();
         }
         if(isset($request->ingredients)){
-            $ingredients = AdminIngredient::get();
+            $ingredients = AdminIngredient::orderBy('created_at', 'DESC');
+
+            if(isset($request->user()->address->country))
+                $ingredients->where('country', $request->user()->address->country);
+
+            if(isset($request->country)){
+                $ingredients->where('country', $request->country);
+            }
+            $ingredients = $ingredients->get();;
             $data['ingredients'] = $ingredients;
         }
         if(isset($request->mostPurchasedItems)){
