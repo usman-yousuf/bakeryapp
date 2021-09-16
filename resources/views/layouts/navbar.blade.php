@@ -29,6 +29,7 @@
                                     <a class="dropdown-item" href="{{route('set','United Kindom')}}">United Kindom</a>
                                     <a class="dropdown-item" href="{{route('set','South Africa')}}">South Africa</a>
                                     <a class="dropdown-item" href="{{route('set','Pakistan')}}">Pakistan</a>
+                                    <a class="dropdown-item" href="{{route('set','Uganda')}}">Uganda</a>
                                     <a class="dropdown-item" href="{{route('set','India')}}">India</a>
                                   </div>
                                 </div>
