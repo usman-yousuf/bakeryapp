@@ -9,6 +9,8 @@ class AdminIngredientType extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     function adminIgredient(){
     	return $this->belongsTo(AdminIngredient::class , 'admin_ingredient_id' , 'id');
     }

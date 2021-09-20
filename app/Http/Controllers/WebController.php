@@ -249,7 +249,7 @@ class WebController extends Controller
 
         $adminIngredient =  new AdminIngredient;
         $adminIngredient->name = $request->ingredient_name;
-        $adminIngredient->country = Session::get('country') ?? 'USA';
+        $adminIngredient->country = Session::get('country') ?? 'United States';
         $adminIngredient->save();
 
         foreach( $request->brand_types as $key => $brandType ){
@@ -266,21 +266,28 @@ class WebController extends Controller
     }
 
     public function edit_brand(Request $request){
+
         $this->validate($request,[
             'ingredient_name' => 'required|unique:admin_ingredients,name',
             'product_types' => 'required',
             'product_id' => 'required|exists:admin_ingredients,id',
-            'product_ingredient_id' => 'required|exists:admin_ingredient_types,id',
+            'product_ingredient_id' => 'required|exists:admin_ingredient_types,id'
         ]);
 
         $adminIngredient =  AdminIngredient::where('id',$request->product_id)->update(['name' => $request->ingredient_name]);
-        $adminIngredient =  AdminIngredientType::where('id',$request->product_ingredient_id)->updateOrCreate([
 
-            'type_name'           => $request->ingredient_name,
-            'admin_ingredient_id' => $request->product_id,
-            'brand_name'          => $request->brand_types,
+        $adminIngredienttype =  AdminIngredientType::where('id',$request->product_ingredient_id)->first();
 
-        ]);
+        if(NULL  == $adminIngredienttype)
+            $adminIngredienttype = new AdminIngredientType;
+
+        $adminIngredienttype->type_name           = $request->product_types;
+        $adminIngredienttype->admin_ingredient_id = $request->product_id;
+        $adminIngredienttype->brand_name          = $request->brand_types;
+        $adminIngredienttype->admin_ingredient_id = $request->product_id;
+        $adminIngredienttype->save();
+
+        
 
         return redirect()->back();
 
