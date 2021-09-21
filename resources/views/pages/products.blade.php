@@ -84,6 +84,9 @@
                                         id="product_name-d"
                                         placeholder=" Product Name" required>
                                 </div>
+                                @error('product_name')
+                                        <strong class="w-100 m-2 p-2 alert-danger">{{ $message }}</strong>
+                                @enderror 
                             </div>
                             <div class="row">
                                 <div class="col-12 d-flex">

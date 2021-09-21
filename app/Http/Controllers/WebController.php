@@ -202,6 +202,10 @@ class WebController extends Controller
 
     public function add_product(Request $request){
 
+        $this->validate($request,[
+            'product_name' => 'required|unique:admin_products,name',
+        ]);
+
         $adminProduct = new AdminProduct;
         $adminProduct->name =  $request->product_name;
         $adminProduct->country =  Session::get('country') ?? 'USA';
