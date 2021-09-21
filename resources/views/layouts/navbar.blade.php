@@ -26,7 +26,7 @@
                                   <div class="dropdown-menu border-0 text-white rounded bg_blue-s" aria-labelledby="dropdownMenuButton">
                                     <a class="dropdown-item" href="{{route('set','United Arab Emirates')}}">United Arab Emirates</a>
                                     <a class="dropdown-item" href="{{route('set','United States')}}">United States</a>
-                                    <a class="dropdown-item" href="{{route('set','United Kingdom')}}">United Kindom</a>
+                                    <a class="dropdown-item" href="{{route('set','United Kingdom')}}">United Kingdom</a>
                                     <a class="dropdown-item" href="{{route('set','South Africa')}}">South Africa</a>
                                     <a class="dropdown-item" href="{{route('set','Pakistan')}}">Pakistan</a>
                                     <a class="dropdown-item" href="{{route('set','Uganda')}}">Uganda</a>
