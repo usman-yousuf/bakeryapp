@@ -41,10 +41,10 @@ Route::group([ 'prefix' => 'auth'], function () {
     Route::post('get_analytics', [OrderController::class,'analytics']);
     Route::post('search_purchase_list', 'App\Http\Controllers\ProductController@searchPurchaseList');
     Route::post('delete_user', 'App\Http\Controllers\UserController@deleteUser');
-    Route::post('admin_products_Ingredients', [AdminProductController::class, 'getIngredientProducts']);
     Route::post('get_units', 'App\Http\Controllers\ProductController@units');
     
     Route::group([ 'middleware' => 'auth:api'], function() {
+    Route::post('admin_products_Ingredients', [AdminProductController::class, 'getIngredientProducts']);
 
         Route::post('get_user', 'App\Http\Controllers\AuthController@getUser');
         Route::get('logout', 'App\Http\Controllers\AuthController@logout');
