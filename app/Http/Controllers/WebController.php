@@ -257,7 +257,7 @@ class WebController extends Controller
             $adminIngredientType = new AdminIngredientType;
             $adminIngredientType->admin_ingredient_id = $adminIngredient->id;
             $adminIngredientType->brand_name = $brandType;
-            $adminIngredientType->type_name = $product_types[$key] ?? 'other';
+            $adminIngredientType->type_name = $request->product_types[$key] ?? 'other';
             $adminIngredientType->save();
         }
 
@@ -268,7 +268,7 @@ class WebController extends Controller
     public function edit_brand(Request $request){
 
         $this->validate($request,[
-            'ingredient_name' => 'required|unique:admin_ingredients,name',
+            'ingredient_name' => 'required',
             'product_types' => 'required',
             'product_id' => 'required|exists:admin_ingredients,id',
             'product_ingredient_id' => 'required|exists:admin_ingredient_types,id'

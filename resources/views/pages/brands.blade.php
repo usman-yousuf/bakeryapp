@@ -33,7 +33,7 @@
                                                 </div>
                                                 <div class="mt-4">
                                                     <p class="mb-0">Brand Name</p>
-                                                    <strong>{{ $product->admin_ingredient_types[$key]->brand_name ?? 'other' }}</strong>
+                                                    <strong>{{ $product->admin_ingredient_types[0]->brand_name ?? 'other' }}</strong>
                                                 </div>
                                                 <div class="text-right mt-3">
                                                     <a href="" data-target="#edit_brands_{{$key}}" data-toggle="modal">
@@ -58,23 +58,29 @@
                                                                 <div class="row">
                                                                     <div class="col-12">
                                                                         <input type="text" class="w-100 py-3 my-2 rounded border-0 bg_gray-s button_outline-s"
-                                                                            name="ingredient_name"
-                                                                            id=""
-                                                                            placeholder=" Ingredient Name"
-                                                                            value="{{ $product->name }}" 
-                                                                            >
-                                                                            <input type="hidden" value="{{ $product->id }}" name="product_id"
-                                                                            value="{{ $product->name }}"/>
-                                                                            @error('ingredient_name')
-                                                                                <strong class="w-100 m-2 p-2 alert-danger">{{ $message }}</strong>
-                                                                            @enderror 
+                                                                        name="ingredient_name"
+                                                                        id=""
+                                                                        placeholder=" Ingredient Name"
+                                                                        value="{{ $product->name }}" >
+
+                                                                        <input type="hidden" value="{{ $product->id }}" name="product_id"
+                                                                        value="{{ $product->name }}"/>
+
+                                                                        @error('ingredient_name')
+                                                                            <strong class="w-100 m-2 p-2 alert-danger">{{ $message }}</strong>
+                                                                        @enderror 
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="col-12 mt-4">
-                                                                        <input class="w-100 py-3 my-2 rounded border-0 bg_gray-s button_outline-s" name="product_types"  placeholder="Ingredient Type" value="{{ $product->admin_ingredient_types[$key]->type_name ?? ''}}">
+                                                                        <input class="w-100 py-3 my-2 rounded border-0 bg_gray-s button_outline-s" 
+                                                                        name="product_types"  
+                                                                        placeholder="Ingredient Type" 
+                                                                        value="{{ $product->admin_ingredient_types[0]->type_name ?? ''}}">
+
                                                                         <input type="hidden" name="product_ingredient_id"
-                                                                         value="{{ $product->admin_ingredient_types[$key]->id ?? '' }}">
+                                                                         value="{{ $product->admin_ingredient_types[0]->id ?? '' }}">
+
                                                                         @error('product_types')
                                                                                 <strong class="w-100 m-2 p-2 alert-danger">{{ $message }}</strong>
                                                                         @enderror 
@@ -82,7 +88,10 @@
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="col-12 mt-4">
-                                                                        <input class="w-100 py-3 my-2 rounded border-0 bg_gray-s button_outline-s"  name="brand_types"  placeholder="Brands Name" value="{{ $product->admin_ingredient_types[$key]->brand_name ?? ''}}">
+                                                                        <input class="w-100 py-3 my-2 rounded border-0 bg_gray-s button_outline-s"  
+                                                                        name="brand_types"  
+                                                                        placeholder="Brands Name"
+                                                                        value="{{ $product->admin_ingredient_types[0]->brand_name ?? ''}}">
                                                                         @error('brand_types')
                                                                                 <strong class="w-100 m-2 p-2 alert-danger">{{ $message }}</strong>
                                                                         @enderror 
@@ -138,17 +147,11 @@
                             <div class="row">
                                 <div class="col-12 mt-4">
                                     <input class="w-100 py-3 my-2 rounded border-0 bg_gray-s button_outline-s" name="product_types[]"  placeholder="Ingredient Type">
-                                    @error('ingredient_name')
-                                            <strong class="w-100 m-2 p-2 alert-danger">{{ $message }}</strong>
-                                    @enderror 
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-12 mt-4">
                                     <input class="w-100 py-3 my-2 rounded border-0 bg_gray-s button_outline-s"  name="brand_types[]"  placeholder="Brands Name">
-                                    @error('ingredient_name')
-                                            <strong class="w-100 m-2 p-2 alert-danger">{{ $message }}</strong>
-                                    @enderror 
                                 </div>
                             </div>
 
