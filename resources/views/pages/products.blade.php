@@ -91,21 +91,14 @@
                                         class="w-100 py-3 my-2 rounded border-0 bg_gray-s button_outline-s"
                                         name="type_name_1"
                                         id="type_name_1-d"
-                                        placeholder=" Type 1">
+                                        placeholder="Inches">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-12 d-flex">
                                     <input type="text" class="w-100 py-3 my-2 rounded border-0 bg_gray-s button_outline-s"
                                         name="type_name_2"
-                                        id="type_name_2-d" placeholder=" Type 2">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12 d-flex">
-                                    <input type="text" class="w-100 py-3 my-2 rounded border-0 bg_gray-s button_outline-s"
-                                        name="type_name_3"
-                                        id="type_name_3-d" placeholder=" Type 3">
+                                        id="type_name_2-d" placeholder="Layers">
                                 </div>
                             </div>
                         </div>

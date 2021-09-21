@@ -177,7 +177,7 @@ class AuthController extends Controller
                 $address->address1 = $request->address1;
 
             if(isset($request->city))
-                $address->city = $request->city;
+                $address->country = $request->city;
 
             if(isset($request->state))
                 $address->state = $request->state;
