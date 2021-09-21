@@ -44,13 +44,14 @@ Route::group([ 'prefix' => 'auth'], function () {
     Route::post('get_units', 'App\Http\Controllers\ProductController@units');
     
     Route::group([ 'middleware' => 'auth:api'], function() {
-    Route::post('admin_products_Ingredients', [AdminProductController::class, 'getIngredientProducts']);
-
+        
+        Route::post('admin_products_Ingredients', [AdminProductController::class, 'getIngredientProducts']);
+        
         Route::post('get_user', 'App\Http\Controllers\AuthController@getUser');
         Route::get('logout', 'App\Http\Controllers\AuthController@logout');
         Route::post('change_social_password', 'App\Http\Controllers\AuthController@changeSocialLoginPassword');
 
-        // subscription rooutes
+        // subscription routes
 
         Route::post('get_subscription', 'App\Http\Controllers\SubscriptionController@getSubscription');
         Route::post('update_subscription', 'App\Http\Controllers\SubscriptionController@updateSubscription');

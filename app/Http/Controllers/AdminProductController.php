@@ -32,14 +32,16 @@ class AdminProductController extends Controller
         if(isset($request->products) || (isset($request->should_get_admin_products) && ($request->should_get_admin_products))){
             $products = AdminProduct::orderBy('created_at', 'DESC');
 
-            $products->where('country', $request->user()->address->country);
+            if(isset($request->user()->address->country))
+                $products->where('country', $request->user()->address->country);
 
             $data['products'] = $products->get();
         }
         if(isset($request->ingredients)){
             $ingredients = AdminIngredient::orderBy('created_at', 'DESC');
 
-            $ingredients->where('country', $request->user()->address->country);
+            if(isset($request->user()->address->country))
+                $ingredients->where('country', $request->user()->address->country);
 
             if(isset($request->country)){
                 $ingredients->where('country', $request->country);
