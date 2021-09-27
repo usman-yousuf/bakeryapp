@@ -41,7 +41,7 @@
                                     <td class="product-d">{{ $admin_product->name ?? NULL }}</td>
                                     <td class="product-id d-none">{{ $admin_product->id ?? NULL }}</td>
 
-                                    @for ($i = 0; $i < 3; $i++)
+                                    @for ($i = 0; $i < 2; $i++)
                                     <td class="item-d">
                                         <span class="type-d_{{$i}}">{{ $admin_product->admin_product_types[$i]->type_name ?? 'None' }}</span><br>
                                         <span class="type-id_{{$i}} d-none">{{ $admin_product->admin_product_types[$i]->id ?? ''}}</span><br>
