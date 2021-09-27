@@ -29,9 +29,8 @@
                             <thead>
                                 <tr>
                                     <th class="">Name</th>
-                                    <th class="">Type 1</th>
-                                    <th class="">Type 2</th>
-                                    <th class="">Type 3</th>
+                                    <th class="">Inches</th>
+                                    <th class="">Layers</th>
                                 </tr>
                             </thead>
                             <tbody class="">
